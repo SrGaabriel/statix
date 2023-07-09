@@ -1,15 +1,35 @@
 import { getApi } from "./api";
 
-export interface Player {
+export interface PlayerInfo {
+    id: string,
+    name: string,
+    club: string,
+    age: number,
+    born: number,
+    nationality: string,
+    position: string,
+}
+
+export interface PlayerSuggestion {
     id: string;
     name: string;
     club: string;
     club_elo: number;
-    nation: string;
+    nationality: string;
     position: string;
 }
 
-export async function getPlayer(id: string): Promise<Player | null> {
+export function getPositionName(positionAbbreviation: string): string {
+    switch (positionAbbreviation) {
+        case "GK": return "goalkeeper"; break;
+        case "DF": return "defender"; break;
+        case "MF": return "midfielder"; break;
+        case "FW": return "forward"; break;
+    }
+    throw new Error("Invalid position");
+}
+
+export async function getPlayerInfo(id: string): Promise<PlayerInfo | null> {
     const response = await fetch(`${getApi()}/players/${id}`, {
         method: "GET",
         headers: {
@@ -19,10 +39,25 @@ export async function getPlayer(id: string): Promise<Player | null> {
     if (response.status !== 200) {
         return null;
     }
-    return (await response.json()) as Player;
+    return (await response.json()).player as PlayerInfo;
 }
 
-export async function getAllPlayers(): Promise<Player[]> {
+export async function getPlayerPositionData(id: string, position: string) {
+    const response = await fetch(`${getApi()}/players/${id}/${getPositionName(position)}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    if (response.status !== 200) {
+        return null;
+    }
+    const data = (await response.json());
+    console.log(data);
+    return data
+}
+
+export async function getAllPlayers(): Promise<PlayerSuggestion[]> {
     const response = await fetch(`${getApi()}/players`, {
         method: "GET",
         headers: {
@@ -32,10 +67,10 @@ export async function getAllPlayers(): Promise<Player[]> {
     if (response.status !== 200) {
         return [];
     }
-    return (await response.json()) as Player[];
+    return (await response.json()) as PlayerSuggestion[];
 }
 
-export async function getPlayerSuggestions(name: string): Promise<Player[]> {
+export async function getPlayerSuggestions(name: string): Promise<PlayerSuggestion[]> {
     const response = await fetch(`${getApi()}/players?search=${name}`, {
         method: "GET",
         headers: {
@@ -45,5 +80,5 @@ export async function getPlayerSuggestions(name: string): Promise<Player[]> {
     if (response.status !== 200) {
         return [];
     }
-    return (await response.json()) as Player[];
+    return (await response.json()) as PlayerSuggestion[];
 }

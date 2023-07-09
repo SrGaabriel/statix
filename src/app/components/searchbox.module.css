@@ -67,13 +67,29 @@
 .searchBox:focus {
     box-shadow: 0 0 8px #00000080;
 }
-  
-@keyframes shining {
-    0% {
-        background-position: -100% -100%;
+
+@media (max-width: 600px) {
+    .searchBox {
+        font-size: 12px;
+        padding: 3%;
+        padding-left: 5%;
+        padding-right: 5%;
     }
-    100% {
-        background-position: 100% 100%;
+  
+    .searchBoxSuggestionsContainer {
+        padding-right: 5%;
+    }
+  
+    .suggestionContent {
+        padding: 2%;
+    }
+  
+    .positionBadge {
+        width: 30px;
+        height: 32px;
+        padding: 1%;
+        margin-left: 3%;
+        margin-right: 3%;
     }
 }
-  
+

@@ -1,0 +1,161 @@
+.page {
+    height: 100%;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    background-color: rgb(206, 205, 205);
+}
+
+.playerDataColumn {
+    margin-top: 3%;
+    margin-left: 5%;
+    height: 100%;
+    width: 20%;
+    border-right: 3px solid gray
+}
+
+.playerData {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 90%;
+}
+
+.playerBasicStats {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
+
+.playerBadgeSection {
+    padding: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.playerSelectable {
+    margin-top: 5%;
+    border: 0;
+    padding: 2%;
+    font-size: 100%;
+    font-family: var(--font-mono);
+    background: var(--primary-glow);
+    width: 50%;
+    margin-bottom: 15%;
+}
+
+.playerStatsSection {
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    height: 100%;
+    overflow: auto;
+}
+
+.playerStatistic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.651);
+    margin-left: 5%;
+    margin-top: 1%;
+    margin-bottom: 3%;
+    height: 400px;
+    width: 400px;
+    border-radius: 3%;
+    box-shadow: 0 0 10px #00000080;
+    transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
+}
+
+.seeMoreButtonSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.seeMoreButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-bottom: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+}
+
+.seeMoreButton:hover {
+    opacity:1;
+}
+
+.playerStatisticLabel {
+    margin-top: 20%;
+    width: 100%;
+}
+
+.playerStatisticValuesSection {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 60%;
+    margin-top: 1%;
+}
+
+.playerStatisticValue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 15%;
+    width: 100%;
+    height: 15%;
+}
+
+.basicPlayerStatisticInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+}
+
+.playerStatisticName {
+    margin-left: 5%;
+    font-family: var(--font-mono);
+}
+
+.playerStatisticRating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 1000;
+    font-size: 20px;
+    color: green;
+    border: 6px solid green;
+    padding: 6%;
+    margin-left: 1%;
+    width: 10%;
+    height: 10%;
+    border-radius: 100%;
+}
+
+.playerStatisticBarSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+.playerStatisticBar {
+    width: 100%;
+    height: 40%;
+    accent-color: var(--color-accent);
+}

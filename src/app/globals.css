@@ -29,6 +29,24 @@
     #0071ff33 160deg,
     transparent 360deg
   );
+  --quaternary-glow: conic-gradient(
+    from 180deg at 50% 50%,
+    #c7d8e233 0deg,
+    #7d838833 55deg,
+    #41434433 120deg,
+    #91939433 160deg,
+    #06293a33 240deg,
+    transparent 360deg
+  );
+  --fifth-glow: conic-gradient(
+    from 180deg at 50% 50%,
+    #0099f133 0deg,
+    #1036b333 55deg,
+    #0c629b5b 120deg,
+    #2a4ada33 160deg,
+    #00aaff33 240deg,
+    transparent 360deg
+  );
 
   --tile-start-rgb: 239, 245, 249;
   --tile-end-rgb: 228, 232, 233;

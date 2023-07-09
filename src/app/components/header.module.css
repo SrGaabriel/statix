@@ -3,16 +3,16 @@
     position: sticky;
     justify-content: space-between;
     align-items: center;
-    padding: 0 70px;
+    padding: 0 3%;
     background-color: #0e0c64;
-    height: 65px;
+    height: 5%;
     width: 100%;
-    padding-right: 180px;
+    padding-right: 8%;
     border-bottom: 1px solid #d3d3d380;
 }
 
 .headerLogo {
-    margin-right: 100px;
+    margin-right: 5%;
 }
 
 .headerLeftHandSide {
@@ -22,4 +22,26 @@
 
 .headerLeftHandSide * {
     margin-right: 5%;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+        padding: 0 2%;
+        height: auto;
+    }
+    
+    .headerLogo {
+        margin-right: 0;
+        margin-bottom: 2%;
+        flex-basis: 100%;
+    }
+    
+    .headerLeftHandSide {
+        justify-content: center;
+    }
+    
+    .headerLeftHandSide * {
+        margin-right: 3%;
+    }
 }

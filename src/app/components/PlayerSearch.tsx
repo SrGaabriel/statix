@@ -1,8 +1,9 @@
 'use client'
 
-import { Player, getAllPlayers, getPlayerSuggestions } from '../api/player';
+import { PlayerSuggestion, getAllPlayers, getPlayerSuggestions } from '../api/player';
 import { getClubColors } from '../utils/colors';
 import React, { useState, useEffect, useRef, ChangeEvent, HTMLAttributes } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import styles from './searchbox.module.css';
 
@@ -11,7 +12,7 @@ interface Properties extends HTMLAttributes<HTMLDivElement> {
   height?: number
 }
 
-let allPlayersCache: Player[] = []
+let allPlayersCache: PlayerSuggestion[] = []
 
 getAllPlayers().then((players) => {
   allPlayersCache = players;
@@ -19,9 +20,8 @@ getAllPlayers().then((players) => {
 
 const SearchBox: React.FC<Properties> = ({ width = 400, height = 200 }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState([] as Player[]);
+  const [suggestions, setSuggestions] = useState([] as PlayerSuggestion[]);
   const debounceTimer = useRef(undefined as (NodeJS.Timeout | undefined));
-  const suggestionsCache = useRef({} as { [query: string]: Player[] });
 
   useEffect(() => {
     return () => {
@@ -29,12 +29,12 @@ const SearchBox: React.FC<Properties> = ({ width = 400, height = 200 }) => {
     };
   }, []);
 
-  const setAndSortSuggestions = (suggestions: Player[]) => {
+  const setAndSortSuggestions = (suggestions: PlayerSuggestion[]) => {
     setSuggestions(suggestions.sort((a, b) => b.club_elo - a.club_elo));
   }
 
-  const searchPlayers = (query: string): Player[] => {
-    const results: Player[] = [];
+  const searchPlayers = (query: string): PlayerSuggestion[] => {
+    const results: PlayerSuggestion[] = [];
   
     for (const player of allPlayersCache) {
       if (player.name.toLowerCase().normalize().includes(query.toLowerCase().normalize())) {
@@ -47,17 +47,8 @@ const SearchBox: React.FC<Properties> = ({ width = 400, height = 200 }) => {
   const fetchSuggestions = async (query: string) => {
     if (query.length < 3)
       return;
-    const cacheKey = query.slice(0, 3).toLowerCase();
 
-    if (suggestionsCache.current[cacheKey]) { 
-      setAndSortSuggestions(suggestionsCache.current[cacheKey].filter((suggestion) => suggestion.name.toLowerCase().includes(query.toLowerCase())));
-    } else if (allPlayersCache.length > 0) {
-      setAndSortSuggestions(searchPlayers(query))
-    } else {
-      let suggestions = await getPlayerSuggestions(query);
-      setAndSortSuggestions(suggestions.filter((suggestion) => suggestion.name.toLowerCase().includes(query.toLowerCase())));
-      suggestionsCache.current[cacheKey] = suggestions;
-    }
+    setAndSortSuggestions(searchPlayers(query))
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -73,8 +64,7 @@ const SearchBox: React.FC<Properties> = ({ width = 400, height = 200 }) => {
     }, 300);
   };
 
-  const handleSuggestionClick = (suggestion: Player) => {
-    window.location.href = '/' + suggestion.id;
+  const handleSuggestionClick = () => {
     setAndSortSuggestions([]);
   };
 
@@ -90,36 +80,37 @@ const SearchBox: React.FC<Properties> = ({ width = 400, height = 200 }) => {
       <div className={styles.searchBoxSuggestionsContainer}>
         <ul className={styles.searchBoxSuggestions} style={{width: `${width + 60}px`}}>
           {suggestions.map((suggestion) => (
-            <li
-              className={styles.searchBoxSuggestion}
-              key={suggestion.id}
-              onClick={() => handleSuggestionClick(suggestion)}
-            >
-              <div
-                className={styles.suggestionContent}
-                style={getStripeStyle(suggestion.club)}
+            <Link key={suggestion.id} href={`/player/${suggestion.id}`}>
+              <li
+                className={styles.searchBoxSuggestion}
+                onClick={() => handleSuggestionClick()}
               >
-                <Image
-                  className={styles.clubBadge}
-                  src={`/badges/${suggestion.club}.png`}
-                  alt={`${suggestion.club} badge`}
-                  width={32}
-                  height={32}
-                />
-                <p
-                  className={styles.positionBadge}
-                  style={getStylesByPosition(suggestion.position)}
+                <div
+                  className={styles.suggestionContent}
+                  style={getStripeStyle(suggestion.club)}
                 >
-                  {suggestion.position}
-                </p>
-                <p
-                  className={styles.playerSuggestionName}
-                  dangerouslySetInnerHTML={{
-                    __html: formatSuggestionName(suggestion, searchTerm)
-                  }}
-                />
-              </div>
-            </li>
+                  <Image
+                    className={styles.clubBadge}
+                    src={`/badges/${suggestion.club}.png`}
+                    alt={`${suggestion.club} badge`}
+                    width={32}
+                    height={32}
+                  />
+                  <p
+                    className={styles.positionBadge}
+                    style={getStylesByPosition(suggestion.position)}
+                  >
+                    {suggestion.position}
+                  </p>
+                  <p
+                    className={styles.playerSuggestionName}
+                    dangerouslySetInnerHTML={{
+                      __html: formatSuggestionName(suggestion, searchTerm)
+                    }}
+                  />
+                </div>
+              </li>
+            </Link>
           ))}
         </ul>
       </div>
@@ -155,7 +146,7 @@ function getStylesByPosition(position: string) {
   */
 }
 
-function formatSuggestionName(suggestion: Player, query: string) {
+function formatSuggestionName(suggestion: PlayerSuggestion, query: string) {
   const regex = new RegExp(`(${query})`, 'gi');
   return suggestion.name.toUpperCase().replace(regex, '<strong>$1</strong>');
 }
