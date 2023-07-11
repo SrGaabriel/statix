@@ -1,3 +1,4 @@
+import { getPositionName } from "../utils/defaults";
 import { getApi } from "./api";
 
 export interface PlayerInfo {
@@ -19,14 +20,16 @@ export interface PlayerSuggestion {
     position: string;
 }
 
-export function getPositionName(positionAbbreviation: string): string {
-    switch (positionAbbreviation) {
-        case "GK": return "goalkeeper"; break;
-        case "DF": return "defender"; break;
-        case "MF": return "midfielder"; break;
-        case "FW": return "forward"; break;
-    }
-    throw new Error("Invalid position");
+export interface PlayerRanking {
+    ranking: [
+        {
+            id: string;
+            name: string;
+            nation: string;
+            born: string;
+            value: number;
+        }
+    ]
 }
 
 export async function getPlayerInfo(id: string): Promise<PlayerInfo | null> {
@@ -42,8 +45,22 @@ export async function getPlayerInfo(id: string): Promise<PlayerInfo | null> {
     return (await response.json()).player as PlayerInfo;
 }
 
-export async function getPlayerPositionData(id: string, position: string) {
-    const response = await fetch(`${getApi()}/players/${id}/${getPositionName(position)}`, {
+export async function getPlayerPositionData(id: string, position: string, statType: string) {
+    const response = await fetch(`${getApi()}/players/${id}/${getPositionName(position)}/${statType}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    if (response.status !== 200) {
+        return null;
+    }
+    const data = (await response.json());
+    return data
+}
+
+export async function getPlayerStatRanking(id: string, position: string, statType: string, statistic: string) {
+    const response = await fetch(`${getApi()}/players/${id}/${position}/${statType}/${statistic}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"

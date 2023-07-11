@@ -6,6 +6,7 @@ import React, { useState, useEffect, useRef, ChangeEvent, HTMLAttributes } from 
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './searchbox.module.css';
+import { getDefaultStatForPosition, getPositionName } from '../utils/defaults';
 
 interface Properties extends HTMLAttributes<HTMLDivElement> {
   width?: number,
@@ -80,7 +81,7 @@ const SearchBox: React.FC<Properties> = ({ width = 400, height = 200 }) => {
       <div className={styles.searchBoxSuggestionsContainer}>
         <ul className={styles.searchBoxSuggestions} style={{width: `${width + 60}px`}}>
           {suggestions.map((suggestion) => (
-            <Link key={suggestion.id} href={`/player/${suggestion.id}`}>
+            <Link key={suggestion.id} href={`/player/${suggestion.id}/${getPositionName(suggestion.position)}/${getDefaultStatForPosition(suggestion.position)}`}>
               <li
                 className={styles.searchBoxSuggestion}
                 onClick={() => handleSuggestionClick()}

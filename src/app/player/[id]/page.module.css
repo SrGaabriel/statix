@@ -59,76 +59,76 @@
     overflow: auto;
 }
 
+.playerStatsHeaders {
+    background-color: #3811c4;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    margin-left: 5%;
+    margin-right: 3%;
+    margin-bottom: 2%;
+}
+
+.playerStatsHeaderButton {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgb(206, 205, 205);
+    padding: 2%;
+    cursor: pointer;
+    height: 100%;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.playerStatsHeaderButton:hover {
+    background-color: #5f36f1;
+}
+
+.playerStatsHeaderButtonText {
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 120%;
+    font-family: var(--font-mono);
+}
+
 .playerStatistic {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.651);
     margin-left: 5%;
     margin-top: 1%;
     margin-bottom: 3%;
+    height: auto;
+    background-color: rgb(240, 240, 240);
     height: 400px;
     width: 400px;
     border-radius: 3%;
-    box-shadow: 0 0 10px #00000080;
-    transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
+    transition: box-shadow 0.25s ease-in-out;
 }
 
-.seeMoreButtonSection {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.seeMoreButton {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-bottom: 50%;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-}
-
-.seeMoreButton:hover {
-    opacity:1;
+.playerStatistic:hover {
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.2);
 }
 
 .playerStatisticLabel {
-    margin-top: 20%;
-    width: 100%;
-}
-
-.playerStatisticValuesSection {
     display: flex;
-    flex-direction: column;
-    width: 90%;
-    height: 60%;
-    margin-top: 1%;
-}
-
-.playerStatisticValue {
-    display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-top: 2%;
-    margin-bottom: 15%;
-    width: 100%;
-    height: 15%;
+    align-self: center;
+    text-align: center;
+    margin-top: 6%;
+    width: 95%;
 }
 
-.basicPlayerStatisticInfo {
+.playerStatisticRatingSection {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    width: 90%;
-}
-
-.playerStatisticName {
-    margin-left: 5%;
-    font-family: var(--font-mono);
+    justify-content: center;
+    width: 95%;
+    height: 70%;
 }
 
 .playerStatisticRating {
@@ -136,26 +136,71 @@
     align-items: center;
     justify-content: center;
     font-weight: 1000;
-    font-size: 20px;
-    color: green;
-    border: 6px solid green;
-    padding: 6%;
-    margin-left: 1%;
-    width: 10%;
-    height: 10%;
+    font-size: 120px;
+    padding: 30%;
+    margin-top: 5%;
+    width: 50%;
+    height: 50%;
     border-radius: 100%;
 }
 
-.playerStatisticBarSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
+.playerStatisticModal {
+    position: fixed;
+    border-radius: 20px;
+    left: 50%;
+    top: 50%;
+    border: 0;
+    width: 30%;
+    height: 80%;
+    transform: translate(-50%, -50%);
 }
 
-.playerStatisticBar {
-    width: 100%;
-    height: 40%;
-    accent-color: var(--color-accent);
+.playerStatisticModalTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.playerStatisticModalContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.playerStatisticModalRanking {
+    display: flex;
+    flex-direction: column;
+    margin-top: 35%;
+    margin-left: 15%;
+}
+
+.playerStatisticModalRankingList {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: auto;
+    max-width: 80%;
+    padding: 5%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: auto;
+    list-style-type: none;
+    background-color: rgb(220, 220, 220);
+}
+
+.playerStatisticModalRankingListElement {
+    padding: 3%;
+    font-size: 100%;
+}
+
+.unselectable {
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
 }
