@@ -128,11 +128,11 @@ function getDefendingStats(playerInfo: PlayerInfo, playerData: any, position: st
 function getOverallGoalkeeperStats(playerInfo: PlayerInfo, playerData: any) {
     return (
         <StatisticLayout info={playerInfo} data={playerData} position="goalkeeper">
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="overall" stat="team_defensive_prowess" label="TEAM DEFENSIVE PROWESS" value={playerData.overall.team_defensive_prowess}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="overall" stat="penalty_saving" label="PENALTY SAVING" value={playerData.overall.penalty_saving}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="overall" stat="freekick_saving" label="FREEKICK SAVING" value={playerData.overall.freekick_saving}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="overall" stat="corners_saving" label="CORNER GOALS PREVENTING" value={playerData.overall.corners_saving}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="overall" stat="clean_sheet_consistency" label="CLEAN SHEET CONSISTENCY" value={playerData.overall.clean_sheet_consistency}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="overall" stat="team_defensive_prowess" label="TEAM DEFENSIVE PROWESS" value={playerData.team_defensive_prowess}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="overall" stat="penalty_saving" label="PENALTY SAVING" value={playerData.penalty_saving}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="overall" stat="freekick_saving" label="FREEKICK SAVING" value={playerData.freekick_saving}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="overall" stat="corners_saving" label="CORNER GOALS PREVENTING" value={playerData.corners_saving}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="overall" stat="clean_sheet_consistency" label="CLEAN SHEET CONSISTENCY" value={playerData.clean_sheet_consistency}/>
         </StatisticLayout>
     )
 }
@@ -140,11 +140,11 @@ function getOverallGoalkeeperStats(playerInfo: PlayerInfo, playerData: any) {
 function getShotStoppingStats(playerInfo: PlayerInfo, playerData: any) {
     return (
         <StatisticLayout info={playerInfo} data={playerData} position="goalkeeper">
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="shot_stopping" stat="shot_stopping_total" label="TOTAL SHOT-STOPPING ABILITY" value={playerData.shot_stopping.shot_stopping_total}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="shot_stopping" stat="shot_stopping_per_90" label="AVERAGE SHOT-STOPPING ABILITY" value={playerData.shot_stopping.shot_stopping_per_90}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="shot_stopping" stat="shot_quality_faced" label="SHOT QUALITY FACED" value={playerData.shot_stopping.shot_quality_faced}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="shot_stopping" stat="shots_against" label="SHOTS FACED" value={playerData.shot_stopping.shots_against}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="shot_stopping" stat="shots_against_per_90" label="SHOTS FACED PER 90" value={playerData.shot_stopping.shots_against_per_90}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="shot-stopping" stat="shot_stopping_total" label="TOTAL SHOT-STOPPING ABILITY" value={playerData.shot_stopping_total}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="shot-stopping" stat="shot_stopping_per_90" label="AVERAGE SHOT-STOPPING ABILITY" value={playerData.shot_stopping_per_90}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="shot-stopping" stat="shot_quality_faced" label="SHOT QUALITY FACED" value={playerData.shot_quality_faced}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="shot-stopping" stat="shots_against" label="SHOTS FACED" value={playerData.shots_against}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="shot-stopping" stat="shots_against_per_90" label="SHOTS FACED PER 90" value={playerData.shots_against_per_90}/>
         </StatisticLayout>
     )
 }
@@ -152,12 +152,12 @@ function getShotStoppingStats(playerInfo: PlayerInfo, playerData: any) {
 function getDistributionStats(playerInfo: PlayerInfo, playerData: any) {
     return (
         <StatisticLayout info={playerInfo} data={playerData} position="goalkeeper">
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="total_passes" label="TOTAL PASSES" value={playerData.distribution.total_passes}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="launching_consistency" label="LAUNCHING ACCURACY" value={playerData.distribution.launching_consistency}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="passing_distance" label="PASSING DISTANCE" value={playerData.distribution.passing_distance}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="launching_tendency" label="LAUNCHING TENDENCY" value={playerData.distribution.launching_tendency}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="goalkicks_launching_tendency" label="GOALKICK LAUNCHING TENDENCY" value={playerData.distribution.goalkicks_launching_tendency}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="goalkicks_distance" label="GOALKICK DISTANCE" value={playerData.distribution.goalkicks_distance}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="total_passes" label="TOTAL PASSES" value={playerData.total_passes}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="launching_consistency" label="LAUNCHING ACCURACY" value={playerData.launching_consistency}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="passing_distance" label="PASSING DISTANCE" value={playerData.passing_distance}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="launching_tendency" label="LAUNCHING TENDENCY" value={playerData.launching_tendency}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="goalkicks_launching_tendency" label="GOALKICK LAUNCHING TENDENCY" value={playerData.goalkicks_launching_tendency}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="distribution" stat="goalkicks_distance" label="GOALKICK DISTANCE" value={playerData.goalkicks_distance}/>
         </StatisticLayout>
     )
 }
@@ -165,9 +165,9 @@ function getDistributionStats(playerInfo: PlayerInfo, playerData: any) {
 function getSweepingStats(playerInfo: PlayerInfo, playerData: any) {
     return (
         <StatisticLayout info={playerInfo} data={playerData} position="goalkeeper">
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="sweeping" stat="crosses_stopping_tendency" label="CROSS CLAIMING TENDENCY" value={playerData.sweeping.crosses_stopping_tendency}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="sweeping" stat="sweeping_actions" label="SWEEPING ACTIONS" value={playerData.sweeping.sweeping_actions}/>
-            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="sweeping" stat="sweeping_tendency" label="SWEEPING TENDENCY" value={playerData.sweeping.sweeping_tendency}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="sweeping" stat="crosses_stopping_tendency" label="CROSS CLAIMING TENDENCY" value={playerData.crosses_stopping_tendency}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="sweeping" stat="sweeping_actions" label="SWEEPING ACTIONS" value={playerData.sweeping_actions}/>
+            <PlayerStatistic id={playerInfo.id} position="goalkeeper" statType="sweeping" stat="sweeping_tendency" label="SWEEPING TENDENCY" value={playerData.sweeping_tendency}/>
         </StatisticLayout>
     )
 }
