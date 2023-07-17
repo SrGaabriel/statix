@@ -1,8 +1,7 @@
 .searchBox {
     border: 1px solid rgb(83, 83, 83);
-    border-radius: 12px;
     font-family: 'Roboto', sans-serif;
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(240, 240, 240);
     font-size: 15px;
     padding: 5%;
     padding-left: 7%;

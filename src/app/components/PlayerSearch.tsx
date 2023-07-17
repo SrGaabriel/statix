@@ -1,72 +1,79 @@
 'use client'
 
-import { PlayerSuggestion, getAllPlayers, getPlayerSuggestions } from '../api/player';
+import { PlayerSuggestion, playerSuggestionsFetcher } from '../api/player';
 import { getClubColors } from '../utils/colors';
-import React, { useState, useEffect, useRef, ChangeEvent, HTMLAttributes } from 'react';
+import React, { useState, ChangeEvent, HTMLAttributes, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './searchbox.module.css';
 import { getDefaultStatForPosition, getPositionName } from '../utils/defaults';
+import useSWR from 'swr';
 
 interface Properties extends HTMLAttributes<HTMLDivElement> {
   width?: number,
   height?: number
 }
 
-let allPlayersCache: PlayerSuggestion[] = []
-
-getAllPlayers().then((players) => {
-  allPlayersCache = players;
-});
-
 const SearchBox: React.FC<Properties> = ({ width = 400, height = 200 }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState([] as PlayerSuggestion[]);
-  const debounceTimer = useRef(undefined as (NodeJS.Timeout | undefined));
+  const isSearchAvailable = searchTerm.length > 3
+  const { data, error, isLoading } = useSWR(isSearchAvailable ? `${searchTerm}` : null, playerSuggestionsFetcher);
 
-  useEffect(() => {
-    return () => {
-      clearTimeout(debounceTimer.current);
-    };
-  }, []);
-
-  const setAndSortSuggestions = (suggestions: PlayerSuggestion[]) => {
-    setSuggestions(suggestions.sort((a, b) => b.club_elo - a.club_elo));
-  }
-
-  const searchPlayers = (query: string): PlayerSuggestion[] => {
-    const results: PlayerSuggestion[] = [];
+  function renderSuggestions() {
+    if (isLoading)
+      return <li className={`${styles.searchBoxSuggestion} ${styles.emptySearchBoxSuggestion}`}>
+        <div className={styles.suggestionContent}>
+          <Image
+            className={styles.clubBadge}
+            src={`/badges/$empty.png`}
+          />
+        </div>
+      </li>
+    if (error || !data)
+      return <p>An unexpected error occured.</p>
   
-    for (const player of allPlayersCache) {
-      if (player.name.toLowerCase().normalize().includes(query.toLowerCase().normalize())) {
-        results.push(player);
-      }
+    return data!!.sort((a, b) => b.club_elo - a.club_elo).map((suggestion: PlayerSuggestion) => (
+        <Link key={suggestion.id} href={`/player/${suggestion.id}/${getPositionName(suggestion.position)}/${getDefaultStatForPosition(suggestion.position)}`}>
+          <li
+            className={styles.searchBoxSuggestion}
+            onClick={() => handleSuggestionClick()}
+          >
+            <div
+              className={styles.suggestionContent}
+              style={getStripeStyle(suggestion.club)}
+            >
+              <Image
+                className={styles.clubBadge}
+                src={`/badges/${suggestion.club}.png`}
+                alt={`${suggestion.club} badge`}
+                width={32}
+                height={32}
+              />
+              <p
+                className={styles.positionBadge}
+                style={getStylesByPosition(suggestion.position)}
+              >
+                {suggestion.position}
+              </p>
+              <p
+                className={styles.playerSuggestionName}
+                dangerouslySetInnerHTML={{
+                  __html: formatSuggestionName(suggestion, searchTerm)
+                }}
+              />
+            </div>
+          </li>
+        </Link>
+      ))
     }
-    return results;
-  }
-
-  const fetchSuggestions = async (query: string) => {
-    if (query.length < 3)
-      return;
-
-    setAndSortSuggestions(searchPlayers(query))
-  };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.target.value = event.target.value.toUpperCase();
     const value = event.target.value;
     setSearchTerm(value);
-    clearTimeout(debounceTimer.current);
-    debounceTimer.current = setTimeout(() => {
-      if (value.length > 3) {
-        fetchSuggestions(value);
-      } else {
-        setAndSortSuggestions([]);
-      }
-    }, 300);
   };
 
   const handleSuggestionClick = () => {
-    setAndSortSuggestions([]);
   };
 
   return (
@@ -80,39 +87,7 @@ const SearchBox: React.FC<Properties> = ({ width = 400, height = 200 }) => {
       />
       <div className={styles.searchBoxSuggestionsContainer}>
         <ul className={styles.searchBoxSuggestions} style={{width: `${width + 60}px`}}>
-          {suggestions.map((suggestion) => (
-            <Link key={suggestion.id} href={`/player/${suggestion.id}/${getPositionName(suggestion.position)}/${getDefaultStatForPosition(suggestion.position)}`}>
-              <li
-                className={styles.searchBoxSuggestion}
-                onClick={() => handleSuggestionClick()}
-              >
-                <div
-                  className={styles.suggestionContent}
-                  style={getStripeStyle(suggestion.club)}
-                >
-                  <Image
-                    className={styles.clubBadge}
-                    src={`/badges/${suggestion.club}.png`}
-                    alt={`${suggestion.club} badge`}
-                    width={32}
-                    height={32}
-                  />
-                  <p
-                    className={styles.positionBadge}
-                    style={getStylesByPosition(suggestion.position)}
-                  >
-                    {suggestion.position}
-                  </p>
-                  <p
-                    className={styles.playerSuggestionName}
-                    dangerouslySetInnerHTML={{
-                      __html: formatSuggestionName(suggestion, searchTerm)
-                    }}
-                  />
-                </div>
-              </li>
-            </Link>
-          ))}
+          {isSearchAvailable ? renderSuggestions() : undefined}
         </ul>
       </div>
     </div>
@@ -148,8 +123,12 @@ function getStylesByPosition(position: string) {
 }
 
 function formatSuggestionName(suggestion: PlayerSuggestion, query: string) {
-  const regex = new RegExp(`(${query})`, 'gi');
-  return suggestion.name.toUpperCase().replace(regex, '<strong>$1</strong>');
+  const regex = new RegExp(`(${removeAccents(query)})`, 'gi');
+  return removeAccents(suggestion.name.toUpperCase()).replace(regex, '<strong>$1</strong>');
+}
+
+function removeAccents(word: string): string {
+  return word.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 export default SearchBox;

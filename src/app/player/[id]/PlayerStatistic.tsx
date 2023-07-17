@@ -3,12 +3,13 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
 import styles from './page.module.css';
 import { convertPercentageToLetter, getGradeColor } from '@/app/utils/grades';
-import PlayerStatisticData from './PlayerStatisticData';
-import { PlayerRanking, getPlayerStatRanking } from '@/app/api/player';
+import { PlayerInfo, PlayerRanking, getPlayerStatRanking } from '@/app/api/player';
 import { getCountryEmoji } from '@/app/utils/emojis';
+import { getExplanationForAttribute } from '@/app/utils/attributes';
+import { getClubColors } from '@/app/utils/colors';
 
 interface Properties extends HTMLAttributes<HTMLDivElement> {
-    id: string,
+    info: PlayerInfo,
     position: string,
     statType: string,
     stat: string
@@ -16,7 +17,8 @@ interface Properties extends HTMLAttributes<HTMLDivElement> {
     value: number;
 }
 
-const PlayerStatistic: React.FC<Properties> = ({ id, position, statType, stat, label, value }) => {
+const PlayerStatistic: React.FC<Properties> = ({ info, position, statType, stat, label, value }) => {
+    const id = info.id;
     const color = getGradeColor(convertPercentageToLetter(value))
     const [ranking, setRanking] = useState(null);
     const [buttonClicked, setButtonClicked] = useState(false);
@@ -28,11 +30,18 @@ const PlayerStatistic: React.FC<Properties> = ({ id, position, statType, stat, l
             .then((data) => setRanking(data));
     }, [id, position, statType, stat, label, value, buttonClicked]);
     
+    const clubColors = getClubColors(info.club);
     return (
         <div className={styles.playerStatistic}
             onClick={() => {
+                const dialog = (document.getElementById(`${label}${value}`) as HTMLDialogElement)
+                if (dialog.open)
+                    return false;
                 setButtonClicked(true);
-                (document.getElementById(`${label}${value}`) as HTMLDialogElement)?.showModal()
+                dialog.showModal();
+            }}
+            style={{
+                '--gradient': `linear-gradient(white, white), linear-gradient(90deg, ${clubColors.primary}, ${clubColors.secondary})`,
             }}
         >
             <div className={styles.playerStatisticLabelSection}>
@@ -42,9 +51,10 @@ const PlayerStatistic: React.FC<Properties> = ({ id, position, statType, stat, l
                 <h1 className={`${styles.playerStatisticRating} ${styles.unselectable}`} style={{color: `${color}`, border:`10px solid ${color}`}}>{convertPercentageToLetter(value)}</h1>
             </div>
             <div className={styles.playerStatisticModalSection}>
-                <dialog id={`${label}${value}`} className={styles.playerStatisticModal}>
+                <dialog id={`${label}${value}`} className={styles.playerStatisticModal} onAbort={() => setButtonClicked(false)}>
                     <div className={styles.playerStatisticModalContainer}>
                         <h1 className={styles.playerStatisticModalTitle}>{label.toUpperCase()}</h1>
+                        <p className={styles.playerStatisticModalDescription}>{getExplanationForAttribute(stat)}</p>
                         <div className={styles.playerStatisticModalRanking}>
                             <h2 className={styles.playerStatisticModalRankingName}>Ranking</h2>
                             {ranking ? renderRanking(ranking) : <p>Loading...</p>}
@@ -64,8 +74,8 @@ interface ValuesProperties extends HTMLAttributes<HTMLDivElement> {
 function renderRanking(ranking: PlayerRanking) {
     return (
       <ul className={styles.playerStatisticModalRankingList}>
-        {ranking.ranking.map((player) => (
-          <li key={player.id + "-ranking"} className={styles.playerStatisticModalRankingListElement}>{getCountryEmoji(player.nation)} {player.name} {player.value.toFixed(2)}</li>
+        {ranking.ranking.map((player, index) => (
+          <li key={player.id + "-ranking"} className={styles.playerStatisticModalRankingListElement}>{index+1}. {getCountryEmoji(player.nation)} {player.name} {player.value.toFixed(2)}</li>
         ))}
       </ul>
     );

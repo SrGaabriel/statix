@@ -18,10 +18,10 @@ export default function Header() {
                 <HeaderButton>Usage</HeaderButton>
                 <HeaderButton>F.A.Q</HeaderButton>
             </div>
-            <SearchBox
-                height={50}
-                width={300}
-            />
+                <SearchBox
+                    height={50}
+                    width={300}
+                />
         </div>
     )
 }

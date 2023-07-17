@@ -4,6 +4,7 @@ import { getCountryEmoji } from '@/app/utils/emojis';
 import Header from '@/app/components/Header';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getPositionName } from '@/app/utils/defaults';
 
 interface Properties {
     info: PlayerInfo,
@@ -24,7 +25,7 @@ export default function StatisticLayout({ info, data, position, children }: Prop
                     <div className={styles.playerData}>
                         <h1>{info.name}</h1> 
                         <div className={styles.playerInfo}>
-                            <p>{getCountryEmoji(info.nationality)} {info.age.toString().slice(0, 2)} years old {info.position}</p>
+                            <p>{getCountryEmoji(info.nationality)} {info.age.toString().slice(0, 2)} years old {getPositionName(info.position)}</p>
                             <div className={styles.playerBadgeSection}>
                                 <Image
                                     className={styles.playerBadge}

@@ -84,18 +84,13 @@ export async function getAllPlayers(): Promise<PlayerSuggestion[]> {
     if (response.status !== 200) {
         return [];
     }
-    return (await response.json()) as PlayerSuggestion[];
+    return response.json();
 }
 
-export async function getPlayerSuggestions(name: string): Promise<PlayerSuggestion[]> {
-    const response = await fetch(`${getApi()}/players?search=${name}`, {
+export const playerSuggestionsFetcher = (name: string): Promise<PlayerSuggestion[]> =>
+    fetch(`${getApi()}/players?search=${name}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         }
-    });    
-    if (response.status !== 200) {
-        return [];
-    }
-    return (await response.json()) as PlayerSuggestion[];
-}
+    }).then(response => response.json())
