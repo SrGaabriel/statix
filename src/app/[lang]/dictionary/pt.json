@@ -1,0 +1,441 @@
+{
+    "code": "pt",
+	"language": "Linguagem",
+    "players": "JOGADORES",
+    "error": "Um erro inesperado occoreu",
+    "other": "Outros",
+    "from": "Da",
+    "languages": {
+        "en": "Inglês",
+        "pt": "Português"
+    },
+    "player": {
+        "not_found": "Jogador não encontrado"
+    },
+    "search": {
+        "placeholder": "Pesquise jogadores...",
+        "no_players_found": "Nenhum jogador foi encontrado"
+    },
+    "info": {
+        "club": "Time",
+        "position": "Posição",
+        "nationality": "Nacionalidade"
+    },
+    "leagues": {
+        "premier_league": "Premier League",
+        "la_liga": "La Liga",
+        "bundesliga": "Bundesliga",
+        "serie_a": "Serie A",
+        "ligue_1": "Ligue 1",
+        "brasileirao": "Brasileirão Série A",
+        "top_5": "Top 5 Ligas Europeias",
+        "from_premier_league": "da Premier League",
+        "from_la_liga": "da La Liga",
+        "from_bundesliga": "da Bundesliga",
+        "from_serie_a": "da Serie A",
+        "from_ligue_1": "da Ligue 1",
+        "from_brasileirao": "do Brasileirão",
+        "from_top_5": "das Top 5 Ligas Europeias"
+    },
+    "position": {
+        "striker": "Centro-avante",
+        "winger": "Ponta",
+        "forward": "Atacante",
+        "midfielder": "Meio-campista",
+        "centreback": "Zagueiro",
+        "fullback": "Lateral",
+        "defender": "Defensor",
+		"goalkeeper": "Goleiro",
+
+        "strikers": "Centro-avantes",
+        "wingers": "Pontas",
+        "forwards": "Atacantes",
+        "midfielders": "Meio-campistas",
+        "fullbacks": "Laterais",
+        "centrebacks": "Zagueiros",
+        "defenders": "Defensores",
+		"goalkeepers": "Goleiros"
+    },
+    "statistics": {
+        "dynamic": "Dinâmico",
+        "absolute": "Absoluto",
+        "standard": "Padrão",
+        "compact": "Compacto",
+        "profile": "Perfil",
+        "shooting": "Finalização",
+        "possession": "Posse de bola",
+        "playmaking": "Criatividade",
+        "passing": "Passe",
+        "defending": "Defesa",
+        "overall": "Geral",
+        "shot_stopping": "Reflexos",
+        "distribution": "Distribuição",
+        "sweeping": "Saida do gol",
+        "compare": "Comparar",
+        "comparing_to": "Comparando a"
+    },
+    "compare": {
+        "compare_different_players": "COMPARE JOGADORES DIFERENTES",
+        "add_at_least_two_players": "Adicione pelo menos dois jogadores para comparar",
+        "goalkeeper_and_outfield_players": "Goleiros e jogadores de linha não podem ser comparados",
+        "comparison": "COMPARAÇÃO",
+        "add_player": "Adicione um jogador",
+        "strengths": "Pontos fortes",
+        "weaknesses": "Pontos fracos",
+        "reference": "REFERÊNCIA"
+    },
+    "statistics_data": {
+        "shooting_tendency": {
+            "label": "Tendência de finalizar",
+            "explanation": "O número médio de tentativas de finalização por 90 minutos. Indica com que frequência um jogador realiza chutes durante uma partida."
+        },
+        "shooting_threat": {
+            "label": "Perigo na finalização",
+            "explanation": "O número médio de gols marcados por chute. Representa a eficiência do jogador em converter chutes em gols."
+        },
+        "shooting_chances": {
+            "label": "Oportunidades de finalização",
+            "explanation": "O número médio de gols esperados por chute. Mede a qualidade das oportunidades de finalização que um jogador cria."
+        },
+        "shooting_consistency": {
+            "label": "Consistência na finalização",
+            "explanation": "A porcentagem de chutes que são direcionados ao alvo. Reflete a precisão do jogador e sua capacidade de acertar o alvo com seus chutes."
+        },
+        "shooting_clinicality": {
+            "label": "Eficácia na finalização",
+            "explanation": "A diferença entre os gols reais marcados e os gols esperados. Quantifica a habilidade do jogador em finalizar as jogadas."
+        },
+        "shooting_distance": {
+            "label": "Distância das finalizações",
+            "explanation": "A distância média dos chutes realizados por um jogador. Indica a tendência do jogador em realizar chutes de diferentes áreas do campo."
+        },
+        "shot_creating_actions": {
+            "label": "Criação de chances de chutes",
+            "explanation": "O número de ações que levam a um chute por um jogador. Inclui passes, dribles e outras ações que contribuem para a criação de oportunidades de finalização."
+        },
+        "shot_creating_tendency": {
+            "label": "Tendência de criar chances de chutes",
+            "explanation": "O número médio de ações de criação de oportunidades por 90 minutos. Indica com que frequência um jogador gera oportunidades para chutes."
+        },
+        "shot_creating_passes": {
+            "label": "Passes para chute",
+            "explanation": "O número de passes que levam a um chute por um jogador. Representa a capacidade do jogador de realizar passes decisivos que criam chances de finalização."
+        },
+        "shot_creating_setpieces": {
+            "label": "Chances de chute em bola parada",
+            "explanation": "O número de passes de bola parada que levam a um chute por um jogador. Inclui cobranças de falta, escanteios e outras situações de bola parada que resultam em oportunidades de finalização."
+        },
+        "shot_creating_dribbles": {
+            "label": "Dribles de criação de chute",
+            "explanation": "O número de dribles bem-sucedidos que levam a um chute por um jogador. Reflete a habilidade do jogador em superar adversários e criar oportunidades de finalização através do drible."
+        },
+        "shot_creating_defensive_actions": {
+            "label": "Ações defensivas que criam chutes",
+            "explanation": "O número de ações defensivas que levam a um chute por um jogador. Inclui interceptações, tackles e outras contribuições defensivas que geram contra-ataques ou oportunidades de ataque."
+        },
+        "goal_creating_actions": {
+            "label": "Ações de criação de gols",
+            "explanation": "O número de ações que levam a um gol por um jogador. Inclui passes, dribles e outras ações que contribuem diretamente para oportunidades de marcar gols."
+        },
+        "goal_creating_tendency": {
+            "label": "Tendência de criar gols",
+            "explanation": "O número médio de ações de criação de gols por 90 minutos. Indica com que frequência um jogador gera oportunidades para marcar gols."
+        },
+        "goal_creating_passes": {
+            "label": "Passes de criação de gols",
+            "explanation": "O número de passes em jogo que levam a um gol por um jogador. Representa a capacidade do jogador de fazer passes decisivos que resultam diretamente em gols."
+        },
+        "goal_creating_setpieces": {
+            "label": "Bola parada de criação de gols",
+            "explanation": "O número de passes de bola parada que levam a um gol por um jogador. Inclui cobranças de falta, escanteios e outras situações de bola parada que resultam diretamente em gols."
+        },
+        "goal_creating_dribbles": {
+            "label": "Dribles de criação de gols",
+            "explanation": "O número de dribles bem-sucedidos que levam a um gol por um jogador. Reflete a habilidade do jogador em superar adversários e criar oportunidades de marcar gols através do drible."
+        },
+        "goal_creating_defensive_actions": {
+            "label": "Ações defensivas de criação de gols",
+            "explanation": "O número de ações defensivas que levam a um gol por um jogador. Inclui interceptações, tackles e outras contribuições defensivas que resultam diretamente em gols."
+        },
+        "taking_on_tendency": {
+            "label": "Tendência de driblar",
+            "explanation": "O número médio de tentativas de drible por 90 minutos. Indica com que frequência um jogador tenta driblar os adversários."
+        },
+        "taking_on_ability": {
+            "label": "Habilidade de driblar",
+            "explanation": "O número médio de dribles bem-sucedidos por 90 minutos. Representa a habilidade do jogador em superar os adversários com sucesso através do drible."
+        },
+        "taking_on_consistency": {
+            "label": "Consistência no drible",
+            "explanation": "A taxa de sucesso das tentativas de drible realizadas por um jogador. Reflete a capacidade do jogador em driblar com sucesso os adversários."
+        },
+        "carrying_tendency": {
+            "label": "Tendência de conduzir a bola",
+            "explanation": "O número médio de conduções de bola por 90 minutos. Indica com que frequência um jogador avança com a bola."
+        },
+        "progressive_carries": {
+            "label": "Conduções progressivas",
+            "explanation": "O número de conduções que levam a bola em direção ao gol adversário. Representa a habilidade do jogador em fazer corridas progressivas com a bola."
+        },
+        "carrying_progressiveness": {
+            "label": "Progressão com a bola",
+            "explanation": "O número médio de conduções progressivas por 90 minutos. Indica com que frequência um jogador faz corridas progressivas com a bola."
+        },
+        "final_third_carries": {
+            "label": "Conduções até o terço final",
+            "explanation": "O número de conduções para a terceira parte final do campo por 90 minutos. Representa a habilidade do jogador em penetrar na linha defensiva adversária com a bola."
+        },
+        "penalty_area_carries": {
+            "label": "Conduções até a área",
+            "explanation": "O número de conduções para a área penal por 90 minutos. Reflete a habilidade do jogador em avançar com a bola em direção a posições de gol."
+        },
+        "carrying_total_distance": {
+            "label": "Distância total com a bola",
+            "explanation": "A distância total percorrida por um jogador enquanto conduz a bola. Indica a contribuição geral do jogador na progressão com a bola."
+        },
+        "touches_per_90": {
+            "label": "Toques na bola por 90 minutos",
+            "explanation": "O número médio de toques na bola por 90 minutos. Representa o envolvimento do jogador no jogo e a frequência de suas interações com a bola."
+        },
+        "received_passes": {
+            "label": "Passes recebidos",
+            "explanation": "O número de passes recebidos por um jogador. Reflete o posicionamento do jogador e sua capacidade de receber e controlar passes dos companheiros de equipe."
+        },
+        "received_progressive_passes": {
+            "label": "Passes progr. recebidos",
+            "explanation": "O número de passes progressivos recebidos por um jogador. Indica o envolvimento do jogador em receber passes que avançam o jogo da equipe."
+        },
+        "possession_trustworthiness": {
+            "label": "Confiabilidade na posse de bola",
+            "explanation": "O número de vezes que um jogador é desarmado da bola. Reflete a capacidade do jogador em manter a posse de bola e evitar perdê-la para os adversários."
+        },
+        "defensive_third_touches": {
+            "label": "Toques na bola no campo defensivo",
+            "explanation": "O número de toques na bola na terceira parte defensiva do campo. Representa o envolvimento do jogador na construção defensiva e circulação da bola na zona defensiva."
+        },
+        "mid_third_touches": {
+            "label": "Toques na bola no meio-campo",
+            "explanation": "O número de toques na bola na terceira parte central do campo. Reflete o envolvimento do jogador na construção de jogadas e circulação da bola na área do meio-campo."
+        },
+        "attacking_third_touches": {
+            "label": "Toques na bola no ataque",
+            "explanation": "O número de toques na bola na terceira parte ofensiva do campo. Indica o envolvimento do jogador no ataque da equipe e sua presença na zona defensiva do adversário."
+        },
+        "directness": {
+            "label": "Objetividade",
+            "explanation": "A porcentagem de passes que são realizados diretamente em direção ao alvo. Reflete a tendência do jogador em realizar passes rápidos e diretos em vez de passes laterais ou para trás."
+        },
+        "passes_per_90": {
+            "label": "Passes cada 90 minutos",
+            "explanation": "O número médio de passes completos por 90 minutos. Representa o envolvimento do jogador no jogo de passes da equipe e seu volume de passes."
+        },
+        "accuracy": {
+            "label": "Precisão dos passes",
+            "explanation": "A porcentagem de passes totais completados por um jogador. Reflete a precisão do jogador e sua taxa de sucesso ao entregar passes precisos."
+        },
+        "key_passes": {
+            "label": "Passes-chave",
+            "explanation": "O número de passes que levam diretamente a um chute de um companheiro de equipe. Representa a habilidade do jogador em criar oportunidades de gol através de seus passes."
+        },
+        "progressive_passes": {
+            "label": "Passes progressivos",
+            "explanation": "O número de passes que movem a bola em direção ao gol adversário. Indica a habilidade do jogador em realizar passes avançados e penetrantes."
+        },
+        "final_third_passes": {
+            "label": "Passes pro ataque",
+            "explanation": "O número de passes para a terceira parte final do campo. Reflete a habilidade do jogador em realizar passes que alcançam a zona de ataque do adversário."
+        },
+        "through_balls": {
+            "label": "Bolas enfiadas",
+            "explanation": "O número de passes que são realizados em direção à área penal adversária e passam entre defensores. Representa a habilidade do jogador em realizar passes que penetram na linha defensiva adversária."
+        },
+        "switching_tendency": {
+            "label": "Tendência de virar o jogo",
+            "explanation": "Quantas vezes um jogador realiza passes para o outro lado do campo cada 90 minutos."
+        },
+        "crossing_tendency": {
+            "label": "Tendência de cruzar",
+            "explanation": "Quantos cruzamentos o jogador realiza a cada 90 minutos. Indica a tendência do jogador em realizar cruzamentos para a área penal adversária."
+        },
+        "short_range_passes": {
+            "label": "Passes de curta distância",
+            "explanation": "O número de passes de curta distância completos por um jogador. Representa o envolvimento do jogador em combinações de passes curtas e rápidas."
+        },
+        "short_range_pass_accuracy": {
+            "label": "Precisão em passes de curta distância",
+            "explanation": "A porcentagem de passes de curta distância completos por um jogador. Reflete a precisão do jogador em situações de passes curtos e em curta distância."
+        },
+        "medium_range_passes": {
+            "label": "Passes de média distância",
+            "explanation": "O número de passes de média distância completos por um jogador. Indica a habilidade do jogador em realizar passes precisos em distâncias moderadas."
+        },
+        "medium_range_pass_accuracy": {
+            "label": "Precisão em passes de média distância",
+            "explanation": "A porcentagem de passes de média distância completos por um jogador. Reflete a precisão do jogador em realizar passes em distâncias moderadas."
+        },
+        "long_range_passes": {
+            "label": "Passes de longa distância",
+            "explanation": "O número de passes de longa distância completos por um jogador. Representa a habilidade do jogador em realizar passes precisos em longas distâncias."
+        },
+        "long_range_pass_accuracy": {
+            "label": "Precisão em passes de longa distância",
+            "explanation": "A porcentagem de passes de longa distância completos por um jogador. Reflete a precisão do jogador em realizar passes em longas distâncias."
+        },
+        "expected_assists": {
+            "label": "Assistências esperadas",
+            "explanation": "O número médio de gols esperados assistidos por um jogador. Quantifica a qualidade dos passes do jogador que levam a oportunidades de gol para os companheiros de equipe."
+        },
+        "expected_assisted_shots": {
+            "label": "Chutes assistidos esperadas",
+            "explanation": "O número médio de finalizações assistidas esperadas por um jogador. Representa a qualidade dos passes do jogador que resultam diretamente em tentativas de finalização por parte dos companheiros de equipe."
+        },
+        "forwards_clinicality": {
+            "label": "Finalização dos companheiros",
+            "explanation": "A diferença entre as assistências reais e as assistências esperadas. Quantifica a eficiência do jogador em fornecer assistências com base nos resultados esperados."
+        },
+        "challenging_tendency": {
+            "label": "Tendência de disputar a bola",
+            "explanation": "O número médio de duelos defensivos por 90 minutos. Indica com que frequência um jogador se envolve em duelos defensivos para recuperar a posse de bola."
+        },
+        "challenging_consistency": {
+            "label": "Consistência em duelos defensivos",
+            "explanation": "A taxa de sucesso dos duelos defensivos tentados por um jogador. Reflete a capacidade do jogador de vencer duelos e recuperar a posse de bola dos adversários com sucesso."
+        },
+        "defensive_actions": {
+            "label": "Ações defensivas",
+            "explanation": "O número total de ações defensivas realizadas por um jogador. Inclui desarmes, interceptações e outras contribuições defensivas."
+        },
+        "defensive_third_tackles": {
+            "label": "Desarmes no campo defensivo",
+            "explanation": "O número de desarmes realizados por um jogador na terceira parte defensiva do campo. Indica o envolvimento do jogador na defesa em seu próprio território."
+        },
+        "mid_third_tackles": {
+            "label": "Desarmes no meio campo",
+            "explanation": "O número de desarmes realizados por um jogador na terceira parte central do campo. Representa as contribuições defensivas do jogador na área do meio-campo."
+        },
+        "attacking_third_tackles": {
+            "label": "Desarmes no ataque",
+            "explanation": "O número de desarmes realizados por um jogador na terceira parte ofensiva do campo. Reflete os esforços defensivos do jogador na zona ofensiva do adversário."
+        },
+        "recoveries": {
+            "label": "Recuperações",
+            "explanation": "O número de vezes que um jogador recupera a posse da bola após ter sido perdida por sua equipe. Representa a capacidade do jogador de recuperar a bola e retomar o controle para sua equipe."
+        },
+        "aerial_reliability": {
+            "label": "Habilidade aérea",
+            "explanation": "O número médio de duelos aéreos vencidos por um jogador por 90 minutos. Reflete a confiabilidade do jogador em vencer duelos aéreos."
+        },
+        "aerial_prowess": {
+            "label": "Sucesso no jogo aéreo",
+            "explanation": "A taxa de sucesso dos duelos aéreos tentados por um jogador. Indica a habilidade do jogador em vencer desafios aéreos contra adversários."
+        },
+        "clearances": {
+            "label": "Chutões",
+            "explanation": "O número de chutões feitos por um jogador. Representa as ações defensivas do jogador em afastar a bola da zona de perigo."
+        },
+        "shots_blocked": {
+            "label": "Chutes bloqueados",
+            "explanation": "O número de chutes bloqueados por um jogador. Reflete a habilidade do jogador em posicionar-se bem e bloquear tentativas de finalização por parte dos adversários."
+        },
+        "passes_blocked": {
+            "label": "Passes bloqueados",
+            "explanation": "O número de passes bloqueados por um jogador. Indica a habilidade do jogador em ler o jogo e interceptar passes dos adversários."
+        },
+        "interceptions": {
+            "label": "Interceptações",
+            "explanation": "O número de interceptações realizadas por um jogador. Representa a habilidade do jogador em ler o jogo, antecipar passes e interceptá-los."
+        },
+        "yellow_cards": {
+            "label": "Cartões amarelos",
+            "explanation": "O número de cartões amarelos recebidos por um jogador. Reflete o registro disciplinar do jogador e o número de ações disciplinares tomadas pelo árbitro."
+        },
+        "fouling_tendency": {
+            "label": "Tendência a cometer faltas",
+            "explanation": "O número médio de faltas cometidas por um jogador por 90 minutos. Indica com que frequência um jogador comete faltas durante as partidas."
+        },
+        "goals_against_per_90": {
+            "label": "Capacidade defensiva do time",
+            "explanation": "A média de gols concedidos por um goleiro a cada 90 minutos, em ordem ascendente. Reflete a efetividade de toda a equipe em evitar gols."
+        },
+        "penalty_saving": {
+            "label": "Defesas de pênaltis",
+            "explanation": "A taxa de sucesso ao defender pênaltis por um goleiro. Representa a habilidade do goleiro em parar chutes de pênalti."
+        },
+        "freekick_saving": {
+            "label": "Lidança com faltas",
+            "explanation": "A média de faltas defendidas por um goleiro a cada 90 minutos. Reflete a efetividade do goleiro em defender chutes de falta."
+        },
+        "corners_saving": {
+            "label": "Lidança com escanteios",
+            "explanation": "A média de escanteios defendidos por um goleiro a cada 90 minutos. Representa a habilidade do goleiro em evitar gols provenientes de cobranças de escanteio."
+        },
+        "clean_sheet_consistency": {
+            "label": "Taxa de jogo sem sofrer gols",
+            "explanation": "A porcentagem de partidas em que um goleiro mantém o gol invicto (não sofre gols). Reflete a habilidade do goleiro em evitar gols consistentemente."
+        },
+        "shot_stopping_total": {
+            "label": "Reflexos totais",
+            "explanation": "A diferença entre os gols esperados evitados e os gols esperados sofridos por um goleiro. Quantifica o desempenho geral do goleiro em fazer defesas."
+        },
+        "shot_stopping_per_90": {
+            "label": "Reflexos em média",
+            "explanation": "A média de gols esperados evitados por um goleiro a cada 90 minutos. Representa a habilidade do goleiro em evitar gols com base nos resultados esperados."
+        },
+        "shot_quality_faced": {
+            "label": "Qualidade dos chutes enfrentados",
+            "explanation": "A média de gols esperados enfrentados por um goleiro a cada chute no alvo. Indica a tendência dos oponentes de chutar apenas em situações específicas."
+        },
+        "shots_against": {
+            "label": "Chutes enfrentados",
+            "explanation": "O número total de chutes enfrentados por um goleiro. Reflete o envolvimento do goleiro em situações de defesa de chutes e o número de chutes com os quais ele precisa lidar."
+        },
+        "shots_against_per_90": {
+            "label": "Tendência de ser exposto",
+            "explanation": "A média de chutes a gol enfrentados por um goleiro a cada 90 minutos. Representa a tendência do goleiro de ser exposto a situações de defesa de chutes por partida."
+        },
+        "total_passes": {
+            "label": "Total de passes",
+            "explanation": "O número total de passes tentados por um goleiro. Reflete o envolvimento do goleiro no jogo de passes da equipe e sua habilidade em distribuir a bola."
+        },
+        "passing_distance": {
+            "label": "Distância dos passes",
+            "explanation": "A média do comprimento dos passes feitos por um goleiro. Representa a habilidade do goleiro em distribuir a bola em diferentes distâncias."
+        },
+        "launching_consistency": {
+            "label": "Consistência nas bolas longas",
+            "explanation": "A taxa de sucesso das cobranças longas feitas por um goleiro. Reflete a precisão e efetividade do goleiro em lançar passes de longa distância."
+        },
+        "launching_tendency": {
+            "label": "Tendência de lançar a bola",
+            "explanation": "A porcentagem de cobranças longas feitas por um goleiro. Indica a tendência do goleiro em realizar lançamentos de longa distância."
+        },
+        "goalkicks_launching_tendency": {
+            "label": "Taxa de tiros de meta longos",
+            "explanation": "A porcentagem de tiros de meta cobrados por um goleiro. Reflete a tendência do goleiro em cobrar tiros de meta em vez de passes curtos."
+        },
+        "goalkicks_distance": {
+            "label": "Distância dos tiros de meta",
+            "explanation": "A média do comprimento dos tiros de meta cobrados por um goleiro. Representa a habilidade do goleiro em distribuir a bola em diferentes distâncias a partir dos tiros de meta."
+        },
+        "crosses_stopped": {
+            "label": "Cruzamentos interceptados",
+            "explanation": "O número de cruzamentos interceptados por um goleiro. Indica a habilidade do goleiro em sair da área e agarrar ou afastar cruzamentos na área penal."
+        },
+        "crosses_stopping_tendency": {
+            "label": "Tendência de pegar cruzamentos",
+            "explanation": "A porcentagem de cruzamentos interceptados por um goleiro. Reflete a tendência do goleiro em sair da área e agarrar ou afastar cruzamentos para evitar perigo na área penal."
+        },
+        "sweeping_actions": {
+            "label": "Saídas da área",
+            "explanation": "O número de vezes que um goleiro atua como um varredor fora da sua área penal. Indica o envolvimento do goleiro em ações de varredura longe do gol."
+        },
+        "sweeping_tendency": {
+            "label": "Tendência de sair da área",
+            "explanation": "A média de ações de varredura por 90 minutos. Indica a tendência do goleiro de sair da sua área penal e atuar como um varredor atrás da linha defensiva."
+        },
+		"sweeping_distance": {
+			"label": "Distância das saídas",
+			"explanation": "A média da distância percorrida por um goleiro durante as ações de varredura. Representa a habilidade do goleiro em sair da sua área penal e atuar como um varredor atrás da linha defensiva."
+		}
+    }
+}

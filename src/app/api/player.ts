@@ -1,4 +1,3 @@
-import { getPositionName } from "../utils/defaults";
 import { getApi } from "./api";
 
 export interface PlayerInfo {
@@ -7,8 +6,11 @@ export interface PlayerInfo {
     club: string,
     age: number,
     born: number,
+    league: string,
     nationality: string,
     position: string,
+    base_id: string,
+    has_image: boolean
 }
 
 export interface PlayerSuggestion {
@@ -27,9 +29,11 @@ export interface PlayerRanking {
             name: string;
             nation: string;
             born: string;
+            rank: number;
             value: number;
         }
     ]
+    total: number;
 }
 
 export async function getPlayerInfo(id: string): Promise<PlayerInfo | null> {
@@ -45,8 +49,8 @@ export async function getPlayerInfo(id: string): Promise<PlayerInfo | null> {
     return (await response.json()).player as PlayerInfo;
 }
 
-export async function getPlayerPositionData(id: string, position: string, statType: string) {
-    const response = await fetch(`${getApi()}/players/${id}/${getPositionName(position)}/${statType}`, {
+export async function getPlayerPositionData(id: string, league: string, positionName: string) {
+    const response = await fetch(`${getApi()}/players/${id}/data?position=${positionName}&league=${league}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -59,8 +63,8 @@ export async function getPlayerPositionData(id: string, position: string, statTy
     return data
 }
 
-export async function getPlayerStatRanking(id: string, position: string, statType: string, statistic: string) {
-    const response = await fetch(`${getApi()}/players/${id}/${position}/${statType}/${statistic}`, {
+export async function getPlayerStatRanking(id: string, positionName: string, statType: string, statistic: string) {
+    const response = await fetch(`${getApi()}/players/${id}/${statType}/${statistic}?position=${positionName}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -70,7 +74,6 @@ export async function getPlayerStatRanking(id: string, position: string, statTyp
         return null;
     }
     const data = (await response.json());
-    console.log(data);
     return data
 }
 
@@ -87,8 +90,40 @@ export async function getAllPlayers(): Promise<PlayerSuggestion[]> {
     return response.json();
 }
 
+export const playerInfoFetcher = (id: string): Promise<PlayerInfo> =>
+    fetch(`${getApi()}/players/${id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(response => response.json()).then(data => data.player)
+
+export const playerDataFetcher = (id: string, position: string, league: string): Promise<any> =>
+    fetch(`${getApi()}/players/${id}/data?position=${position}&league=${league}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(response => response.json())
+
+export const statisticRankFetcher = (id: string, position: string, league: string, statType: string, statistic: string): Promise<PlayerRanking> =>
+    fetch(`${getApi()}/players/${id}/${statType}/${statistic}?position=${position}&league=${league}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(response => response.json())
+
 export const playerSuggestionsFetcher = (name: string): Promise<PlayerSuggestion[]> =>
     fetch(`${getApi()}/players?search=${name}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(response => response.json())
+
+export const playerProfileFetcher = (id: string, league: string, position: string, mode: string): Promise<any> =>
+    fetch(`${getApi()}/players/${id}/profile?position=${position}&league=${league}&type=${mode}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"

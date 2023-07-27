@@ -3,12 +3,10 @@
     position: sticky;
     justify-content: space-between;
     align-items: center;
-    padding: 0 3%;
+    padding-right: 2.5%;
     background-color: #0e0c64;
-    height: 5%;
+    height: 70px;
     width: 100%;
-    padding-right: 8%;
-    border-bottom: 1px solid #d3d3d380;
 }
 
 .headerLogo {
@@ -18,19 +16,87 @@
 .headerLeftHandSide {
     display: flex;
     align-items: center;
+    margin-right: auto;
+    height: 100%;
+    margin-left: 30px;
 }
 
-.headerLeftHandSide * {
-    margin-right: 5%;
+.headerButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    height: 70%;
+    padding: 0 5%;
+    margin-left: 6%;
+    margin-right: 6%;
+    border: 2px solid rgb(25, 183, 223);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-@media (max-width: 768px) {
+.headerButton:hover {
+    background-color: rgb(25, 183, 223);
+    box-shadow: 0 0 20px #00000080;
+}
+
+.headerButtonComponent {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.languageSection {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    margin-right: 20px;
+    font-family: var(--font-mono);
+    border: 3px solid rgb(25, 183, 223);
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.languageSection:hover {
+    box-shadow: 0 0 50px #00000080;
+}
+
+.homeLogoLink {
+    margin-left: 20px;
+}
+
+.searchLogo {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 200px;
+    z-index: 5000;
+    top: 70px;
+    background-color: rgb(206, 206, 206);
+}
+
+.menuButton {
+    padding: 7%;
+    text-align: center;
+}
+
+.menuButton:hover {
+    background-color: rgb(188, 188, 188);
+}
+
+@media (max-width: 1100px) {
     .header {
         flex-wrap: wrap;
-        padding: 0 2%;
-        height: auto;
+        background-color: rgb(5, 78, 212);
     }
-    
     .headerLogo {
         margin-right: 0;
         margin-bottom: 2%;

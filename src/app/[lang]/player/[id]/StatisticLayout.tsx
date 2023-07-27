@@ -5,20 +5,25 @@ import { getCountryEmoji } from '@/app/utils/emojis';
 import Header from '@/app/components/Header';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getLeagueName, getPositionName } from '@/app/utils/defaults';
+import { OUTFIELD_POSITIONS, getLeagueName, getPositionNameById, getPositionPluralName, getStatisticName } from '@/app/utils/naming';
 import DropdownMenu from '@/app/components/DropdownMenu';
-import { Dispatch, useEffect, useState } from 'react';
+import React, { Dispatch, HTMLAttributes, useEffect, useState, useRef } from 'react';
 import { Action, useStatisticContext } from './StatisticContext';
+import PlayerStatistic from './PlayerStatistic';
+import PlayerStatisticRadar from './PlayerStatisticRadar';
 
-interface Properties {
-    children: React.ReactNode;
+interface Properties extends HTMLAttributes<HTMLDivElement> {
+    playerData: any,
+    isLoading?: boolean,
+    isProfile?: boolean
 }
 
-export default function StatisticLayout({children}: Properties) {
+const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isProfile=false}) => {
     const { state, dispatch } = useStatisticContext();
-    const { playerInfo, league, position, statisticType, fullView, dynamicMode } = state;
+    const { playerInfo, league, position, statisticType, fullView, dynamicMode, dictionary } = state;
     const [localFullView, setLocalFullView] = useState(fullView);
     const [localDynamicMode, setDynamicMode] = useState(fullView);
+
     useEffect(() => {
         if (localFullView != fullView) {
             dispatch({ type: 'SET_FULL_VIEW_MODE', payload: localFullView });
@@ -28,39 +33,73 @@ export default function StatisticLayout({children}: Properties) {
         }
     }, [localFullView, dispatch, fullView, localDynamicMode, dynamicMode]);
 
-    const positions = ['defender', 'midfielder', 'forward'].filter(pos => pos !== position);
+    const positions = OUTFIELD_POSITIONS.filter(pos => pos !== position);
     const leagues = ['premier_league', 'ligue_1', 'serie_a', 'bundesliga', 'la_liga', 'brasileirao', 'top_5'].filter(nleague => league !== nleague);
+
+    const makeEmptyStatistic = () => {
+        return (
+            <div className={styles.playerStatistic}>
+                <div className={styles.playerStatisticContainer}>
+                    <h1 className={`${styles.playerStatisticLabel} ${styles.invisibleText} ${styles.unselectable}`}>LOADING</h1>
+                    <p className={`${styles.playerStatisticRating} ${styles.loadingPlayerStatisticRating}`}>--</p>
+                </div>
+            </div>
+        )
+    };
+
+    let statistics;
+    if (isLoading) {
+        statistics = 
+            (<>
+                {makeEmptyStatistic()}
+                {makeEmptyStatistic()}
+                {makeEmptyStatistic()}
+                {makeEmptyStatistic()}
+                {makeEmptyStatistic()}
+                {makeEmptyStatistic()}
+            </>)
+    } else if (isProfile) {
+        statistics = <PlayerStatisticRadar/>
+    } else if (playerData) {
+        const dataset = playerData[statisticType]
+        statistics = [];
+        for (const key in dataset) {
+            statistics.push(
+                (<PlayerStatistic stat={key} label={getStatisticName(dictionary, key)} value={dataset[key]}/>)
+            )
+        }
+    }
 
     return (
         <div className={styles.page}>
-            <Header/>
+            <Header dictionary={dictionary}/>
             <main className={styles.main}>
                 <div className={styles.playerDataColumn}>
                     <div className={styles.playerData}>
                         <h1>{playerInfo.name}</h1> 
                         <div className={styles.playerInfo}>
-                            <p>{getCountryEmoji(playerInfo.nationality)} {playerInfo.age.toString().slice(0, 2)} years old {getPositionName(playerInfo.position)}</p>
+                            <p>{getCountryEmoji(playerInfo.nationality)} {playerInfo.age.toString().slice(0, 2)} years old {getPositionNameById(playerInfo.position)}</p>
                             <div className={styles.playerBadgeSection}>
                                 <Image
                                     className={styles.playerBadge}
-                                    src={`/badges/${playerInfo.club}.png`}
+                                    src={playerInfo.has_image ? `https://www.sportsbase.io/images/people/${playerInfo.base_id}.png` : `/badges/${playerInfo.club}.png`}
                                     alt={`${playerInfo.club} badge`}
                                     width={180}
                                     height={180}
                                 />
                             </div>
                             <div className={styles.playerBasicStats}>
-                                {position !== "goalkeeper" && <h4>COMPARING TO OTHER</h4>}
+                                {position !== "goalkeeper" && <h4>{`${dictionary.statistics.comparing_to} ${dictionary.other}`.toUpperCase()}</h4>}
                                 {position !== "goalkeeper" && <DropdownMenu
-                                    dispatch={dispatch}
-                                    defaultOption={{ label: position.toUpperCase() + 'S', type: 'SET_POSITION', payload: '', image: `/icons/${position}.png` }}
-                                    otherOptions={positions.map(pos => ({ label: pos.toUpperCase() + 'S', type: 'SET_POSITION', payload: pos, image: `/icons/${pos}.png` }))}
+                                    callback={(option) => dispatch({ type: 'SET_POSITION', payload: option.payload})}
+                                    defaultOption={{ label: getPositionPluralName(dictionary, position).toUpperCase(), payload: '', image: `/icons/${position}.png` }}
+                                    otherOptions={positions.map(pos => ({ label: getPositionPluralName(dictionary, pos).toUpperCase(), type: 'SET_POSITION', payload: pos, image: `/icons/${pos}.png` }))}
                                 />}
-                                <h4>COMPARING TO {position.toUpperCase()}S FROM</h4>
+                                <h4>{`${dictionary.statistics.comparing_to} ${getPositionPluralName(dictionary, position).toUpperCase()} ${dictionary.from}`.toUpperCase()}</h4>
                                 <DropdownMenu
-                                    dispatch={dispatch}
-                                    defaultOption={{ label: getLeagueName(league).toUpperCase(), type: 'SET_POSITION', payload: '', image: `/leagues/${league}.png` }}
-                                    otherOptions={leagues.map(nleague => ({ label: getLeagueName(nleague).toUpperCase(), type: 'SET_LEAGUE', payload: nleague, image: `/leagues/${nleague}.png` }))}
+                                    callback={(option) => dispatch({ type: 'SET_LEAGUE', payload: option.payload})}
+                                    defaultOption={{ label: getLeagueName(dictionary, league).toUpperCase(), payload: '', image: `/leagues/${league}.png` }}
+                                    otherOptions={leagues.map(nleague => ({ label: getLeagueName(dictionary, nleague).toUpperCase(), type: 'SET_LEAGUE', payload: nleague, image: `/leagues/${nleague}.png` }))}
                                 />
                             </div>
                         </div>
@@ -68,14 +107,14 @@ export default function StatisticLayout({children}: Properties) {
                 </div>
                 <div className={styles.playerStatsSection}>
                     <div className={styles.playerStatsUpperSection}>
-                        {getHeaderButtons(playerInfo.id, statisticType, position, dispatch)}
+                        {getHeaderButtons(playerInfo.id, statisticType, position, dictionary, dispatch)}
                         {statisticType == "profile"
-                            ? createModeToggle("DYNAMIC", "ABSOLUTE", dynamicMode, setDynamicMode)
-                            : createModeToggle("STANDARD", "COMPACT", localFullView, setLocalFullView)
+                            ? createModeToggle(dictionary.statistics.dynamic.toUpperCase(), dictionary.statistics.absolute.toUpperCase(), dynamicMode, setDynamicMode)
+                            : createModeToggle(dictionary.statistics.standard.toUpperCase(), dictionary.statistics.compact.toUpperCase(), localFullView, setLocalFullView)
                         }
                     </div>
                     <div className={styles.playerStatisticsContainer}>
-                        {children}
+                        {statistics}
                     </div>
                 </div>
             </main>
@@ -101,7 +140,7 @@ function createModeToggle(
     )
 }
 
-function getHeaderButtons(id: string, currentStatType: string, position: string, dispatch: Dispatch<Action>) {
+function getHeaderButtons(id: string, currentStatType: string, position: string, dictionary: any, dispatch: Dispatch<Action>) {
     const createButton = (id: string, label: string) => {
         const className = id === currentStatType ? `${styles.playerStatsHeaderButton} ${styles.playerStatsHeaderButtonActive}` : styles.playerStatsHeaderButton;
         return (<div onClick={() => dispatch({ type: 'SET_STATISTIC_TYPE', payload: id })} className={className}>
@@ -112,29 +151,31 @@ function getHeaderButtons(id: string, currentStatType: string, position: string,
     if (position === "goalkeeper") {
         return (
             <div className={styles.playerStatsHeaders}>
-                {createButton("profile", "Profile")}
-                {createButton("overall", "Overall")}
-                {createButton("shot-stopping", "Shot-Stopping")}
-                {createButton("distribution", "Distribution")}
-                {createButton("sweeping", "Sweeping")}
-                <Link href={{ pathname: "/compare", query: { first: id } }} className={`${styles.playerStatsHeaderButton} ${styles.compareHeaderButton}`}>
-                <button className={`${styles.playerStatsHeaderButtonText} ${styles.compareHeaderButtonText}`}>Compare</button>
-            </Link>
+                {createButton("profile", dictionary.statistics.profile)}
+                {createButton("overall", dictionary.statistics.overall)}
+                {createButton("shot-stopping", dictionary.statistics.shot_stopping)}
+                {createButton("distribution", dictionary.statistics.distribution)}
+                {createButton("sweeping", dictionary.statistics.sweeping)}
+                <Link href={{ pathname: `/${dictionary.code}/compare`, query: { first: id } }} className={`${styles.playerStatsHeaderButton} ${styles.compareHeaderButton}`}>
+                    <button className={`${styles.playerStatsHeaderButtonText} ${styles.compareHeaderButtonText}`}>{dictionary.statistics.compare}</button>
+                </Link>
             </div>
         )
     }
 
     return (
         <div className={styles.playerStatsHeaders}>
-            {createButton("profile", "Profile")}
-            {createButton("shooting", "Shooting")}
-            {createButton("playmaking", "Playmaking")}
-            {createButton("possession", "Possession")}
-            {createButton("passing", "Passing")}
-            {createButton("defending", "Defending")}
-            <Link href={{ pathname: "/compare", query: { first: id } }} className={`${styles.playerStatsHeaderButton} ${styles.compareHeaderButton}`}>
-                <button className={`${styles.playerStatsHeaderButtonText} ${styles.compareHeaderButtonText}`}>Compare</button>
+            {createButton("profile", dictionary.statistics.profile)}
+            {createButton("shooting", dictionary.statistics.shooting)}
+            {createButton("playmaking", dictionary.statistics.playmaking)}
+            {createButton("possession", dictionary.statistics.possession)}
+            {createButton("passing", dictionary.statistics.passing)}
+            {createButton("defending", dictionary.statistics.defending)}
+            <Link href={{ pathname: `/${dictionary.code}/compare`, query: { first: id } }} className={`${styles.playerStatsHeaderButton} ${styles.compareHeaderButton}`}>
+                <button className={`${styles.playerStatsHeaderButtonText} ${styles.compareHeaderButtonText}`}>{dictionary.statistics.compare}</button>
             </Link>
         </div>
     )
 }
+
+export default StatisticLayout;

@@ -12,9 +12,9 @@
 
 .playerDataColumn {
     margin-top: 3%;
-    margin-left: 5%;
+    margin-left: 3%;
     height: 100%;
-    width: 20%;
+    width: 475px;
     border-right: 2px solid gray
 }
 
@@ -44,7 +44,7 @@
     margin-top: 2%;
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
     height: 100%;
 }
 
@@ -61,11 +61,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    flex-wrap: wrap;
-    overflow-wrap: break-word;
     width: 100%;
     height: 50px;
-    margin-left: 5%;
+    margin-left: 4%;
     margin-right: 3%;
     margin-bottom: 2%;
     box-sizing: border-box;
@@ -127,18 +125,19 @@
 }
 
 .playerStatistic {
-    margin-left: 5%;
+    margin-left: 4%;
     margin-top: 1%;
     margin-bottom: 3%;
 }
 
 .playerStatisticContainer {
+    position: relative;
     display: flex;
     cursor: pointer;
     flex-direction: column;
     align-items: center;
     height: 400px;
-    width: 400px;
+    width: 380px;
     transition: box-shadow 0.25s ease-in-out, background-image 0.5s ease-in-out;
     border: double 6px transparent;
     background-image: linear-gradient(white, white), linear-gradient(black, black);
@@ -158,8 +157,10 @@
     align-items: center;
     align-self: center;
     text-align: center;
+    padding: 0 5%;
     margin-top: 6%;
-    width: 95%;
+    font-size: 28px;
+    width: 100%;
 }
 
 .playerStatisticRatingSection {
@@ -167,7 +168,7 @@
     align-items: center;
     justify-content: center;
     width: 95%;
-    height: 70%;
+    height: 300px;
 }
 
 .playerStatisticRating {
@@ -199,14 +200,48 @@
     border: 6px solid black;
 }
 
-.playerStatisticModalTitle {
+.playerStatisticModalTitleContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    align-self: center;
     text-align: center;
     margin-top: 5%;
-    width: 90%;
+    width: 100%;
+}
+
+.playerStatisticModalTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    flex: 1 0 auto;
+    padding: 0 15%;
+}
+
+.playerStatisticModalCloseButton {
+    font-family: 'Montserrat';
+    font-size: 16px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 35px;
+    width: 35px;
+    margin-right: 5%;
+    right: 0;
+    border-radius: 6px;
+    background-color: transparent;
+    color: rgb(100, 100, 100);
+    border: 2px solid rgb(100, 100, 100);
+    transition: color 0.2s ease-in-out, border 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.playerStatisticModalCloseButton:hover {
+    color: rgb(230, 66, 54);
+    border: 2px solid rgb(230, 66, 54);
 }
 
 .playerStatisticModalDescription {
@@ -360,7 +395,7 @@
 .compactPlayerStatisticLabel {
     display: flex;
     font-family: 'Manrope';
-    font-size: 20px;
+    font-size: 18px;
     max-width: 161px;
     margin-left: 5%;
 }
@@ -441,9 +476,6 @@
         margin-left: 0;
         width: 100%;
     }
-    .playerStatsHeaders {
-        width: 90%;
-    }
     .playerData {
         width: 100%;
         align-items: center;
@@ -461,6 +493,10 @@
     }
     .playerStatsUpperSection {
         flex-direction: column;
+    }
+    .playerStatsHeaders {
+        flex-wrap: wrap;
+        width: 90%;
     }
     .playerStatisticsContainer {
         width: 100%;

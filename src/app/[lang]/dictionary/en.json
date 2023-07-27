@@ -1,0 +1,441 @@
+{
+  "code": "en",
+  "language": "Language",
+  "players": "PLAYERS",
+  "error": "An unexpected error occurred",
+  "other": "Other",
+  "from": "From",
+  "player": {
+      "not_found": "Player not found"
+  },
+  "languages": {
+    "en": "English",
+    "pt": "Portuguese"
+  },
+  "search": {
+      "placeholder": "Search for a player...",
+      "no_players_found": "No players were found"
+  },
+  "info": {
+    "club": "Club",
+    "position": "Position",
+    "nationality": "Nationality"
+  },
+  "leagues": {
+      "premier_league": "Premier League",
+      "la_liga": "La Liga",
+      "bundesliga": "Bundesliga",
+      "serie_a": "Serie A",
+      "ligue_1": "Ligue 1",
+      "brasileirao": "Brazilian Serie A",
+      "top_5": "Top 5 European Leagues",
+      "from_premier_league": "from Premier League",
+      "from_la_liga": "from La Liga",
+      "from_bundesliga": "from Bundesliga",
+      "from_serie_a": "from Serie A",
+      "from_ligue_1": "from Ligue 1",
+      "from_brasileirao": "from Brazilian Serie A",
+      "from_top_5": "from the Top 5 European Leagues"
+  },
+  "position": {
+      "forward": "Forward",
+      "striker": "Striker",
+      "winger": "Winger",
+      "midfielder": "Midfielder",
+      "fullback": "Full-back",
+      "centreback": "Centre-back",
+      "defender": "Defender",
+      "goalkeeper": "Goalkeeper",
+
+      "forwards": "Forwards",
+      "strikers": "Strikers",
+      "wingers": "Wingers",
+      "midfielders": "Midfielders",
+      "fullbacks": "Full-backs",
+      "centrebacks": "Centre-backs",
+      "defenders": "Defenders",
+      "goalkeepers": "Goalkeepers"
+  },
+  "statistics": {
+      "dynamic": "Dynamic",
+      "absolute": "Absolute",
+      "standard": "Standard",
+      "compact": "Compact",
+      "profile": "Profile",
+      "shooting": "Shooting",
+      "playmaking": "Playmaking",
+      "possession": "Possession",
+      "passing": "Passing",
+      "defending": "Defending",
+      "overall": "Overall",
+      "shot_stopping": "Shot Stopping",
+      "distribution": "Distribution",
+      "sweeping": "Sweeping",
+      "compare": "Compare",
+      "comparing_to": "Comparing to"
+  },
+  "compare": {
+      "compare_different_players": "COMPARE DIFFERENT PLAYERS",
+      "comparison": "COMPARISON",
+      "add_at_least_two_players": "You must add at least two players to compare",
+      "goalkeeper_and_outfield_players": "You can only compare goalkeepers with other goalkeepers.",
+      "add_player": "Add player",
+      "strengths": "Strengths",
+      "weaknesses": "Weaknesses",
+      "reference": "REFERENCE"
+  },
+  "statistics_data": {
+      "shooting_tendency": {
+          "label": "Shooting tendency",
+          "explanation": "The average number of shooting attempts per 90 minutes. It indicates how frequently a player takes shots during a match."
+      },
+      "shooting_threat": {
+          "label": "Shooting threat",
+          "explanation": "The average number of goals scored per shot. It represents the player's efficiency in converting shots into goals."
+      },
+      "shooting_chances": {
+          "label": "Shooting chances",
+          "explanation": "The average expected goals per shot. It measures the quality of shooting opportunities a player creates."
+      },
+      "shooting_consistency": {
+          "label": "Shooting consistency",
+          "explanation": "The percentage of shots that are on target. It reflects the player's accuracy and ability to hit the target with their shots."
+      },
+      "shooting_clinicality": {
+          "label": "Shooting clinicality",
+          "explanation": "The difference between the actual goals scored and the expected goals. It quantifies the player's finishing ability."
+      },
+      "shooting_distance": {
+          "label": "Shooting distance",
+          "explanation": "The average distance of shots taken by a player. It indicates the player's tendency to take shots from different areas of the field."
+      },
+      "shot_creating_actions": {
+          "label": "Shot creating actions",
+          "explanation": "The number of actions that lead to a shot by a player. It includes passes, dribbles, and other actions that contribute to the creation of shooting opportunities."
+      },
+      "shot_creating_tendency": {
+          "label": "Shot creating tendency",
+          "explanation": "The average number of shot creating actions per 90 minutes. It indicates how frequently a player generates opportunities for shots."
+      },
+      "shot_creating_passes": {
+          "label": "Shot creating passes",
+          "explanation": "The number of live-ball passes that lead to a shot by a player. It represents the player's ability to make key passes that set up shooting chances."
+      },
+      "shot_creating_setpieces": {
+          "label": "Shot creating set-pieces",
+          "explanation": "The number of dead-ball passes that lead to a shot by a player. It includes free-kicks, corners, and other set-piece situations that result in shooting opportunities."
+      },
+      "shot_creating_dribbles": {
+          "label": "Shot creating dribbles",
+          "explanation": "The number of successful dribbles that lead to a shot by a player. It reflects the player's skill in beating opponents and creating shooting opportunities through dribbling."
+      },
+      "shot_creating_defensive_actions": {
+          "label": "Shot creating defensive actions",
+          "explanation": "The number of defensive actions that lead to a shot by a player. It includes interceptions, tackles, and other defensive contributions that trigger counter-attacks or attacking opportunities."
+      },
+      "goal_creating_actions": {
+          "label": "Goal creating actions",
+          "explanation": "The number of actions that lead to a goal by a player. It includes passes, dribbles, and other actions that directly contribute to goal-scoring opportunities."
+      },
+      "goal_creating_tendency": {
+          "label": "Goal creating tendency",
+          "explanation": "The average number of goal creating actions per 90 minutes. It indicates how frequently a player generates opportunities for goals."
+      },
+      "goal_creating_passes": {
+          "label": "Goal creating passes",
+          "explanation": "The number of live-ball passes that lead to a goal by a player. It represents the player's ability to make key passes that directly result in goals."
+      },
+      "goal_creating_setpieces": {
+          "label": "Goal creating set-pieces",
+          "explanation": "The number of dead-ball passes that lead to a goal by a player. It includes free-kicks, corners, and other set-piece situations that directly result in goals."
+      },
+      "goal_creating_dribbles": {
+          "label": "Goal creating dribbles",
+          "explanation": "The number of successful dribbles that lead to a goal by a player. It reflects the player's skill in beating opponents and creating goal-scoring opportunities through dribbling."
+      },
+      "goal_creating_defensive_actions": {
+          "label": "Goal creating defensive actions",
+          "explanation": "The number of defensive actions that lead to a goal by a player. It includes interceptions, tackles, and other defensive contributions that directly result in goals."
+      },
+      "taking_on_tendency": {
+          "label": "Taking on tendency",
+          "explanation": "The average number of take-ons per 90 minutes. It indicates how frequently a player attempts to dribble past opponents."
+      },
+      "taking_on_ability": {
+          "label": "Taking on ability",
+          "explanation": "The average number of successful take-ons per 90 minutes. It represents the player's skill in successfully beating opponents through dribbling."
+      },
+      "taking_on_consistency": {
+          "label": "Taking on consistency",
+          "explanation": "The success rate of take-ons attempted by a player. It reflects the player's ability to successfully dribble past opponents."
+      },
+      "carrying_tendency": {
+          "label": "Carrying tendency",
+          "explanation": "The average number of carries per 90 minutes. It indicates how frequently a player progresses with the ball through carrying."
+      },
+      "progressive_carries": {
+          "label": "Progressive carries",
+          "explanation": "The number of carries that move the ball towards the opponent's goal. It represents the player's ability to make forward runs with the ball."
+      },
+      "carrying_progressiveness": {
+          "label": "Carrying progressiveness",
+          "explanation": "The average number of progressive carries per 90 minutes. It indicates how frequently a player makes progressive runs with the ball."
+      },
+      "final_third_carries": {
+          "label": "Final third carries",
+          "explanation": "The number of carries into the final third per 90 minutes. It represents the player's ability to penetrate the opponent's defensive line with the ball."
+      },
+      "penalty_area_carries": {
+          "label": "Penalty area carries",
+          "explanation": "The number of carries into the penalty area per 90 minutes. It reflects the player's ability to advance the ball into scoring positions."
+      },
+      "carrying_total_distance": {
+          "label": "Carrying total distance",
+          "explanation": "The total distance covered by a player while carrying the ball. It indicates the player's overall contribution in ball progression through carrying."
+      },
+      "touches_per_90": {
+          "label": "Touches per 90",
+          "explanation": "The average number of touches on the ball per 90 minutes. It represents the player's involvement in the game and the frequency of their interactions with the ball."
+      },
+      "received_passes": {
+          "label": "Received passes",
+          "explanation": "The number of passes received by a player. It reflects the player's positioning and ability to receive and control passes from teammates."
+      },
+      "received_progressive_passes": {
+          "label": "Received progressive passes",
+          "explanation": "The number of progressive passes received by a player. It indicates the player's involvement in receiving forward passes that advance the team's attacking play."
+      },
+      "possession_trustworthiness": {
+          "label": "Possession trustworthiness",
+          "explanation": "The number of times a player is dispossessed of the ball. It reflects the player's ability to maintain possession and avoid losing the ball to opponents."
+      },
+      "defensive_third_touches": {
+          "label": "Defensive third touches",
+          "explanation": "The number of touches on the ball in the defensive third. It represents the player's involvement in defensive build-up and ball circulation from the defensive zone."
+      },
+      "mid_third_touches": {
+          "label": "Middle third touches",
+          "explanation": "The number of touches on the ball in the middle third. It reflects the player's involvement in the team's build-up and ball circulation in the midfield area."
+      },
+      "attacking_third_touches": {
+          "label": "Attacking third touches",
+          "explanation": "The number of touches on the ball in the attacking third. It indicates the player's involvement in the team's attacking play and presence in the opponent's defensive zone."
+      },
+      "directness": {
+          "label": "Directness",
+          "explanation": "The percentage of passes that are played directly towards the target. It reflects the player's tendency to play quick and forward passes rather than sideways or backward passes."
+      },
+      "passes_per_90": {
+          "label": "Passes per 90",
+          "explanation": "The average number of completed passes per 90 minutes. It represents the player's involvement in the team's passing game and their passing volume."
+      },
+      "accuracy": {
+          "label": "Passing accuracy",
+          "explanation": "The percentage of total passes completed by a player. It reflects the player's precision and success rate in delivering accurate passes."
+      },
+      "key_passes": {
+          "label": "Key passes",
+          "explanation": "The number of passes that directly lead to a shot by a teammate. It represents the player's ability to create goal-scoring opportunities through their passing."
+      },
+      "progressive_passes": {
+          "label": "Progressive passes",
+          "explanation": "The number of passes that move the ball towards the opponent's goal. It indicates the player's ability to make forward and penetrative passes."
+      },
+      "final_third_passes": {
+          "label": "Final third passes",
+          "explanation": "The number of passes into the final third of the pitch. It reflects the player's ability to deliver passes that reach the attacking zone of the opponent."
+      },
+      "through_balls": {
+          "label": "Through balls",
+          "explanation": "The number of passes that split the opponent's defensive line and reach a teammate in a scoring position. It represents the player's ability to deliver passes that break the opponent's defensive structure."
+      },
+      "switching_tendency": {
+          "label": "Switching tendency",
+          "explanation": "The percentage of passes that are played to the opposite side of the pitch. It reflects the player's tendency to switch the play and deliver passes to the opposite flank."
+      },
+      "crossing_tendency": {
+          "label": "Crossing tendency",
+          "explanation": "The percentage of passes that are crossed into the penalty area."
+      },
+      "short_range_passes": {
+          "label": "Short-range passes",
+          "explanation": "The number of short-range passes completed by a player. It represents the player's involvement in short and quick passing combinations."
+      },
+      "short_range_pass_accuracy": {
+          "label": "Short-range pass accuracy",
+          "explanation": "The percentage of short-range passes completed by a player. It reflects the player's accuracy in short and close-range passing situations."
+      },
+      "medium_range_passes": {
+          "label": "Medium-range passes",
+          "explanation": "The number of medium-range passes completed by a player. It indicates the player's ability to deliver passes over moderate distances with accuracy."
+      },
+      "medium_range_pass_accuracy": {
+          "label": "Medium-range pass accuracy",
+          "explanation": "The percentage of medium-range passes completed by a player. It reflects the player's accuracy in delivering passes over moderate distances."
+      },
+      "long_range_passes": {
+          "label": "Long-range passes",
+          "explanation": "The number of long-range passes completed by a player. It represents the player's ability to deliver accurate passes over long distances."
+      },
+      "long_range_pass_accuracy": {
+          "label": "Long-range pass accuracy",
+          "explanation": "The percentage of long-range passes completed by a player. It reflects the player's accuracy in delivering passes over long distances."
+      },
+      "expected_assists": {
+          "label": "Expected assists",
+          "explanation": "The average expected goals assisted by a player. It quantifies the quality of the player's passes that lead to goal-scoring opportunities for teammates."
+      },
+      "expected_assisted_shots": {
+          "label": "Expected assisted shots",
+          "explanation": "The average expected shots assisted by a player. It represents the quality of the player's passes that directly result in shot attempts by teammates."
+      },
+      "forwards_clinicality": {
+          "label": "Forwards clinicality",
+          "explanation": "The difference between the actual assists and the expected goals assisted. It quantifies the player's effectiveness in providing assists based on the expected outcomes."
+      },
+      "challenging_tendency": {
+          "label": "Challenging tendency",
+          "explanation": "The average number of challenges per 90 minutes. It indicates how frequently a player engages in defensive challenges to win back possession."
+      },
+      "challenging_consistency": {
+          "label": "Challenging consistency",
+          "explanation": "The success rate of challenges attempted by a player. It reflects the player's ability to win duels and successfully regain possession from opponents."
+      },
+      "defensive_actions": {
+          "label": "Defensive actions",
+          "explanation": "The total number of defensive actions performed by a player. It includes tackles, interceptions, and other defensive contributions."
+      },
+      "defensive_third_tackles": {
+          "label": "Defensive third tackles",
+          "explanation": "The number of tackles made by a player in the defensive third of the pitch. It indicates the player's defensive involvement in their own territory."
+      },
+      "mid_third_tackles": {
+          "label": "Middle third tackles",
+          "explanation": "The number of tackles made by a player in the middle third of the pitch. It represents the player's defensive contributions in the midfield area."
+      },
+      "attacking_third_tackles": {
+          "label": "Attacking third tackles",
+          "explanation": "The number of tackles made by a player in the attacking third of the pitch. It reflects the player's defensive efforts in the opponent's offensive zone."
+      },
+      "recoveries": {
+          "label": "Recoveries",
+          "explanation": "The number of times a player regains possession of the ball after it was lost by their team. It represents the player's ability to recover the ball and regain control for their team."
+      },
+      "aerial_reliability": {
+          "label": "Aerial reliability",
+          "explanation": "The average number of aerial duels won by a player per 90 minutes. It reflects the player's reliability in winning aerial duels."
+      },
+      "aerial_prowess": {
+          "label": "Aerial prowess",
+          "explanation": "The success rate of aerial duels attempted by a player. It indicates the player's ability to win aerial challenges against opponents."
+      },
+      "clearances": {
+          "label": "Clearances",
+          "explanation": "The number of clearances made by a player. It represents the player's defensive actions in clearing the ball away from the danger zone."
+      },
+      "shots_blocked": {
+          "label": "Shots blocked",
+          "explanation": "The number of shots blocked by a player. It reflects the player's ability to position themselves well and block shot attempts by opponents."
+      },
+      "passes_blocked": {
+          "label": "Passes blocked",
+          "explanation": "The number of passes blocked by a player. It indicates the player's ability to read the game and intercept passes from opponents."
+      },
+      "interceptions": {
+          "label": "Interceptions",
+          "explanation": "The number of interceptions made by a player. It represents the player's ability to read the game, anticipate passes, and intercept them."
+      },
+      "yellow_cards": {
+          "label": "Yellow cards",
+          "explanation": "The number of yellow cards received by a player. It reflects the player's disciplinary record and the number of cautionary actions taken by the referee."
+      },
+      "fouling_tendency": {
+          "label": "Fouling tendency",
+          "explanation": "The average number of fouls committed by a player per 90 minutes. It indicates how frequently a player commits fouls during matches."
+      },
+      "goals_against_per_90": {
+          "label": "Team defensive prowess",
+          "explanation": "The average number of goals conceded by a goalkeeper per 90 minutes in ascending order. It reflects the entire team's effectiveness in preventing goals."
+      },
+      "penalty_saving": {
+          "label": "Penalty saving",
+          "explanation": "The success rate of saving penalty kicks by a goalkeeper. It represents the goalkeeper's ability to stop penalty shots."
+      },
+      "freekick_saving": {
+          "label": "Free-kick saving",
+          "explanation": "The average number of free-kicks saved by a goalkeeper per 90 minutes. It reflects the goalkeeper's effectiveness in saving free-kick shots."
+      },
+      "corners_saving": {
+          "label": "Corners saving",
+          "explanation": "The average number of corners saved by a goalkeeper per 90 minutes. It represents the goalkeeper's ability to prevent goals from corner kicks."
+      },
+      "clean_sheet_consistency": {
+          "label": "Clean sheet consistency",
+          "explanation": "The percentage of matches in which a goalkeeper keeps a clean sheet (concedes no goals). It reflects the goalkeeper's ability to consistently prevent goals."
+      },
+      "shot_stopping_total": {
+          "label": "Shot stopping total",
+          "explanation": "The difference between the expected goals prevented and the expected goals conceded by a goalkeeper. It quantifies the goalkeeper's overall shot-stopping performance."
+      },
+      "shot_stopping_per_90": {
+          "label": "Average Shot stopping",
+          "explanation": "The average expected goals prevented by a goalkeeper per 90 minutes. It represents the goalkeeper's ability to prevent goals based on the expected outcomes."
+      },
+      "shot_quality_faced": {
+          "label": "Shot quality faced",
+          "explanation": "The average expected goals faced per shot on target by a goalkeeper. It indicates the tendency of the opponents to shoot only in specific situations, with better scoring chances or lower."
+      },
+      "shots_against": {
+          "label": "Shots against",
+          "explanation": "The total number of shots faced by a goalkeeper. It reflects the goalkeeper's involvement in shot-stopping situations and the number of shots they have to deal with."
+      },
+      "shots_against_per_90": {
+          "label": "Shots against per 90",
+          "explanation": "The average number of shots faced by a goalkeeper per 90 minutes. It represents the goalkeeper's involvement in shot-stopping situations per match."
+      },
+      "total_passes": {
+          "label": "Total passes",
+          "explanation": "The total number of passes attempted by a goalkeeper. It reflects the goalkeeper's involvement in the team's passing game and their ability to distribute the ball."
+      },
+      "passing_distance": {
+          "label": "Passing distance",
+          "explanation": "The average length of passes made by a goalkeeper. It represents the goalkeeper's ability to distribute the ball over different distances."
+      },
+      "launching_consistency": {
+          "label": "Launching consistency",
+          "explanation": "The success rate of long passes made by a goalkeeper. It reflects the goalkeeper's accuracy and effectiveness in launching long-range passes."
+      },
+      "launching_tendency": {
+          "label": "Launching tendency",
+          "explanation": "The percentage of long passes made by a goalkeeper. It indicates the goalkeeper's tendency to launch long-range passes."
+      },
+      "goalkicks_launching_tendency": {
+          "label": "Gk launching tendency",
+          "explanation": "The percentage of goal-kicks launched by a goalkeeper. It reflects the goalkeeper's tendency to launch goal-kicks rather than short passes."
+      },
+      "goalkicks_distance": {
+          "label": "Gk launching distance",
+          "explanation": "The average length of goal-kicks made by a goalkeeper. It represents the goalkeeper's ability to distribute the ball over different distances."
+      },
+      "crosses_stopped": {
+          "label": "Crosses stopped",
+          "explanation": "The number of crosses stopped by a goalkeeper. It indicates the goalkeeper's ability to come out and catch or punch away crosses into the penalty area."
+      },
+      "crosses_stopping_tendency": {
+          "label": "Crosses stopping tendency",
+          "explanation": "The percentage of crosses stopped by a goalkeeper. It reflects the goalkeeper's tendency to come out and catch or punch away crosses to avoid danger in the penalty area."
+      },
+      "sweeping_actions": {
+          "label": "Sweeper actions",
+          "explanation": "The number of times a goalkeeper acts as a sweeper outside their penalty area. It indicates the goalkeeper's involvement in sweeping actions away from the goal."
+      },
+      "sweeping_tendency": {
+          "label": "Sweeper tendency",
+          "explanation": "The average number of sweeper actions per 90 minutes. It indicates the goalkeeper's tendency to leave their penalty area and act as a sweeper behind the defensive line."
+      },
+      "sweeping_distance": {
+          "label": "Sweeping distance",
+          "explanation": "The average distance covered by a goalkeeper while acting as a sweeper. It represents the goalkeeper's overall involvement in sweeping actions away from the goal."
+      }
+  }
+}

@@ -1,0 +1,66 @@
+.statisticDropdownMenu {
+    position: relative;
+    margin-top: 5%;
+    border: 0;
+    font-size: 100%;
+    width: 90%;
+    font-family: 'Roboto';
+    margin-bottom: 15%;
+}
+
+.defaultOption {
+    display: flex;
+    align-items: center;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 10%;
+    width: 100%;
+    background-color: rgb(190, 190, 190);
+}
+
+.otherOptions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+    position: absolute;
+    height: auto;
+    background-color: rgb(210, 210, 210);
+    z-index: 7;
+}
+
+.otherOption {
+    display: flex;
+    box-sizing: border-box;
+    overflow: hidden;
+    cursor: pointer;
+    padding-left: 10%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    height: 100%;
+    width: 100%;
+}
+
+.optionLabel {
+    margin-left: 2%;
+}
+
+.otherOption:hover {
+    background-color: gray;
+}
+
+.dropdownIcon {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.unselectable {
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
+}

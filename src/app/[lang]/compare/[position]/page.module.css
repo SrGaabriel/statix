@@ -1,0 +1,189 @@
+.page {
+    height: 100%;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    min-height: 100vh;
+    background-color: rgb(240, 240, 240);
+}
+
+.otherSection {
+    width: 30%;
+    border-right: 2px solid gray;
+}
+
+.otherSectionContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 5%;
+}
+
+.comparisonTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10%;
+    font-family: 'Manrope';
+}
+
+.otherSectionContainerData {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-top: 15%;
+    margin-left: 10%;
+}
+
+.playersTitle {
+    font-family: 'Raleway';
+}
+
+.playerList {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+    width: 80%;
+    background-color: rgb(210, 210, 210);
+    border-radius: 6px;
+    list-style-type: none;
+}
+
+.playerListElement {
+    display: flex;
+    align-items: center;
+    padding: 4%;
+    padding-left: 8%;
+    border-left: none;
+    cursor: pointer;
+}
+
+.playerListBadge {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+.playerListElement:hover {
+    background-color: rgb(180, 180, 180);
+    border-radius: 6px;
+}
+
+.referenceTitle {
+    font-family: 'Raleway';
+    margin-top: 10%;
+}
+
+.referenceContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+    width: 85%;
+    background-color: rgb(210, 210, 210);
+    border-radius: 6px;
+}
+
+.referenceBox {
+    display: flex;
+    align-items: center;
+    padding: 3%;
+    padding-left: 5%;
+    border-left: 5px solid #132257;
+}
+
+.referenceBox:first-child {
+    border-bottom: 1px solid gray;
+}
+
+.referenceBoxContent {
+    margin-left: 5%;
+}
+
+.comparisonFact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.strengthsSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 15%;
+}
+
+.strengthsTitle {
+    color: rgb(2, 165, 2);
+}
+
+.strengthsList {
+    margin-top: 5%;
+    list-style-type: none;
+}
+
+.weaknessesSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+    margin-bottom: 20%;
+}
+
+.weaknessesTitle {
+    color: rgb(233, 64, 64);
+}
+
+.weaknessesList {
+    margin-top: 5%;
+    margin-left: 10%;
+    list-style-type: none;
+}
+
+.radarSection {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: auto;
+}
+
+.playerRadarContainer {
+    width: 100%;
+    height: 900px;
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerRadarChart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.playerStatisticRadar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1200px) {
+    .main {
+        flex-direction: column;
+    }
+    .otherSection {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid gray;
+    }
+    .otherSectionContainer {
+        height: auto;
+    }
+}

@@ -5,24 +5,23 @@ import styles from './page.module.css';
 import { convertPercentageToLetter, getGradeColor } from '@/app/utils/grades';
 import { statisticRankFetcher } from '@/app/api/player';
 import { getCountryEmoji } from '@/app/utils/emojis';
-import { getExplanationForAttribute } from '@/app/utils/attributes';
 import { getClubColors } from '@/app/utils/colors';
 import useSWR from 'swr';
 import Loading from '@/app/components/Loading';
 import Link from 'next/link';
 import { useStatisticContext } from './StatisticContext';
+import { getStatisticExplanation } from '@/app/utils/naming';
 
 interface Properties extends HTMLAttributes<HTMLDivElement> {
-    stat: string
-    label: string;
-    playerData: any;
+    stat: string,
+    label: string,
+    value: number
 }
 
-const PlayerStatistic: React.FC<Properties> = ({ stat, label, playerData }) => {
+const PlayerStatistic: React.FC<Properties> = ({ stat, label, value }) => {
     const context = useStatisticContext();
     const {state} = context;
-    const { playerInfo, league, position, statisticType, fullView } = state;
-    const value = playerData[statisticType][stat];
+    const { playerInfo, league, position, statisticType, fullView, dictionary } = state;
     const color = getGradeColor(convertPercentageToLetter(value))
     const [buttonClicked, setButtonClicked] = useState(false);
     const { data, error, isLoading } = useSWR(buttonClicked ? `/api/${playerInfo.id}/${position}/${league}/${statisticType}/${stat}` : null, () => statisticRankFetcher(playerInfo.id, position, league, statisticType, stat), {
@@ -40,7 +39,7 @@ const PlayerStatistic: React.FC<Properties> = ({ stat, label, playerData }) => {
                 </div>
             )
         } else if (error || !data) {
-            return <p>An unexpected error occured.</p>
+            return <p>{dictionary.error}</p>
         }
         return (
           <ul className={styles.playerStatisticModalRankingList}>
@@ -53,7 +52,7 @@ const PlayerStatistic: React.FC<Properties> = ({ stat, label, playerData }) => {
                     )
 
                 return (<li key={player.id + "-ranking"} className={styles.playerStatisticModalRankingListElement}>
-                    <Link href={`/player/${player.id}`} className={styles.playerStatisticModalRankingListElementLink}>
+                    <Link href={`/${dictionary.code}/player/${player.id}`} className={styles.playerStatisticModalRankingListElementLink}>
                         {player.rank}. {getCountryEmoji(player.nation)} {player.name} {player.value.toFixed(2)}
                     </Link>
                 </li>)
@@ -66,23 +65,32 @@ const PlayerStatistic: React.FC<Properties> = ({ stat, label, playerData }) => {
         '--gradient': `linear-gradient(white, white), linear-gradient(90deg, ${clubColors.primary}, ${clubColors.secondary})`,
         '--grade-color': color
     }
+    const closeModal = () => {
+        const dialog = (document.getElementById(`${label}${stat}`) as HTMLDialogElement);
+        dialog.close();
+    }
 
     return (
-        <div className={styles.playerStatistic}
-            onClick={() => {
-                const dialog = (document.getElementById(`${label}${value}`) as HTMLDialogElement);
+        <div className={styles.playerStatistic}>
+            <div onClick={() => {
+                let dialog = (document.getElementById(`${label}${stat}`) as HTMLDialogElement);
                 if (dialog.open)
                     return;
                 setButtonClicked(true);
                 dialog.showModal();
-            }}
-        >
-            {fullView ? renderFull() : renderCompact()}
+            }}>
+                {fullView ? renderFull() : renderCompact()}
+            </div>
             <div className={styles.playerStatisticModalSection}>
-                <dialog id={`${label}${value}`} className={styles.playerStatisticModal} onClose={() => setButtonClicked(false)}>
+                <dialog id={`${label}${stat}`} className={styles.playerStatisticModal} onClose={() => setButtonClicked(false)}>
                     <div className={styles.playerStatisticModalContainer}>
-                        <h1 className={styles.playerStatisticModalTitle}>{label.toUpperCase()}</h1>
-                        <p className={styles.playerStatisticModalDescription}>{buttonClicked && getExplanationForAttribute(stat)}</p>
+                        <div className={styles.playerStatisticModalTitleContainer}>
+                            <h1 className={styles.playerStatisticModalTitle}>{label.toUpperCase()}</h1>
+                            <button className={styles.playerStatisticModalCloseButton} onClick={() => closeModal()}>
+                                X
+                            </button>
+                        </div>
+                        <p className={styles.playerStatisticModalDescription}>{buttonClicked && getStatisticExplanation(dictionary, stat)}</p>
                         <div className={styles.playerStatisticModalRanking}>
                             <h2 className={styles.playerStatisticModalRankingName}>Ranking{data && ` (${data.total} players in filter)`}</h2>
                             {buttonClicked && renderRanking()}
@@ -112,9 +120,6 @@ const PlayerStatistic: React.FC<Properties> = ({ stat, label, playerData }) => {
             </div>
         )
     }
-
-    if (fullView) return renderFull();
-    return renderCompact();
 }
 
 export default PlayerStatistic;

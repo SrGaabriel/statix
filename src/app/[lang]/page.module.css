@@ -5,7 +5,6 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
-  background: var(--tertiary-glow);
 }
 
 .center {
@@ -14,7 +13,6 @@
   align-items: center;
   position: relative;
   padding: 4rem 0;
-  backdrop-filter: blur(100000px);
 }
 
 .center::before {
