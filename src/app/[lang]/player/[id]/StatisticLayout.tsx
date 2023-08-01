@@ -23,6 +23,7 @@ const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isP
     const { playerInfo, league, position, statisticType, fullView, dynamicMode, dictionary } = state;
     const [localFullView, setLocalFullView] = useState(fullView);
     const [localDynamicMode, setDynamicMode] = useState(fullView);
+    const [clickedDropdown, setClickedDropdown] = useState<string | null>(null);
 
     useEffect(() => {
         if (localFullView != fullView) {
@@ -76,9 +77,8 @@ const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isP
             <main className={styles.main}>
                 <div className={styles.playerDataColumn}>
                     <div className={styles.playerData}>
-                        <h1>{playerInfo.name}</h1> 
+                        <h1 className={styles.playerName}>{playerInfo.name}</h1> 
                         <div className={styles.playerInfo}>
-                            <p>{getCountryEmoji(playerInfo.nationality)} {playerInfo.age.toString().slice(0, 2)} years old {getPositionNameById(playerInfo.position)}</p>
                             <div className={styles.playerBadgeSection}>
                                 <Image
                                     className={styles.playerBadge}
@@ -89,18 +89,14 @@ const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isP
                                 />
                             </div>
                             <div className={styles.playerBasicStats}>
-                                {position !== "goalkeeper" && <h4>{`${dictionary.statistics.comparing_to} ${dictionary.other}`.toUpperCase()}</h4>}
-                                {position !== "goalkeeper" && <DropdownMenu
-                                    callback={(option) => dispatch({ type: 'SET_POSITION', payload: option.payload})}
-                                    defaultOption={{ label: getPositionPluralName(dictionary, position).toUpperCase(), payload: '', image: `/icons/${position}.png` }}
-                                    otherOptions={positions.map(pos => ({ label: getPositionPluralName(dictionary, pos).toUpperCase(), type: 'SET_POSITION', payload: pos, image: `/icons/${pos}.png` }))}
-                                />}
-                                <h4>{`${dictionary.statistics.comparing_to} ${getPositionPluralName(dictionary, position).toUpperCase()} ${dictionary.from}`.toUpperCase()}</h4>
-                                <DropdownMenu
-                                    callback={(option) => dispatch({ type: 'SET_LEAGUE', payload: option.payload})}
-                                    defaultOption={{ label: getLeagueName(dictionary, league).toUpperCase(), payload: '', image: `/leagues/${league}.png` }}
-                                    otherOptions={leagues.map(nleague => ({ label: getLeagueName(dictionary, nleague).toUpperCase(), type: 'SET_LEAGUE', payload: nleague, image: `/leagues/${nleague}.png` }))}
-                                />
+                                {position !== "goalkeeper" && <h4>{`${dictionary.statistics.compare_to} ${dictionary.other}`.toUpperCase()}</h4>}
+                                {position !== "goalkeeper" && <div className={styles.positionBlocks}>
+                                    {positions.map(pos => createPositionBlock(dictionary, pos, dispatch))}
+                                </div>}
+                                <h4>{dictionary.from.toUpperCase()}</h4>
+                                <div className={styles.positionBlocks}>
+                                    {leagues.map(league => createLeagueBlock(dictionary, league, dispatch))}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,6 +115,34 @@ const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isP
                 </div>
             </main>
         </div>
+    )
+}
+
+function createPositionBlock(dictionary: any, position: string, dispatch: Dispatch<Action>) {
+    return (
+        <button className={styles.positionBlock} onClick={() => dispatch({ type: 'SET_POSITION', payload: position })}>
+            <Image
+                src={`/icons/${position}.png`}
+                alt={`${position} icon`}
+                width={16}
+                height={16}
+            />
+            {dictionary.position[position + 's'].toUpperCase()}
+        </button>
+    )
+}
+
+function createLeagueBlock(dictionary: any, league: string, dispatch: Dispatch<Action>) {
+    return (
+        <button className={styles.positionBlock} onClick={() => dispatch({ type: 'SET_LEAGUE', payload: league })}>
+            <Image
+                src={`/leagues/${league}.png`}
+                alt={`${league} icon`}
+                width={16}
+                height={16}
+            />
+            {dictionary.leagues[league].toUpperCase()}
+        </button>
     )
 }
 

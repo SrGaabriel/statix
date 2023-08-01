@@ -7,10 +7,12 @@ export default async function Home({ params }: { params: { lang: string } }) {
   const dictionary = await getDictionary(params.lang);
   return (
     <div>
-    <Header dictionary={dictionary}/>
-      <main className={styles.main}>
-
-      </main>
+		<Header dictionary={dictionary}/>
+		<main className={styles.main}>
+			<div className={styles.initialContainer}>
+				
+			</div>	
+		</main>
     </div>
   )
 }

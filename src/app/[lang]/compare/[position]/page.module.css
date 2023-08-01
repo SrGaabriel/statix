@@ -47,10 +47,9 @@
     display: flex;
     flex-direction: column;
     margin-top: 4%;
-    width: 80%;
+    min-width: 85%;
     background-color: rgb(210, 210, 210);
     border-radius: 6px;
-    list-style-type: none;
 }
 
 .playerListElement {
@@ -81,7 +80,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 4%;
-    width: 85%;
+    min-width: 85%;
     background-color: rgb(210, 210, 210);
     border-radius: 6px;
 }
@@ -100,51 +99,6 @@
 
 .referenceBoxContent {
     margin-left: 5%;
-}
-
-.comparisonFact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: 10%;
-}
-
-.strengthsSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 15%;
-}
-
-.strengthsTitle {
-    color: rgb(2, 165, 2);
-}
-
-.strengthsList {
-    margin-top: 5%;
-    list-style-type: none;
-}
-
-.weaknessesSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15%;
-    margin-bottom: 20%;
-}
-
-.weaknessesTitle {
-    color: rgb(233, 64, 64);
-}
-
-.weaknessesList {
-    margin-top: 5%;
-    margin-left: 10%;
-    list-style-type: none;
 }
 
 .radarSection {

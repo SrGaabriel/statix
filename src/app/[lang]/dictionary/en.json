@@ -1,6 +1,5 @@
 {
   "code": "en",
-  "language": "Language",
   "players": "PLAYERS",
   "error": "An unexpected error occurred",
   "other": "Other",
@@ -20,6 +19,10 @@
     "club": "Club",
     "position": "Position",
     "nationality": "Nationality"
+  },
+  "header": {
+    "contact": "Contact",
+    "language": "Language"
   },
   "leagues": {
       "premier_league": "Premier League",
@@ -72,7 +75,7 @@
       "distribution": "Distribution",
       "sweeping": "Sweeping",
       "compare": "Compare",
-      "comparing_to": "Comparing to"
+      "compare_to": "Compare to"
   },
   "compare": {
       "compare_different_players": "COMPARE DIFFERENT PLAYERS",
@@ -111,26 +114,32 @@
       },
       "shot_creating_actions": {
           "label": "Shot creating actions",
+          "short": "Sh. creat. actions",
           "explanation": "The number of actions that lead to a shot by a player. It includes passes, dribbles, and other actions that contribute to the creation of shooting opportunities."
       },
       "shot_creating_tendency": {
           "label": "Shot creating tendency",
+          "short": "Sh. creat. tendency",
           "explanation": "The average number of shot creating actions per 90 minutes. It indicates how frequently a player generates opportunities for shots."
       },
       "shot_creating_passes": {
           "label": "Shot creating passes",
+          "short": "Sh. creat. passes",
           "explanation": "The number of live-ball passes that lead to a shot by a player. It represents the player's ability to make key passes that set up shooting chances."
       },
       "shot_creating_setpieces": {
           "label": "Shot creating set-pieces",
+          "short": "Sh. creat. set-pieces",
           "explanation": "The number of dead-ball passes that lead to a shot by a player. It includes free-kicks, corners, and other set-piece situations that result in shooting opportunities."
       },
       "shot_creating_dribbles": {
           "label": "Shot creating dribbles",
+          "short": "Sh. creat. dribbles",
           "explanation": "The number of successful dribbles that lead to a shot by a player. It reflects the player's skill in beating opponents and creating shooting opportunities through dribbling."
       },
       "shot_creating_defensive_actions": {
           "label": "Shot creating defensive actions",
+          "short": "Sh. creat. def. actions",
           "explanation": "The number of defensive actions that lead to a shot by a player. It includes interceptions, tackles, and other defensive contributions that trigger counter-attacks or attacking opportunities."
       },
       "goal_creating_actions": {
@@ -211,14 +220,17 @@
       },
       "defensive_third_touches": {
           "label": "Defensive third touches",
+          "short": "Def-third touches",
           "explanation": "The number of touches on the ball in the defensive third. It represents the player's involvement in defensive build-up and ball circulation from the defensive zone."
       },
       "mid_third_touches": {
           "label": "Middle third touches",
+          "short": "Mid-third touches",
           "explanation": "The number of touches on the ball in the middle third. It reflects the player's involvement in the team's build-up and ball circulation in the midfield area."
       },
       "attacking_third_touches": {
           "label": "Attacking third touches",
+          "short": "Att-third touches",
           "explanation": "The number of touches on the ball in the attacking third. It indicates the player's involvement in the team's attacking play and presence in the opponent's defensive zone."
       },
       "directness": {
@@ -263,26 +275,32 @@
       },
       "short_range_pass_accuracy": {
           "label": "Short-range pass accuracy",
+          "short": "Short-range pass acc.",
           "explanation": "The percentage of short-range passes completed by a player. It reflects the player's accuracy in short and close-range passing situations."
       },
       "medium_range_passes": {
           "label": "Medium-range passes",
+          "short": "Mid-range passes",
           "explanation": "The number of medium-range passes completed by a player. It indicates the player's ability to deliver passes over moderate distances with accuracy."
       },
       "medium_range_pass_accuracy": {
           "label": "Medium-range pass accuracy",
+          "short": "Mid-range pass acc.",
           "explanation": "The percentage of medium-range passes completed by a player. It reflects the player's accuracy in delivering passes over moderate distances."
       },
       "long_range_passes": {
           "label": "Long-range passes",
+          "short": "L/R passes",
           "explanation": "The number of long-range passes completed by a player. It represents the player's ability to deliver accurate passes over long distances."
       },
       "long_range_pass_accuracy": {
           "label": "Long-range pass accuracy",
+          "short": "L/R pass acc.",
           "explanation": "The percentage of long-range passes completed by a player. It reflects the player's accuracy in delivering passes over long distances."
       },
       "expected_assists": {
           "label": "Expected assists",
+          "short": "Exp. Assists",
           "explanation": "The average expected goals assisted by a player. It quantifies the quality of the player's passes that lead to goal-scoring opportunities for teammates."
       },
       "expected_assisted_shots": {
@@ -295,27 +313,42 @@
       },
       "challenging_tendency": {
           "label": "Challenging tendency",
+          "short": "Challeng. tendency",
           "explanation": "The average number of challenges per 90 minutes. It indicates how frequently a player engages in defensive challenges to win back possession."
       },
       "challenging_consistency": {
           "label": "Challenging consistency",
+          "short": "Challeng. consistency",
           "explanation": "The success rate of challenges attempted by a player. It reflects the player's ability to win duels and successfully regain possession from opponents."
       },
       "defensive_actions": {
           "label": "Defensive actions",
+          "short": "Def actions",
           "explanation": "The total number of defensive actions performed by a player. It includes tackles, interceptions, and other defensive contributions."
       },
       "defensive_third_tackles": {
           "label": "Defensive third tackles",
+          "short": "Def-third tackles",
           "explanation": "The number of tackles made by a player in the defensive third of the pitch. It indicates the player's defensive involvement in their own territory."
       },
       "mid_third_tackles": {
           "label": "Middle third tackles",
+          "short": "Mid-third tackles",
           "explanation": "The number of tackles made by a player in the middle third of the pitch. It represents the player's defensive contributions in the midfield area."
       },
       "attacking_third_tackles": {
           "label": "Attacking third tackles",
+          "short": "Att-third tackles",
           "explanation": "The number of tackles made by a player in the attacking third of the pitch. It reflects the player's defensive efforts in the opponent's offensive zone."
+      },
+      "teams_tackling_contribution": {
+          "label": "Tackling contribution",
+          "explanation": "The percentage of tackles made by a player in their team. It indicates the player's contribution to the team's tackling efforts."
+      },
+      "teams_defensive_contribution": {
+          "label": "Defensive contribution",
+          "short": "Def contribution",
+          "explanation": "The percentage of defensive actions made by a player in their team. It indicates the player's contribution to the team's defensive efforts."
       },
       "recoveries": {
           "label": "Recoveries",

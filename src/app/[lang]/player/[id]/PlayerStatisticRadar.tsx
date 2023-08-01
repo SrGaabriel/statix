@@ -8,7 +8,7 @@ import useSWR from "swr";
 import { useStatisticContext } from "./StatisticContext";
 import { PlayerInfo, playerProfileFetcher } from "@/app/api/player";
 import { ClubColors, getClubColors } from "@/app/utils/colors";
-import { getStatisticName } from "@/app/utils/naming";
+import { getShortenedStatisticName, getStatisticName } from "@/app/utils/naming";
 
 const PlayerStatisticRadar = () => {
     const context = useStatisticContext();
@@ -31,9 +31,11 @@ const PlayerStatisticRadar = () => {
     }, []);
 
     useEffect(() => {
+      const getStatisticLabel = (type: string) => isNarrow ? getShortenedStatisticName(dictionary, type) : getStatisticName(dictionary, type);
+
       if (!data) return;
       const indicators = data.values.map((value: any) => {
-        return { text: getStatisticName(dictionary, value.type).toUpperCase(), max: dynamicMode ? 100: value.best }
+        return { text: getStatisticLabel(value.type).toUpperCase(), max: dynamicMode ? 100: value.best }
       });
       const playerValues: number[] = data.values.map((value: any) => value.value);
       const averageValues: number[] = dynamicMode ? [] : data.values.map((value: any) => value.average);
@@ -97,17 +99,16 @@ function createOptions(
     radar: [
       {
         indicator: indicators,
-        center: ['50%', '50%'],
         startAngle: 90,
         splitNumber: 8,
-        radius: isNarrow ? 70 : 300,
+        radius: isNarrow ? 65 : 300,
         shape: 'circle',
         axisName: {
           color: '#333',
-          fontSize: isNarrow ? 6 : 15,
+          fontSize: isNarrow ? 5 : 15,
           fontFamily: 'Roboto',
           fontWeight: 'bolder',
-          padding: isNarrow ? 0 : 15,
+          padding: isNarrow ? 3 : 15,
         },
         splitArea: {
           areaStyle: {

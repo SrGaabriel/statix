@@ -3,7 +3,6 @@ import Header from "../../components/Header";
 import { getDictionary } from "../dictionary/dictionaries";
 import PlayerComparisonContainer from "./PlayerComparisonContainer";
 import styles from './page.module.css'
-import DropdownMenu from "@/app/components/DropdownMenu";
 
 export default async function Compare({ params, searchParams }: { 
     params: { lang: string },

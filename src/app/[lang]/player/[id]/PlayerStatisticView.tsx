@@ -1,13 +1,10 @@
 'use client'
 
 import { PlayerInfo, playerDataFetcher } from "@/app/api/player"
-import PlayerStatistic from "./PlayerStatistic"
 import StatisticLayout from "./StatisticLayout"
 import StatisticContext, { reducer } from "./StatisticContext"
 import { useReducer } from "react"
 import useSWR from "swr"
-import styles from "./page.module.css"
-import PlayerStatisticRadar from "./PlayerStatisticRadar"
 
 interface Properties {
     playerInfo: PlayerInfo,

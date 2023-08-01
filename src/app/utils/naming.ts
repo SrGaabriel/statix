@@ -96,6 +96,11 @@ export function getStatisticName(dictionary: any, statistic: string): string {
     return dictionary.statistics_data[statistic].label;
 }
 
+export function getShortenedStatisticName(dictionary: any, statistic: string): string {
+    const statisticData = dictionary.statistics_data[statistic];
+    return statisticData.short ? statisticData.short : statisticData.label;
+}
+
 export function getStatisticExplanation(dictionary: any, statistic: string): string {
     return dictionary.statistics_data[statistic].explanation;
 }

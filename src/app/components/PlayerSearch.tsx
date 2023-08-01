@@ -12,11 +12,12 @@ import useDebounce from '../utils/useDebounce';
 interface Properties extends HTMLAttributes<HTMLDivElement> {
   dictionary: any,
   width: string,
-  height: string
+  height: string,
+  style: any,
   resultTrigger?: (result: PlayerSuggestion) => void | undefined
 }
 
-const SearchBox: React.FC<Properties> = ({ dictionary, width = '400px', height = '200px', resultTrigger = undefined }) => {
+const SearchBox: React.FC<Properties> = ({ dictionary, width = '400px', height = '200px', style, resultTrigger = undefined }) => {
   	const [searchTerm, setSearchTerm] = useState('');
   	const isSearchAvailable = searchTerm.length > 3
   	const debouncedSearch = useDebounce(searchTerm, 500)
@@ -32,8 +33,8 @@ const SearchBox: React.FC<Properties> = ({ dictionary, width = '400px', height =
 					className={styles.clubBadge}
 					src={`/badges/empty.png`}
 					alt={`Loading badge`}
-					width={32}
-					height={32}
+					width={28}
+					height={28}
 				/>
 				<p
 					className={`${styles.positionBadge} ${styles.invisibleText}`}
@@ -74,20 +75,20 @@ const SearchBox: React.FC<Properties> = ({ dictionary, width = '400px', height =
   	};
 
 	return (
-		<div className={styles.searchFeature} style={{width, height}}>
-		<input
-			type="text"
-			value={searchTerm}
-			onChange={handleInputChange}
-			placeholder={dictionary.search.placeholder}
-			style={{width, height}}
-			className={styles.searchBox}
-		/>
-		<div className={styles.searchBoxSuggestionsContainer}>
-			{isSearchAvailable ? (<ul className={styles.searchBoxSuggestions} style={{width}}>
-			{renderSuggestions()}
-			</ul>) : null}
-		</div>
+		<div className={styles.searchFeature} style={style}>
+			<input
+				type="text"
+				value={searchTerm}
+				onChange={handleInputChange}
+				placeholder={dictionary.search.placeholder}
+				style={{width, height}}
+				className={styles.searchBox}
+			/>
+			<div className={styles.searchBoxSuggestionsContainer}>
+				{isSearchAvailable ? (<ul className={styles.searchBoxSuggestions} style={{width}}>
+				{renderSuggestions()}
+				</ul>) : null}
+			</div>
 		</div>
 	);
 	function createListElement(suggestion: PlayerSuggestion) {
@@ -103,8 +104,8 @@ const SearchBox: React.FC<Properties> = ({ dictionary, width = '400px', height =
                 className={styles.clubBadge}
                 src={`/badges/${suggestion.club}.png`}
                 alt={`${suggestion.club} badge`}
-                width={32}
-                height={32}
+                width={28}
+                height={28}
               />
               <p
                 className={styles.positionBadge}

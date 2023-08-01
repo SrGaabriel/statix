@@ -1,11 +1,12 @@
 .searchBox {
     border: none;
+    outline: none;
     font-family: 'Roboto';
-    background-color: rgb(240, 240, 240);
+    background-color: var(--background);
     font-size: 16px;
     transition: box-shadow 0.2s ease-in-out;
-    padding: 5%;
-    outline: none;
+    padding-left: 6%;
+    border-radius: 32px;
     box-sizing: border-box;
 }
 
@@ -14,13 +15,15 @@
     position: absolute;
     z-index: 10000;
     overflow: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 5px #000000;
 }
 
 .searchBoxSuggestions {
     display: flex;
     width: 100%;
     min-height: 30px;
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(211, 211, 211);
     flex-direction: column;
     justify-content: center;
     list-style-type: none;
@@ -34,11 +37,12 @@
 
 .suggestionContent {
     display: flex;
-    padding: 2.5%;
+    padding-left: 2.5%;
     align-items: center;
     position: relative;
     border-radius: 1px;
     width: 100%;
+    height: 60px;
     box-sizing: border-box;
 }
 
@@ -46,12 +50,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     padding: 2%;
     margin-left: 4%;
     margin-right: 4%;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .invisibleText {
@@ -60,6 +64,7 @@
 
 .playerSuggestionName {
     font-family: 'Manrope';
+    font-size: 16px;
     color: #333;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

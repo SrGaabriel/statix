@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import * as echarts from 'echarts';
 import ReactECharts from 'echarts-for-react';
+import { getClubColors } from "@/app/utils/colors";
 
 interface Properties {
     names: [string, string, string?],

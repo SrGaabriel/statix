@@ -11,6 +11,12 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
+  --text: #03151b;
+  --background: #e9e7ef;
+  --primary: #0e002f;
+  --secondary: #323d6c;
+  --accent: #ff7300;
+
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
     #16abff33 0deg,

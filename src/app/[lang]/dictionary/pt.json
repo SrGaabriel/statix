@@ -1,6 +1,5 @@
 {
     "code": "pt",
-	"language": "Linguagem",
     "players": "JOGADORES",
     "error": "Um erro inesperado occoreu",
     "other": "Outros",
@@ -20,6 +19,10 @@
         "club": "Time",
         "position": "Posição",
         "nationality": "Nacionalidade"
+    },
+    "header": {
+        "contact": "Contato",
+        "language": "Linguagem"
     },
     "leagues": {
         "premier_league": "Premier League",
@@ -72,7 +75,7 @@
         "distribution": "Distribuição",
         "sweeping": "Saida do gol",
         "compare": "Comparar",
-        "comparing_to": "Comparando a"
+        "compare_to": "Compare a"
     },
     "compare": {
         "compare_different_players": "COMPARE JOGADORES DIFERENTES",
@@ -316,6 +319,14 @@
         "attacking_third_tackles": {
             "label": "Desarmes no ataque",
             "explanation": "O número de desarmes realizados por um jogador na terceira parte ofensiva do campo. Reflete os esforços defensivos do jogador na zona ofensiva do adversário."
+        },
+        "teams_tackling_contribution": {
+            "label": "Contribuição em desarmes",
+            "explanation": "A porcentagem de desarmes realizados por um jogador em relação ao total de desarmes realizados por sua equipe. Indica a contribuição do jogador para a defesa de sua equipe."
+        },
+        "teams_defensive_contribution": {
+            "label": "Contribuição defensiva",
+            "explanation": "A porcentagem de ações defensivas realizadas por um jogador em relação ao total de ações defensivas realizadas por sua equipe. Indica a contribuição do jogador para a defesa de sua equipe."
         },
         "recoveries": {
             "label": "Recuperações",

@@ -1,15 +1,14 @@
 'use client'
 
-import Link from 'next/link';
 import Image from 'next/image';
 import styles from './dropdownMenu.module.css'
-import { Dispatch, useState } from 'react';
-import { Action } from '@/app/[lang]/player/[id]/StatisticContext';
 
 interface Properties {
     callback: (option: DropdownOption) => void,
     defaultOption: DropdownOption,
     otherOptions: DropdownOption[],
+    isClicked: boolean,
+    setClicked: (clicked: boolean) => void;
 }
 
 interface DropdownOption {
@@ -18,9 +17,7 @@ interface DropdownOption {
     image?: string;
 }
 
-const DropdownMenu: React.FC<Properties> = ({ callback, defaultOption, otherOptions }) => {
-    const [isClicked, setClicked] = useState(false)
-
+const DropdownMenu: React.FC<Properties> = ({ callback, defaultOption, otherOptions, isClicked, setClicked }) => {
     return (
         <div className={styles.statisticDropdownMenu} onClick={() => setClicked(!isClicked)}>
             <div className={`${styles.defaultOption} ${styles.unselectable}`}>

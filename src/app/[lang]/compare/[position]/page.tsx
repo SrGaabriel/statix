@@ -3,7 +3,7 @@ import Header from "@/app/components/Header";
 import styles from './page.module.css'
 import PlayerComparisonRadar from "./PlayerComparisonRadar";
 import { getDictionary } from "../../dictionary/dictionaries";
-import { getFromLeagueText, getLeagueName, getPositionPluralName, getStatisticName } from "@/app/utils/naming";
+import { getLeagueName, getPositionPluralName, getStatisticName } from "@/app/utils/naming";
 import Image from "next/image";
 import { getClubColors } from "@/app/utils/colors";
 import Link from "next/link";

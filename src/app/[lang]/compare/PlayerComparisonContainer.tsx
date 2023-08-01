@@ -6,9 +6,10 @@ import Link from 'next/link';
 import React, { HTMLAttributes, useEffect, useState } from 'react';
 import { PlayerInfo } from '@/app/api/player';
 import SearchBox from '@/app/components/PlayerSearch';
-import { OUTFIELD_POSITIONS, getLeagueName, getPositionName, getPositionNameById, getPositionPluralName } from '@/app/utils/naming';
-import { getCountryEmoji } from '@/app/utils/emojis';
+import { OUTFIELD_POSITIONS, getLeagueName, getPositionNameById, getPositionPluralName } from '@/app/utils/naming';
 import DropdownMenu from '@/app/components/DropdownMenu';
+import { getPlayerImageOrClubBadge } from '@/app/utils/images';
+import Image from 'next/image';
 
 interface Properties extends HTMLAttributes<HTMLDivElement> {
     dictionary: any,
@@ -24,6 +25,7 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
     const [position, setPosition] = useState(firstPlayerInfo?.position ? getPositionNameById(firstPlayerInfo.position) : 'forward')
     const positions = OUTFIELD_POSITIONS.filter(pos => pos !== position);
     const leagues = ['premier_league', 'ligue_1', 'serie_a', 'bundesliga', 'la_liga', 'brasileirao', 'top_5'].filter(nleague => league !== nleague);
+    const [clickedDropdown, setClickedDropdown] = useState<string | null>(null);
 
     useEffect(() => {
         const mql = window.matchMedia("(max-width: 1200px)");
@@ -78,15 +80,19 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
                         callback={(option) => setPosition(option.payload)}
                         defaultOption={{ label: getPositionPluralName(dictionary, position).toUpperCase(), payload: '', image: `/icons/${position}.png` }}
                         otherOptions={positions.map(pos => ({ label: getPositionPluralName(dictionary, pos).toUpperCase(), type: 'SET_POSITION', payload: pos, image: `/icons/${pos}.png` }))}
+                        isClicked={clickedDropdown === 'position'}
+                        setClicked={(clicked) => setClickedDropdown(clicked ? 'position' : null)}
                     />}
                     <h4>{`${dictionary.statistics.comparing_to} ${getPositionPluralName(dictionary, position).toUpperCase()} ${dictionary.from}`.toUpperCase()}</h4>
                     <DropdownMenu
                         callback={(option) => setLeague(option.payload)}
                         defaultOption={{ label: getLeagueName(dictionary, league).toUpperCase(), payload: '', image: `/leagues/${league}.png` }}
                         otherOptions={leagues.map(nleague => ({ label: getLeagueName(dictionary, nleague).toUpperCase(), type: 'SET_LEAGUE', payload: nleague, image: `/leagues/${nleague}.png` }))}
+                        isClicked={clickedDropdown === 'league'}
+                        setClicked={(clicked) => setClickedDropdown(clicked ? 'league' : null)}
                     />
                     {!error() ? (<div className={styles.compareButtonSection}>
-                        <Link href={makeLink()} className={styles.compareButton}>{dictionary.statistics.compare}</Link>
+                        <Link href={makeLink()} className={styles.compareButton}>{dictionary.statistics.compare.toUpperCase()}</Link>
                     </div>) : (<div className={styles.compareButtonSection}>
                         <p className={styles.errorText}>{error()}</p>
                     </div>)  
@@ -95,22 +101,22 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
             </div>
             <div className={styles.comparisonContainer}>
                 {!isNarrow && <span className={styles.pageTitle}>{dictionary.compare.compare_different_players}</span>}
+                <dialog className={styles.addPlayerModal} id="addplayermodal" onClose={() => setAddButtonClicked(false)}>
+                    {addButtonClicked && <SearchBox dictionary={dictionary} width={isNarrow ? '350px' : '600px'} height="75px" resultTrigger={(result) => {
+                        if (isPlayerAdded(result.id)) {
+                            return
+                        }
+                        setPlayers([...players, result]);
+                        setAddButtonClicked(false);
+                        const dialog = (document.getElementById(`addplayermodal`) as HTMLDialogElement)
+                        if (!dialog.open)
+                            return;
+                        dialog.close();
+                    }}/>}
+                </dialog>
                 <div className={styles.playerList}>
                     {players.map((player) => renderPlayerCard(player))}
-                    {players.length < 3 && <div className={`${styles.addPlayer} ${styles.playerCard}`}>
-                        <dialog className={styles.addPlayerModal} id="addplayermodal" onClose={() => setAddButtonClicked(false)}>
-                            {addButtonClicked && <SearchBox dictionary={dictionary} width={isNarrow ? '400px' : '600px'} height="75px" resultTrigger={(result) => {
-                                if (isPlayerAdded(result.id)) {
-                                    return
-                                }
-                                setPlayers([...players, result]);
-                                setAddButtonClicked(false);
-                                const dialog = (document.getElementById(`addplayermodal`) as HTMLDialogElement)
-                                if (!dialog.open)
-                                    return;
-                                dialog.close();
-                            }}/>}
-                        </dialog>
+                    {players.length < 3 && <div className={styles.addPlayer}>
                         <h1 className={styles.addPlayerTitle}>{dictionary.compare.add_player.toUpperCase()}</h1>
                         <div className={styles.addPlayerButtonSection}>
                             <button
@@ -136,13 +142,17 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
         const gradientStyle: any = {
             '--gradient': `linear-gradient(white, white), linear-gradient(90deg, ${clubColors.primary}, ${clubColors.secondary})`,
         }
+        const image = player.has_image ? `/images/${player.id}.png` : `/images/placeholder.png`;
         return (
             <div className={styles.playerCard} style={gradientStyle}>
                 <h1 className={styles.playerCardLabel}>{player.name.toUpperCase()}</h1>
                 <div className={styles.playerBasicInfoSection}>
-                    <p className={styles.playerBasicInfo}><b>{dictionary.info.club}:</b> {player.club}</p>
-                    <p className={styles.playerBasicInfo}><b>{dictionary.info.position}:</b> {capitalize(getPositionName(dictionary, getPositionNameById(player.position)))}</p>
-                    <p className={styles.playerBasicInfo}><b>{dictionary.info.nationality}:</b> {getCountryEmoji(player.nationality)}</p>
+                    <Image
+                        src={getPlayerImageOrClubBadge(player)}
+                        alt={player.name}
+                        width={200}
+                        height={200}
+                    />
                 </div>
                 <div className={styles.playerRemoveButtonSection}>
                     <button className={styles.playerRemoveButton} onClick={() => {

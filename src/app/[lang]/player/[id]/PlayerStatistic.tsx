@@ -44,12 +44,17 @@ const PlayerStatistic: React.FC<Properties> = ({ stat, label, value }) => {
         return (
           <ul className={styles.playerStatisticModalRankingList}>
             {data.ranking.map(player => {
-                if (player.id === playerInfo.id)
+                if (player.id === playerInfo.id) {
+                    const borderRadius = player.rank === 1 ? '10px 10px 0 0' : player.rank === 4 ? '0 0 10px 10px' : '0';
+                    const borderRadiusStyle: any = {
+                        borderRadius
+                    }
                     return (
-                        <p className={`${styles.playerStatisticModalRankingListElementLink} ${styles.playerStatisticModalRankingListElementLinkOwn}`}>
+                        <p key="ownuser-ranking" className={`${styles.playerStatisticModalRankingListElementLink} ${styles.playerStatisticModalRankingListElementLinkOwn}`} style={borderRadiusStyle}>
                             {player.rank}. {getCountryEmoji(player.nation)} {player.name} {player.value.toFixed(2)}
                         </p>
                     )
+                }
 
                 return (<li key={player.id + "-ranking"} className={styles.playerStatisticModalRankingListElement}>
                     <Link href={`/${dictionary.code}/player/${player.id}`} className={styles.playerStatisticModalRankingListElementLink}>
