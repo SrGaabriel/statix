@@ -11,7 +11,7 @@ interface Properties extends HTMLAttributes<HTMLDivElement> {
     style?: any
 }
 
-const Header: React.FC<Properties> = ({dictionary, style}) => {
+const Header: React.FC<Properties> = ({dictionary, style = {}}) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
@@ -33,7 +33,7 @@ const Header: React.FC<Properties> = ({dictionary, style}) => {
                         {dictionary.header.language}
                     </Link>
                     <div>
-                        <SearchBox dictionary={dictionary} height="30px" width="350px" style={{ margin: '8px 0' }}/>
+                        <SearchBox dictionary={dictionary} height="40px" width="350px" style={{ margin: '8px 0' }}/>
                     </div>
                 </div>
             </div>

@@ -261,11 +261,11 @@
             "explanation": "Quantos cruzamentos o jogador realiza a cada 90 minutos. Indica a tendência do jogador em realizar cruzamentos para a área penal adversária."
         },
         "short_range_passes": {
-            "label": "Passes de curta distância",
+            "label": "Passes curtos",
             "explanation": "O número de passes de curta distância completos por um jogador. Representa o envolvimento do jogador em combinações de passes curtas e rápidas."
         },
         "short_range_pass_accuracy": {
-            "label": "Precisão em passes de curta distância",
+            "label": "Precisão em passes curtos",
             "explanation": "A porcentagem de passes de curta distância completos por um jogador. Reflete a precisão do jogador em situações de passes curtos e em curta distância."
         },
         "medium_range_passes": {
@@ -274,14 +274,15 @@
         },
         "medium_range_pass_accuracy": {
             "label": "Precisão em passes de média distância",
+            "short": "Prec. em passes de média dist.",
             "explanation": "A porcentagem de passes de média distância completos por um jogador. Reflete a precisão do jogador em realizar passes em distâncias moderadas."
         },
         "long_range_passes": {
-            "label": "Passes de longa distância",
+            "label": "Passes de longos",
             "explanation": "O número de passes de longa distância completos por um jogador. Representa a habilidade do jogador em realizar passes precisos em longas distâncias."
         },
         "long_range_pass_accuracy": {
-            "label": "Precisão em passes de longa distância",
+            "label": "Precisão em passes longos",
             "explanation": "A porcentagem de passes de longa distância completos por um jogador. Reflete a precisão do jogador em realizar passes em longas distâncias."
         },
         "expected_assists": {

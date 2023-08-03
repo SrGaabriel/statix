@@ -13,7 +13,7 @@ export default async function Compare({ params, searchParams }: {
 
     return (
         <div className={styles.page}>
-            <Header dictionary={dictionary}/>
+            <Header dictionary={dictionary} style={{ backgroundColor: 'rgb(15, 31, 75)' }}/>
             <main className={styles.main}>
                 <PlayerComparisonContainer dictionary={dictionary} firstPlayerInfo={firstInfo}/>
             </main>

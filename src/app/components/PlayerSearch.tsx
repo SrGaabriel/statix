@@ -17,7 +17,7 @@ interface Properties extends HTMLAttributes<HTMLDivElement> {
   resultTrigger?: (result: PlayerSuggestion) => void | undefined
 }
 
-const SearchBox: React.FC<Properties> = ({ dictionary, width = '400px', height = '200px', style, resultTrigger = undefined }) => {
+const SearchBox: React.FC<Properties> = ({ dictionary, width = '400px', height = '200px', style = {}, resultTrigger = undefined }) => {
   	const [searchTerm, setSearchTerm] = useState('');
   	const isSearchAvailable = searchTerm.length > 3
   	const debouncedSearch = useDebounce(searchTerm, 500)

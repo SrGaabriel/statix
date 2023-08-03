@@ -4,9 +4,8 @@
     font-family: 'Roboto';
     background-color: var(--background);
     font-size: 16px;
-    transition: box-shadow 0.2s ease-in-out;
     padding-left: 6%;
-    border-radius: 32px;
+    border-radius: 64px;
     box-sizing: border-box;
 }
 
@@ -16,7 +15,7 @@
     z-index: 10000;
     overflow: auto;
     border-radius: 12px;
-    box-shadow: 0 0 5px #000000;
+    box-shadow: 0 0 5px #000000; 
 }
 
 .searchBoxSuggestions {
@@ -78,12 +77,4 @@
 
 .searchBoxSuggestion:hover {
     background-color: rgb(194, 193, 193);
-}
-
-.searchBox:hover {
-    box-shadow: 0 0 3px #00000080;
-}
-
-.searchBox:focus {
-    box-shadow: 0 0 8px #00000080;
 }

@@ -40,7 +40,9 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
     if (players.length === 1 && getPositionNameById(players[0].position) !== position) {
         setPosition(getPositionNameById(players[0].position));
     }
-
+    if (players.length === 1 && players[0].league !== league) {
+        setLeague(players[0].league);
+    }
     const isPlayerAdded = (id: string) => players.some((p) => p.id === id)
     if (firstPlayerInfo && !isPlayerAdded(firstPlayerInfo.id) && !firstPlayerRemoved) {
         setPlayers([...players, firstPlayerInfo!!])
@@ -72,67 +74,10 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
 
     return (
         <div className={styles.totalContainer}>
-            <div className={styles.otherSection}>
-                <div className={styles.otherSectionContainer}>
-                    {isNarrow && <span className={styles.pageTitle}>{dictionary.compare.compare_different_players}</span>}
-                    {position !== "goalkeeper" && <h4>{`${dictionary.statistics.comparing_to} ${dictionary.other}`.toUpperCase()}</h4>}
-                    {position !== "goalkeeper" && <DropdownMenu
-                        callback={(option) => setPosition(option.payload)}
-                        defaultOption={{ label: getPositionPluralName(dictionary, position).toUpperCase(), payload: '', image: `/icons/${position}.png` }}
-                        otherOptions={positions.map(pos => ({ label: getPositionPluralName(dictionary, pos).toUpperCase(), type: 'SET_POSITION', payload: pos, image: `/icons/${pos}.png` }))}
-                        isClicked={clickedDropdown === 'position'}
-                        setClicked={(clicked) => setClickedDropdown(clicked ? 'position' : null)}
-                    />}
-                    <h4>{`${dictionary.statistics.comparing_to} ${getPositionPluralName(dictionary, position).toUpperCase()} ${dictionary.from}`.toUpperCase()}</h4>
-                    <DropdownMenu
-                        callback={(option) => setLeague(option.payload)}
-                        defaultOption={{ label: getLeagueName(dictionary, league).toUpperCase(), payload: '', image: `/leagues/${league}.png` }}
-                        otherOptions={leagues.map(nleague => ({ label: getLeagueName(dictionary, nleague).toUpperCase(), type: 'SET_LEAGUE', payload: nleague, image: `/leagues/${nleague}.png` }))}
-                        isClicked={clickedDropdown === 'league'}
-                        setClicked={(clicked) => setClickedDropdown(clicked ? 'league' : null)}
-                    />
-                    {!error() ? (<div className={styles.compareButtonSection}>
-                        <Link href={makeLink()} className={styles.compareButton}>{dictionary.statistics.compare.toUpperCase()}</Link>
-                    </div>) : (<div className={styles.compareButtonSection}>
-                        <p className={styles.errorText}>{error()}</p>
-                    </div>)  
-                    }
-                </div>
-            </div>
-            <div className={styles.comparisonContainer}>
-                {!isNarrow && <span className={styles.pageTitle}>{dictionary.compare.compare_different_players}</span>}
-                <dialog className={styles.addPlayerModal} id="addplayermodal" onClose={() => setAddButtonClicked(false)}>
-                    {addButtonClicked && <SearchBox dictionary={dictionary} width={isNarrow ? '350px' : '600px'} height="75px" resultTrigger={(result) => {
-                        if (isPlayerAdded(result.id)) {
-                            return
-                        }
-                        setPlayers([...players, result]);
-                        setAddButtonClicked(false);
-                        const dialog = (document.getElementById(`addplayermodal`) as HTMLDialogElement)
-                        if (!dialog.open)
-                            return;
-                        dialog.close();
-                    }}/>}
-                </dialog>
-                <div className={styles.playerList}>
+            <div className={styles.upperContainer}>
+                <div className={styles.playerContainer}>
+                    
                     {players.map((player) => renderPlayerCard(player))}
-                    {players.length < 3 && <div className={styles.addPlayer}>
-                        <h1 className={styles.addPlayerTitle}>{dictionary.compare.add_player.toUpperCase()}</h1>
-                        <div className={styles.addPlayerButtonSection}>
-                            <button
-                                className={styles.addPlayerButton}
-                                onClick={() => {
-                                    const dialog = (document.getElementById(`addplayermodal`) as HTMLDialogElement)
-                                    if (dialog.open)
-                                        return;
-                                    setAddButtonClicked(true);
-                                    dialog.showModal();
-                                }}
-                            >
-                                +
-                            </button>
-                        </div>
-                    </div>}
                 </div>
             </div>
         </div>

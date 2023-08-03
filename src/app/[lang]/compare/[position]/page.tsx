@@ -51,7 +51,6 @@ export default async function Comparison({ params, searchParams }: {
             borderLeft: `5px solid ${clubColors.primary}`,
         }
         return (<Link href={`/${dictionary.code}/player/${playerInfo.id}`} className={styles.playerListElement} style={stripeStyle}>
-            <span>{index}.</span>
             <Image
                 src={`/badges/${playerInfo.club}.png`}
                 alt={playerInfo.club}
