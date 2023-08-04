@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="42bd1f3e-6266-4a63-8155-51b641f5f2a0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/[lang]/player/[id]/PlayerStatistic.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/[lang]/player/[id]/StatisticLayout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/[lang]/player/[id]/page.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/badges/Dortmund.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/player.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/player.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/HeaderButton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/PlayerSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/PlayerSearch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/header.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/headerButton.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/searchbox.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/searchbox.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/player/[id]/PlayerStatistic.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/player/[id]/PlayerStatisticData.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/player/[id]/StatisticLayout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/player/[id]/[position]/[stats]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/player/[id]/page.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/player/page.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/player/page.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/player/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/player/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/attributes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/attributes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/colors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/defaults.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/defaults.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/emojis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/emojis.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2SwdqYvBV6A9ukmLJGVzoVcdZhu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/xgabr/Documents/Programming/Environment/statix",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "ts.external.directory.path": "C:\\Users\\xgabr\\Documents\\Programming\\Environment\\statix\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\xgabr\Documents\Programming\Environment\statix\src\app\[lang]\compare" />
+      <recent name="C:\Users\xgabr\Documents\Programming\Environment\statix\src\app\[lang]" />
+      <recent name="C:\Users\xgabr\Documents\Programming\Environment\statix\src\app\[lang]\player" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="42bd1f3e-6266-4a63-8155-51b641f5f2a0" name="Changes" comment="" />
+      <created>1690061769901</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1690061769901</updated>
+      <workItem from="1690061771287" duration="223000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

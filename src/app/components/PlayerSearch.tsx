@@ -13,7 +13,7 @@ interface Properties extends HTMLAttributes<HTMLDivElement> {
   dictionary: any,
   width: string,
   height: string,
-  style: any,
+  style?: any,
   resultTrigger?: (result: PlayerSuggestion) => void | undefined
 }
 

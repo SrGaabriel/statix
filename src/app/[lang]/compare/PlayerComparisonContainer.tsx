@@ -18,14 +18,11 @@ interface Properties extends HTMLAttributes<HTMLDivElement> {
 
 const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlayerInfo = null }) => {
     const [players, setPlayers] = useState<any[]>([]);
-    const [addButtonClicked, setAddButtonClicked] = useState(false);
     const [isNarrow, setIsNarrow] = useState(false);
     const [firstPlayerRemoved, setFirstPlayerRemoved] = useState(false);
     const [league, setLeague] = useState(firstPlayerInfo?.league ?? 'top_5')
     const [position, setPosition] = useState(firstPlayerInfo?.position ? getPositionNameById(firstPlayerInfo.position) : 'forward')
-    const positions = OUTFIELD_POSITIONS.filter(pos => pos !== position);
-    const leagues = ['premier_league', 'ligue_1', 'serie_a', 'bundesliga', 'la_liga', 'brasileirao', 'top_5'].filter(nleague => league !== nleague);
-    const [clickedDropdown, setClickedDropdown] = useState<string | null>(null);
+    const leagues = ['premier_league', 'ligue_1', 'serie_a', 'bundesliga', 'la_liga', 'brasileirao', 'top_5'];
 
     useEffect(() => {
         const mql = window.matchMedia("(max-width: 1200px)");
@@ -76,9 +73,56 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
         <div className={styles.totalContainer}>
             <div className={styles.upperContainer}>
                 <div className={styles.playerContainer}>
-                    
                     {players.map((player) => renderPlayerCard(player))}
+                    {players.length < 4 && <div className={`${styles.playerCardModel} ${styles.addPlayer}`}>
+                        <h3 className={styles.addPlayerButtonText}>{dictionary.compare.add_player}</h3>
+                        <button className={styles.addPlayerButton} onClick={() => {
+                            const modal = document.getElementById('addModal') as HTMLDialogElement;
+                            modal.showModal();
+                        }}>+</button>
+                        <dialog id="addModal" className={styles.addPlayerButtonModal}>
+                            <SearchBox
+                                width={isNarrow ? '300px' : '800px'}
+                                height={isNarrow ? '80px' : '100px'}
+                                dictionary={dictionary}
+                                resultTrigger={(player) => {
+                                    setPlayers([...players, player]);
+                                    const modal = document.querySelector(`.${styles.addPlayerButtonModal}`) as HTMLDialogElement;
+                                    modal.close();
+                                }}
+                            />
+                        </dialog>
+                    </div>}
                 </div>
+                <div className={styles.leaguesContainer}>
+                    {leagues.map((mappingLeague) => {
+                        const classNames = mappingLeague === league ? `${styles.leagueButton} ${styles.selectedButton}` : styles.leagueButton;
+                        return (
+                            <div key={mappingLeague} className={classNames} onClick={() => setLeague(mappingLeague)}>
+                                <Image src={`/leagues/${mappingLeague}.png`} alt={`${mappingLeague} icon`} width={30} height={30} />
+                                <span>{getLeagueName(dictionary, mappingLeague)}</span>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+            <div className={styles.lowerSection}>
+                <div className={styles.positionContainer}>
+                    {OUTFIELD_POSITIONS.map((pos) => {
+                        const classNames = pos === position ? `${styles.positionButton} ${styles.selectedButton}` : styles.positionButton;
+                        return (
+                            <div key={pos} className={classNames} onClick={() => setPosition(pos)}>
+                                <Image src={`/icons/${pos}.png`} alt={`${pos} icon`} className={styles.whiteIcon} width={30} height={30} />
+                                <span>{getPositionPluralName(dictionary, pos)}</span>
+                            </div>
+                        )
+                    })}
+                </div>
+                {!error ? <Link href={makeLink()} className={styles.finalButton}>
+                    COMPARE
+                </Link> : <div className={styles.errorDiv}>
+                    {error()}
+                </div>}
             </div>
         </div>
     )
@@ -88,32 +132,48 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
             '--gradient': `linear-gradient(white, white), linear-gradient(90deg, ${clubColors.primary}, ${clubColors.secondary})`,
         }
         const image = player.has_image ? `/images/${player.id}.png` : `/images/placeholder.png`;
+        const removeId = `removeButton-${player.id}`;
         return (
-            <div className={styles.playerCard} style={gradientStyle}>
-                <h1 className={styles.playerCardLabel}>{player.name.toUpperCase()}</h1>
-                <div className={styles.playerBasicInfoSection}>
-                    <Image
-                        src={getPlayerImageOrClubBadge(player)}
-                        alt={player.name}
-                        width={200}
-                        height={200}
-                    />
+            <div
+                onMouseEnter={() => {
+                    const removeButton = document.getElementById(removeId) as HTMLButtonElement;
+                    removeButton.style.opacity = '1';
+                    removeButton.style.height = '12%';
+                }}
+                onMouseLeave={() => {
+                    const removeButton = document.getElementById(removeId) as HTMLButtonElement;
+                    removeButton.style.opacity = '0';
+                    removeButton.style.height = '0';
+                }}
+                className={`${styles.playerCardModel} ${styles.actualPlayerCard}`}
+                style={gradientStyle}
+            >
+                <div className={styles.actualPlayerCardData}>
+                    <h1 className={styles.playerCardLabel}>{player.name.toUpperCase()}</h1>
+                    <div className={styles.playerBasicInfoSection}>
+                        <Image
+                            src={getPlayerImageOrClubBadge(player)}
+                            className={styles.playerImage}
+                            alt={player.name}
+                            width={200}
+                            height={200}
+                        />
+                    </div>
                 </div>
-                <div className={styles.playerRemoveButtonSection}>
-                    <button className={styles.playerRemoveButton} onClick={() => {
-                        if (firstPlayerInfo && player.id === firstPlayerInfo.id) {
-                            setFirstPlayerRemoved(true);
-                        }
-                        setPlayers(players.filter((p) => p.id !== player.id));
-                    }}>Remove</button>
-                </div>
+                <button id={removeId} className={styles.removeButton} onClick={() => {
+                    if (player.id === firstPlayerInfo?.id) {
+                        setFirstPlayerRemoved(true);
+                    }
+                    if (players.length === 1 && player.position === 'GK') {
+                        setPosition('forward');
+                    }
+                    setPlayers(players.filter((p) => p.id !== player.id));
+                }}>
+                    REMOVE
+                </button>
             </div>
         )
     }
-}
-
-function capitalize(text: string) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 export default PlayerComparisonContainer;

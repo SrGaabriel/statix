@@ -5,34 +5,245 @@
 .main {
     display: flex;
     flex-direction: row;
-    height: 100%;
-    width: 100%;
+    height: 95vh;
+    width: 100vw;
     color: var(--background);
     background-color: rgb(15, 31, 75);
 }
 
 .upperContainer {
-    position: fixed;
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 75%;
+    flex-direction: row;
+    width: 100vw;
+    height: 80%;
+    border: 3px solid #ffdcfd;
+    border-left: none;
+    border-right: none;
 }
 
 .playerContainer {
+    display: flex;
     width: 80%;
     height: 100%;
-    border: 3px solid #ffdcfd;
-    border-left: none;
+    border-right: 3px solid #ffdcfd;
 }
 
 .playerCardModel {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     width: 25%;
     height: 100%;
 }
 
 .playerCardModel:not(:first-child) {
+    border-left: 3px solid #ffdcfd;
+}
+
+.playerCardModel:not(:nth-child(4)) {
     border-right: 3px solid #ffdcfd;
+}
+
+.addPlayer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addPlayerButtonText {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffdcfd;
+    margin-bottom: 10%;
+    text-transform: uppercase;
+}
+
+.addPlayerButton {
+    position: relative;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    width: 50%;
+    color: var(--background);
+    font-size: 3rem;
+    background-color: transparent;
+    border: 5px solid #ffdcfd;
+    cursor: pointer;
+    transition: width 0.2s, font-size 0.2s;
+}
+
+.addPlayerButton:hover {
+    width: 55%;
+    font-size: 4rem;
+}
+
+.playerCardModel:not(:first-child) {
+    border-right: 3px solid #ffdcfd;
+}
+
+.addPlayerButtonModal {
+    position: fixed;
+    background-color: #ffdcfd;
+    transition: opacity 0.2s;
+    left: 50%;
+    top: 50%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    border: none;
+    height: 500px;
+}
+
+.actualPlayerCard {
+    position: relative;
+}
+
+.actualPlayerCardData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--secondary);
+    width: 100%;
+    height: 100%;
+    padding: 0 5%;
+}
+
+.playerCardLabel {
+    margin: 20% 0;
+}
+
+.playerBasicInfoSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    background-color: rgb(15, 31, 75);;
+    aspect-ratio: 1/1;
+    border: 6px solid var(--background);
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.playerImage {
+    margin-top: auto;
+}
+
+.removeButton {
+    position: absolute;
+    display: flex;
+    color: var(--background);
+    font-family: 'Manrope';
+    font-weight: bolder;
+    font-size: 1.6rem;
+    background-color: rgb(250, 92, 92);
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border: none;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.2s, height 0.2s;
+}
+
+.leaguesContainer {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: rgb(15, 31, 75);
+}
+
+.leagueButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--secondary);
+    text-transform: uppercase;
+    column-gap: 5%;
+    font-size: 1.5rem;
+    font-family: 'Dosis';
+    transition: background-color 0.2s;
+}
+
+.leagueButton:hover {
+    background-color: var(--accent);
+}
+
+.leagueButton:not(:first-child) {
+    border-top: 3px solid #ffdcfd;
+}
+
+.lowerSection {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 20%;
+}
+
+.positionContainer {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    background-color: rgb(15, 31, 75);
+}
+
+.positionButton {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10%;
+    font-size: 1.5rem;
+    font-family: 'Dosis';
+    font-weight: bolder;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: var(--secondary);
+    transition: background-color 0.2s;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-right: 3px solid #ffdcfd;
+}
+
+.selectedButton {
+    cursor: default;
+    background-color: var(--primary);
+}
+
+.selectedButton:hover {
+    background-color: var(--primary) !important;
+}
+
+.positionButton:hover {
+    background-color: var(--accent);
+}
+
+.whiteIcon {
+    filter: brightness(0) invert(1);
+}
+
+.finalButton {
+    height: 100%;
+    width: 20%;
+    background-color: rgb(15, 31, 75);
+}
+
+.errorDiv {
+    display: flex;
+    background-color: rgb(250, 92, 92);
+    font-size: 1.2rem;
+    padding: 0 1%;
+    height: 100%;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
