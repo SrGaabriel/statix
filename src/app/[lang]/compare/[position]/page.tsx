@@ -7,10 +7,11 @@ import { getLeagueName, getPositionPluralName, getStatisticName } from "@/app/ut
 import Image from "next/image";
 import { getClubColors } from "@/app/utils/colors";
 import Link from "next/link";
+import PlayerComparisonModal from "./PlayerComparisonModal";
 
 export default async function Comparison({ params, searchParams }: {
     params: { position: string, lang: string },
-    searchParams: { first: string, second: string, third?: string, league: string }
+    searchParams: { first: string, second: string, third?: string, fourth?: string, league: string }
 }) {
     const dictionary = await getDictionary(params.lang);
     if (!searchParams.first || !searchParams.second) {
@@ -19,13 +20,15 @@ export default async function Comparison({ params, searchParams }: {
     const firstInfo = await getPlayerInfo(searchParams.first);
     const secondInfo = await getPlayerInfo(searchParams.second);
     const thirdInfo = searchParams.third ? await getPlayerInfo(searchParams.third) : null;
-    if (!firstInfo || !secondInfo || (searchParams.third && !thirdInfo)) {
+    const fourthInfo = searchParams.fourth ? await getPlayerInfo(searchParams.fourth) : null;
+    if (!firstInfo || !secondInfo || (searchParams.third && !thirdInfo) || (searchParams.fourth && !fourthInfo)) {
         return (<h1>Invalid search parameters</h1>)
     }
 
     const firstData = await playerProfileFetcher(firstInfo.id, searchParams.league, params.position, "dynamic");
     const secondData = await playerProfileFetcher(secondInfo.id, searchParams.league, params.position, "dynamic");
-    const thirdData = thirdInfo ? await playerProfileFetcher(thirdInfo.id, "top_5", params.position, "dynamic") : null;
+    const thirdData = thirdInfo ? await playerProfileFetcher(thirdInfo.id, searchParams.league, params.position, "dynamic") : null;
+    const fourthData = fourthInfo ? await playerProfileFetcher(fourthInfo.id, searchParams.league, params.position, "dynamic") : null;
 
     const indicators = firstData.values.map((value: any) => ({ text: getStatisticName(dictionary, value.type).toUpperCase(), max: 100 }));
     const getValuesFromData = (data: any) => data.values.map((value: any) => value.value) as number[];
@@ -33,6 +36,7 @@ export default async function Comparison({ params, searchParams }: {
     const firstPlayerValues = getValuesFromData(firstData);
     const secondPlayerValues = getValuesFromData(secondData);
     const thirdPlayerValues = thirdData ? getValuesFromData(thirdData) : undefined;
+    const fourthPlayerValues = fourthData ? getValuesFromData(fourthData) : undefined;
     const sum = sumArrays(firstPlayerValues, secondPlayerValues, thirdPlayerValues || []);
 
     const strengths = []
@@ -87,6 +91,7 @@ export default async function Comparison({ params, searchParams }: {
                                 {makePlayerListElement(firstInfo, 1)}
                                 {makePlayerListElement(secondInfo, 2)}
                                 {thirdInfo && makePlayerListElement(thirdInfo, 3)}
+                                {fourthInfo && makePlayerListElement(fourthInfo, 4)}
                             </ul>
 
                             <h3 className={styles.referenceTitle}>{dictionary.compare.reference}</h3>
@@ -95,25 +100,25 @@ export default async function Comparison({ params, searchParams }: {
                                 {makeReferenceBox(getLeagueName(dictionary, searchParams.league).toUpperCase(), `/leagues/${searchParams.league}.png`)}
                             </div>
 
-                            <h3 className={styles.referenceTitle}>{dictionary.compare.strengths.toUpperCase()}</h3>
-                            <div className={styles.strengthsContainer}>
-                                <span>Click</span>
-                            </div>
+                            <PlayerComparisonModal dictionary={dictionary} type="strengths" color="#2cdb3d"/>
+                            <PlayerComparisonModal dictionary={dictionary} type="weaknesses" color="#ff5959"/>
                         </div>
                     </div>
                 </div>
                 <div className={styles.radarSection}>
                     <PlayerComparisonRadar
-                        names={[firstInfo.name, secondInfo.name, thirdInfo?.name]}
+                        names={[firstInfo.name, secondInfo.name, thirdInfo?.name, fourthInfo?.name]}
                         indicators={indicators}
                         firstPlayerValues={firstPlayerValues}
                         secondPlayerValues={secondPlayerValues}
-                        thirdPlayerValues={thirdPlayerValues}/
-                    >
+                        thirdPlayerValues={thirdPlayerValues}
+                        fourthPlayerValues={fourthPlayerValues}
+                    />
                 </div>
             </main>
         </div>
     )
+
 }
 
 function sumArrays(arr1: number[], arr2: number[], arr3: number[]): number[] {

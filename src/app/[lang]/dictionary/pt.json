@@ -85,7 +85,9 @@
         "add_player": "Adicione um jogador",
         "strengths": "Pontos fortes",
         "weaknesses": "Pontos fracos",
-        "reference": "REFERÊNCIA"
+        "reference": "REFERÊNCIA",
+        "click_to_see_strengths": "Clique para ver e comparar os pontos fortes",
+        "click_to_see_weaknesses": "Clique para ver e comparar os pontos fracos"
     },
     "statistics_data": {
         "shooting_tendency": {

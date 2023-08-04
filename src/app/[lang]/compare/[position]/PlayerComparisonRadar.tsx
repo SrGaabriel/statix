@@ -4,22 +4,23 @@ import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import * as echarts from 'echarts';
 import ReactECharts from 'echarts-for-react';
-import { getClubColors } from "@/app/utils/colors";
 
 interface Properties {
-    names: [string, string, string?],
+    names: [string, string, string?, string?],
     indicators: any,
     firstPlayerValues: any,
     secondPlayerValues: any,
     thirdPlayerValues?: any,
+    fourthPlayerValues?: any
 }
 
 const PlayerComparisonRadar: React.FC<Properties> = ({
-    names: [firstPlayerName, secondPlayerName, thirdPlayerName],
+    names: [firstPlayerName, secondPlayerName, thirdPlayerName, fourthPlayerName],
     indicators,
     firstPlayerValues,
     secondPlayerValues,
-    thirdPlayerValues
+    thirdPlayerValues,
+    fourthPlayerValues
 }) => {
     const [option, setOption] = useState<echarts.EChartsOption>({});
     const [isNarrow, setIsNarrow] = useState<boolean>(false);
@@ -37,13 +38,14 @@ const PlayerComparisonRadar: React.FC<Properties> = ({
     useEffect(() => {
         setOption(createOptions(
             isNarrow,
-            [firstPlayerName, secondPlayerName, thirdPlayerName],
+            [firstPlayerName, secondPlayerName, thirdPlayerName, fourthPlayerName],
             indicators,
             firstPlayerValues,
             secondPlayerValues,
             thirdPlayerValues,
+            fourthPlayerValues
         ));
-    }, [setOption, isNarrow, indicators, firstPlayerName, secondPlayerName, thirdPlayerName, firstPlayerValues, secondPlayerValues, thirdPlayerValues]);
+    }, [setOption, isNarrow, indicators, firstPlayerName, secondPlayerName, thirdPlayerName, fourthPlayerName, fourthPlayerValues, firstPlayerValues, secondPlayerValues, thirdPlayerValues]);
 
     return (
         <div className={styles.playerRadarContainer}>
@@ -56,19 +58,21 @@ const PlayerComparisonRadar: React.FC<Properties> = ({
 
 function createOptions(
     isNarrow: boolean,
-    names: [string, string, string?],
+    names: [string, string, string?, string?],
     indicators: any,
     firstPlayerValues: any,
     secondPlayerValues: any,
-    thirdPlayerValues?: any
+    thirdPlayerValues?: any,
+    fourthPlayerValues?: any
 ): echarts.EChartsOption {
-    const legend = thirdPlayerValues ? [names[0], names[1], names[2]!!] : [names[0], names[1]];
+    const legend = (thirdPlayerValues ? fourthPlayerValues ? names : [names[0], names[1], names[2]] : [names[0], names[1]]) as string[]
     const firstColor = '#1FE06C'
     const secondColor = '#460186'
     const thirdColor = '#E01F93'
+    const fourthColor = "#33b9de"
 
     return {
-        color: thirdPlayerValues ? [firstColor, secondColor, thirdColor] : [firstColor, secondColor],
+        color: [firstColor, secondColor, thirdColor, fourthColor],
         legend: {
           data: legend,
           bottom: 0
@@ -136,6 +140,13 @@ function createOptions(
                 value: thirdPlayerValues,
                 areaStyle: {
                     color: thirdColor
+                }
+              },
+              !fourthPlayerValues ? {} : {
+                name: names[3],
+                value: fourthPlayerValues,
+                areaStyle: {
+                    color: fourthColor
                 }
               }
             ]

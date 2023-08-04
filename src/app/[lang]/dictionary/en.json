@@ -85,7 +85,9 @@
       "add_player": "Add player",
       "strengths": "Strengths",
       "weaknesses": "Weaknesses",
-      "reference": "REFERENCE"
+      "reference": "REFERENCE",
+      "click_to_see_strengths": "Click to see and compare strengths",
+      "click_to_see_weaknesses": "Click to see and compare weaknesses"
   },
   "statistics_data": {
       "shooting_tendency": {

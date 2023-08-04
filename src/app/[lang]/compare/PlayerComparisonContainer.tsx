@@ -46,12 +46,14 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
     }
 
     const makeLink = () => {
-        let link = `./compare/${position}?first=${players[0].id}&second=${players[1].id}&league=${league}`;
-        if (players.length === 3)
+        let link = `./compare/${position}?league=${league}&first=${players[0].id}&second=${players[1].id}`;
+        if (players.length > 2)
             link += `&third=${players[2].id}`;
+        if (players.length > 3)
+            link += `&fourth=${players[3].id}`;
         return link;
     }
-    // 
+
     const hasGoalkeeper = players.some((p) => p.position === 'GK');
     if (hasGoalkeeper && position !== 'goalkeeper') {
         setPosition('goalkeeper');
@@ -59,14 +61,12 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
         setPosition('forward')
     }
 
-    const error = (): string | null => {
-        if (players.length < 2) {
-            return dictionary.compare.add_at_least_two_players;
-        }
-        if (hasGoalkeeper && !players.every((p) => p.position === 'GK')) {
-            return dictionary.compare.goalkeeper_and_outfield_players;
-        }
-        return null;
+    let error: string | null = null;
+    if (players.length < 2) {
+        error = dictionary.compare.add_at_least_two_players;
+    }
+    if (hasGoalkeeper && !players.every((p) => p.position === 'GK')) {
+        error = dictionary.compare.goalkeeper_and_outfield_players;
     }
 
     return (
@@ -108,7 +108,7 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
             </div>
             <div className={styles.lowerSection}>
                 <div className={styles.positionContainer}>
-                    {OUTFIELD_POSITIONS.map((pos) => {
+                    {position !== "goalkeeper" ? OUTFIELD_POSITIONS.map((pos) => {
                         const classNames = pos === position ? `${styles.positionButton} ${styles.selectedButton}` : styles.positionButton;
                         return (
                             <div key={pos} className={classNames} onClick={() => setPosition(pos)}>
@@ -116,12 +116,16 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
                                 <span>{getPositionPluralName(dictionary, pos)}</span>
                             </div>
                         )
-                    })}
+                    }) : (
+                    <div className={`${styles.positionButton} ${styles.selectedButton}`}>
+                        <Image src={`/icons/goalkeeper.png`} alt={`Goalkeeper icon`} className={styles.whiteIcon} width={30} height={30}/>
+                        <span>{dictionary.position.goalkeeper}</span>
+                    </div>)}
                 </div>
                 {!error ? <Link href={makeLink()} className={styles.finalButton}>
                     COMPARE
                 </Link> : <div className={styles.errorDiv}>
-                    {error()}
+                    {error}
                 </div>}
             </div>
         </div>
