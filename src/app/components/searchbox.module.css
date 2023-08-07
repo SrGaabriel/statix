@@ -1,4 +1,5 @@
 .searchBox {
+    position: relative;
     border: none;
     outline: none;
     font-family: 'Roboto';

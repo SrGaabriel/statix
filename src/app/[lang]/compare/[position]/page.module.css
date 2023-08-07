@@ -27,7 +27,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-top: 10%;
+    margin-top: 5%;
     font-family: 'Manrope';
 }
 
@@ -48,8 +48,6 @@
     flex-direction: column;
     margin-top: 4%;
     min-width: 85%;
-    background-color: rgb(210, 210, 210);
-    border-radius: 6px;
 }
 
 .playerListElement {
@@ -59,10 +57,21 @@
     padding-left: 8%;
     border-left: none;
     cursor: pointer;
+    background-color: rgb(210, 210, 210);
 }
 
 .playerListElement:not(:first-child) {
     border-top: 1px solid gray;
+}
+
+.playerListElement:first-child {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.playerListElement:last-child {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 
 .playerListBadge {
@@ -71,12 +80,12 @@
 
 .playerListElement:hover {
     background-color: rgb(180, 180, 180);
-    border-radius: 6px;
 }
 
 .referenceTitle {
     font-family: 'Raleway';
     margin-top: 10%;
+    text-transform: uppercase;
 }
 
 .referenceContainer {
@@ -118,11 +127,6 @@
     height: 65px;
     cursor: pointer;
     transition: box-shadow 0.2s, font-size 0.2s;
-}
-
-.comparisonButton:hover {
-    font-size: 1.05rem;
-    box-shadow: 0 0 5px #000000;
 }
 
 .radarSection {

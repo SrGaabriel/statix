@@ -129,3 +129,20 @@ export const playerProfileFetcher = (id: string, league: string, position: strin
             "Content-Type": "application/json"
         }
     }).then(response => response.json())
+
+export const playerMultipleProfileFetcher = (firstId: string, secondId: string, thirdId: string | undefined, fourthId: string | undefined, league: string, position: string, mode: string): Promise<any> => {
+    let final_url = `${getApi()}/players/compare/${firstId}/${secondId}?position=${position}&league=${league}&type=${mode}`
+    if (thirdId !== undefined) {
+        final_url = final_url.concat(`&third=${thirdId}`)
+        if (fourthId !== undefined) {
+            final_url = final_url.concat(`&fourth=${fourthId}`)
+        }
+    }
+
+    return fetch(final_url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(response => response.json()).then(data => data.players)
+}

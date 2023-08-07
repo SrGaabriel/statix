@@ -1,4 +1,4 @@
-import { getPlayerInfo, playerProfileFetcher } from "@/app/api/player"
+import { getPlayerInfo, playerMultipleProfileFetcher, playerProfileFetcher } from "@/app/api/player"
 import Header from "@/app/components/Header";
 import styles from './page.module.css'
 import PlayerComparisonRadar from "./PlayerComparisonRadar";
@@ -17,38 +17,41 @@ export default async function Comparison({ params, searchParams }: {
     if (!searchParams.first || !searchParams.second) {
         return (<h1>Invalid search parameters</h1>)
     }
-    const firstInfo = await getPlayerInfo(searchParams.first);
-    const secondInfo = await getPlayerInfo(searchParams.second);
-    const thirdInfo = searchParams.third ? await getPlayerInfo(searchParams.third) : null;
-    const fourthInfo = searchParams.fourth ? await getPlayerInfo(searchParams.fourth) : null;
-    if (!firstInfo || !secondInfo || (searchParams.third && !thirdInfo) || (searchParams.fourth && !fourthInfo)) {
-        return (<h1>Invalid search parameters</h1>)
-    }
+    const allPlayersData = await playerMultipleProfileFetcher(
+        searchParams.first,
+        searchParams.second,
+        searchParams.third,
+        searchParams.fourth,
+        searchParams.league,
+        params.position,
+        "dynamic"
+    );
 
-    const firstData = await playerProfileFetcher(firstInfo.id, searchParams.league, params.position, "dynamic");
-    const secondData = await playerProfileFetcher(secondInfo.id, searchParams.league, params.position, "dynamic");
-    const thirdData = thirdInfo ? await playerProfileFetcher(thirdInfo.id, searchParams.league, params.position, "dynamic") : null;
-    const fourthData = fourthInfo ? await playerProfileFetcher(fourthInfo.id, searchParams.league, params.position, "dynamic") : null;
+    const firstPlayerData = allPlayersData[searchParams.first];
+    const secondPlayerData = allPlayersData[searchParams.second];
+    const thirdPlayerData = searchParams.third ? allPlayersData[searchParams.third || ""] : undefined;
+    const fourthPlayerData = searchParams.fourth ? allPlayersData[searchParams.fourth || ""] : undefined;
 
-    const indicators = firstData.values.map((value: any) => ({ text: getStatisticName(dictionary, value.type).toUpperCase(), max: 100 }));
-    const getValuesFromData = (data: any) => data.values.map((value: any) => value.value) as number[];
+    const indicators = []
+    for (const key in firstPlayerData.values) {
+        const value = firstPlayerData.values[key];
+        indicators.push({ text: getStatisticName(dictionary, key).toUpperCase(), max: 100 })
+    };
+    const getValuesFromData = (data: any) => {
+        const values = []
+        for (const key in data.values) {
+            const value = data.values[key];
+            values.push(value)
+        };
+        return values;
+    };
 
-    const firstPlayerValues = getValuesFromData(firstData);
-    const secondPlayerValues = getValuesFromData(secondData);
-    const thirdPlayerValues = thirdData ? getValuesFromData(thirdData) : undefined;
-    const fourthPlayerValues = fourthData ? getValuesFromData(fourthData) : undefined;
+    const firstPlayerValues = getValuesFromData(firstPlayerData);
+    const secondPlayerValues = getValuesFromData(secondPlayerData);
+    const thirdPlayerValues = thirdPlayerData ? getValuesFromData(thirdPlayerData) : undefined;
+    const fourthPlayerValues = fourthPlayerData ? getValuesFromData(fourthPlayerData) : undefined;
     const sum = sumArrays(firstPlayerValues, secondPlayerValues, thirdPlayerValues || []);
 
-    const strengths = []
-    const weaknesses = []
-    for (let i = 0; i < sum.length; i++) {
-        const average_attribute = sum[i]/(thirdInfo ? 3 : 2)
-        if (average_attribute > 80) {
-            strengths.push(indicators[i].text)
-        } else if (average_attribute < 60) {
-            weaknesses.push(indicators[i].text)
-        }
-    }
     const makePlayerListElement = (playerInfo: any, index: number) => {
         const clubColors = getClubColors(playerInfo.club);
         const stripeStyle = {
@@ -88,10 +91,10 @@ export default async function Comparison({ params, searchParams }: {
                         <div className={styles.otherSectionContainerData}>
                             <h3 className={styles.playersTitle}>{dictionary.players}</h3>
                             <ul className={styles.playerList}>
-                                {makePlayerListElement(firstInfo, 1)}
-                                {makePlayerListElement(secondInfo, 2)}
-                                {thirdInfo && makePlayerListElement(thirdInfo, 3)}
-                                {fourthInfo && makePlayerListElement(fourthInfo, 4)}
+                                {makePlayerListElement(firstPlayerData, 1)}
+                                {makePlayerListElement(secondPlayerData, 2)}
+                                {thirdPlayerData && makePlayerListElement(thirdPlayerData, 3)}
+                                {fourthPlayerData && makePlayerListElement(fourthPlayerData, 4)}
                             </ul>
 
                             <h3 className={styles.referenceTitle}>{dictionary.compare.reference}</h3>
@@ -107,7 +110,7 @@ export default async function Comparison({ params, searchParams }: {
                 </div>
                 <div className={styles.radarSection}>
                     <PlayerComparisonRadar
-                        names={[firstInfo.name, secondInfo.name, thirdInfo?.name, fourthInfo?.name]}
+                        names={[firstPlayerData.name, secondPlayerData.name, thirdPlayerData?.name, fourthPlayerData?.name]}
                         indicators={indicators}
                         firstPlayerValues={firstPlayerValues}
                         secondPlayerValues={secondPlayerValues}
@@ -118,7 +121,6 @@ export default async function Comparison({ params, searchParams }: {
             </main>
         </div>
     )
-
 }
 
 function sumArrays(arr1: number[], arr2: number[], arr3: number[]): number[] {

@@ -66,35 +66,38 @@ function createOptions(
     fourthPlayerValues?: any
 ): echarts.EChartsOption {
     const legend = (thirdPlayerValues ? fourthPlayerValues ? names : [names[0], names[1], names[2]] : [names[0], names[1]]) as string[]
-    const firstColor = '#1FE06C'
-    const secondColor = '#460186'
-    const thirdColor = '#E01F93'
-    const fourthColor = "#33b9de"
 
-    return {
-        color: [firstColor, secondColor, thirdColor, fourthColor],
+    const colors = ['#1b1b1b', '#ff7300', '#ffffff', '#5a01a3']
+
+    const object: echarts.EChartsOption = {
+        color: colors,
         legend: {
           data: legend,
+          textStyle: {
+            fontFamily: 'Montserrat',
+            fontSize: isNarrow ? 8 : 14,
+          },
+          itemGap: isNarrow? 30 : 50,
           bottom: 0
         },
         radar: [
           {
             indicator: indicators,
-            startAngle: 90,
-            splitNumber: 8,
+            startAngle: 180,
+            splitNumber: 11,
             radius: isNarrow ? 100 : 300,
             shape: 'circle',
+            zlevel: 0,
             axisName: {
               color: '#333',
               fontSize: isNarrow ? 6 : 15,
               fontFamily: 'Roboto',
               fontWeight: 'bolder',
               padding: isNarrow ? 0 : 15,
-              
             },
             splitArea: {
               areaStyle: {
-                color: ['#8a8a8a', '#c0c0c0' ],
+                color: ['#8a8a8a', '#cacaca' ],
                 shadowColor: 'rgba(0, 0, 0, 0.2)',
                 shadowBlur: 10
               }
@@ -121,38 +124,37 @@ function createOptions(
               }
             },
             data: [
-              {
-                name: names[0],
-                value: firstPlayerValues,
-                areaStyle: {
-                  color: firstColor
-                }
-              },
-              {
-                name: names[1],
-                value: secondPlayerValues,
-                areaStyle: {
-                  color: secondColor
-                }
-              },
-              !thirdPlayerValues ? {} : {
-                name: names[2],
-                value: thirdPlayerValues,
-                areaStyle: {
-                    color: thirdColor
-                }
-              },
-              !fourthPlayerValues ? {} : {
-                name: names[3],
-                value: fourthPlayerValues,
-                areaStyle: {
-                    color: fourthColor
-                }
-              }
             ]
           }
         ]
     };
+
+    const addDataToSeries = (name: string, value: any, color: string) => {
+        // @ts-ignore
+        object.series[0].data.push({
+            name: name,
+            value: value,
+            symbol: 'none',
+            areaStyle: {
+              color: color
+            }
+        })
+    }
+
+    const firstColor = '#1b1b1b'
+    const secondColor = '#ff7300'
+    const thirdColor = '#fffb00'
+    const fourthColor = "#5a01a3"
+    addDataToSeries(names[0], firstPlayerValues, '#1b1b1b')
+    addDataToSeries(names[1], secondPlayerValues, '#ff730071')
+    if (thirdPlayerValues) {
+        addDataToSeries(names[2]!!, thirdPlayerValues, '#ffffff86')
+        if (fourthPlayerValues) {
+            addDataToSeries(names[3]!!, fourthPlayerValues, '#5a01a371')
+        }
+    }
+
+    return object;
 }
 
 export default PlayerComparisonRadar;

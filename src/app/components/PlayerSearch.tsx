@@ -20,8 +20,8 @@ interface Properties extends HTMLAttributes<HTMLDivElement> {
 const SearchBox: React.FC<Properties> = ({ dictionary, width = '400px', height = '200px', style = {}, resultTrigger = undefined }) => {
   	const [searchTerm, setSearchTerm] = useState('');
   	const isSearchAvailable = searchTerm.length > 3
-  	const debouncedSearch = useDebounce(searchTerm, 500)
-  	const { data, error, isLoading } = useSWR(isSearchAvailable && debouncedSearch ? `${searchTerm}` : null, playerSuggestionsFetcher);
+  	const debouncedSearchTerm = useDebounce(searchTerm, 500)
+  	const { data, error, isLoading } = useSWR(isSearchAvailable ? `${debouncedSearchTerm}` : null, playerSuggestionsFetcher);
 
 	function renderSuggestions() {
 		if (isLoading || (!data && !error)) {
@@ -70,7 +70,7 @@ const SearchBox: React.FC<Properties> = ({ dictionary, width = '400px', height =
 
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     	event.target.value = event.target.value.toUpperCase();
-    	const value = event.target.value;
+    	const value = removeAccents(event.target.value).replace(/[^a-zA-Z ]/g, "");
     	setSearchTerm(value);
   	};
 
