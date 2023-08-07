@@ -215,8 +215,10 @@
     text-align: center;
     padding: 0 5%;
     margin-top: 6%;
-    font-size: 28px;
+    font-size: 32px;
+    line-height: 35.2px;
     width: 100%;
+    font-family: 'Montserrat';
 }
 
 .playerStatisticRatingSection {
@@ -231,11 +233,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Montserrat';
     font-weight: 1000;
     font-size: 750%;
-    padding: 30%;
-    width: 50%;
-    height: 50%;
+    aspect-ratio: 1/1;
+    height: 90%;
     border-radius: 100%;
     color: var(--grade-color);
     border: 20px solid var(--grade-color);

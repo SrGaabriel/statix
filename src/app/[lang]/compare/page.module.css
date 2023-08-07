@@ -65,7 +65,7 @@
     border-radius: 100%;
     width: 50%;
     color: var(--background);
-    font-size: 3rem;
+    font-size: 5rem;
     background-color: transparent;
     border: 5px solid #ffdcfd;
     cursor: pointer;
@@ -73,8 +73,8 @@
 }
 
 .addPlayerButton:hover {
-    width: 55%;
-    font-size: 4rem;
+    width: 60%;
+    font-size: 6rem;
 }
 
 .playerCardModel:not(:first-child) {

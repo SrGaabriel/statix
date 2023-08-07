@@ -97,9 +97,12 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
                 <div className={styles.leaguesContainer}>
                     {leagues.map((mappingLeague) => {
                         const classNames = mappingLeague === league ? `${styles.leagueButton} ${styles.selectedButton}` : styles.leagueButton;
+                        const imageStyle = mappingLeague == "top_5" ? {
+                            filter: 'brightness(0) invert(1)'
+                        } : {}
                         return (
                             <div key={mappingLeague} className={classNames} onClick={() => setLeague(mappingLeague)}>
-                                <Image src={`/leagues/${mappingLeague}.png`} alt={`${mappingLeague} icon`} width={30} height={30} />
+                                <Image src={`/leagues/${mappingLeague}.png`} alt={`${mappingLeague} icon`} width={30} height={30} style={imageStyle}/>
                                 <span>{getLeagueName(dictionary, mappingLeague)}</span>
                             </div>
                         )
