@@ -3,7 +3,7 @@ import Header from "@/app/components/Header";
 import styles from './page.module.css'
 import PlayerComparisonRadar from "./PlayerComparisonRadar";
 import { getDictionary } from "../../dictionary/dictionaries";
-import { getLeagueName, getPositionPluralName, getStatisticName } from "@/app/utils/naming";
+import { getLeagueName, getPositionPluralName, getShortenedStatisticName, getStatisticName } from "@/app/utils/naming";
 import Image from "next/image";
 import { getClubColors } from "@/app/utils/colors";
 import Link from "next/link";
@@ -35,7 +35,7 @@ export default async function Comparison({ params, searchParams }: {
     const indicators = []
     for (const key in firstPlayerData.values) {
         const value = firstPlayerData.values[key];
-        indicators.push({ text: getStatisticName(dictionary, key).toUpperCase(), max: 100 })
+        indicators.push({ text: getShortenedStatisticName(dictionary, key).toUpperCase(), max: 100 })
     };
     const getValuesFromData = (data: any) => {
         const values = []

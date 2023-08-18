@@ -12,16 +12,16 @@
 
 .playerDataColumn {
     color: var(--text);
-    margin-top: 3%;
-    margin-right: 3%;
+    margin: 1% 0;
+    margin-right: 2%;
     display: flex;
     text-align: center;
-    width: 550px;
-    padding: 1%;
+    width: 525px;
     border-radius: 16px;
     background-color: #323d6c9a;
     border: 5px solid #1a1a1a;
     height: 80%;
+    padding: 1% 0;
     transition: box-shadow 0.2s ease-in-out;
 }
 
@@ -36,8 +36,13 @@
     text-align: center;
     color: var(--background);
     width: 100%;
-    margin-top: 2%;
-    padding: 0 3%;
+    padding: 2% 5%;
+}
+
+.playerName {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 150%;
+    text-transform: uppercase;
 }
 
 .playerBasicStats {
@@ -57,7 +62,7 @@
     border: 7px solid #1a1a1a;
     border-radius: 100%;
     aspect-ratio: 1/1;
-    margin: 10% 18%;
+    margin: 10% 30%;
     background-color: var(--background);
     overflow: hidden;
 }
@@ -74,7 +79,6 @@
     flex-wrap: wrap;
     height: 10%;
     margin: 5% 0;
-    margin-bottom: 5%;
     border: 3px solid rgb(34, 34, 34);
 }
 
@@ -89,8 +93,8 @@
     color: var(--text);
     height: 60px;
     width: 33.32%;
+    font-size: 11px;
     padding: 0 2%;
-    border-radius: 0;
     cursor: pointer;
     border: none;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
@@ -102,8 +106,8 @@
 
 .playerStatsSection {
     margin-top: 2%;
-    margin-left: 4%;
     display: flex;
+    padding: 0 3%;
     flex-direction: column;
     width: 100%;
     height: 95vh;
@@ -122,7 +126,6 @@
     flex-direction: column;
     flex-wrap: wrap;
     height: auto;
-    width: 95%;
 }
 
 .playerStatsHeaders {
@@ -143,6 +146,7 @@
     border-right: 1px solid rgb(206, 205, 205);
     height: 100%;
     width: 100%;
+    font-size: 90%;
     cursor: pointer;
     background-color: var(--secondary);
     transition: background-color 0.2s ease-in-out;
@@ -192,14 +196,19 @@
     cursor: pointer;
     flex-direction: column;
     align-items: center;
-    height: 400px;
-    width: 400px;
-    transition: box-shadow 0.25s ease-in-out, background-image 0.5s ease-in-out;
+    width: 310px;
+    height: 310px;
+    aspect-ratio: 1/1;
+    transition: all 0.25s ease-in-out;
     border: double 6px transparent;
     background-image: linear-gradient(white, white), linear-gradient(black, black);
     border-radius: 30px;
     background-origin: border-box;
     background-clip: content-box, border-box;
+}
+
+.playerStatisticContainer:hover {
+    transform: scale(1.05);
 }
 
 .playerStatisticContainer:hover {
@@ -215,8 +224,7 @@
     text-align: center;
     padding: 0 5%;
     margin-top: 6%;
-    font-size: 32px;
-    line-height: 35.2px;
+    font-size: 24px;
     width: 100%;
     font-family: 'Montserrat';
 }
@@ -225,8 +233,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 95%;
-    height: 300px;
+    width: 100%;
+    height: 100%;
 }
 
 .playerStatisticRating {
@@ -235,12 +243,12 @@
     justify-content: center;
     font-family: 'Montserrat';
     font-weight: 1000;
-    font-size: 750%;
+    font-size: 525%;
+    height: 190px;
     aspect-ratio: 1/1;
-    height: 90%;
     border-radius: 100%;
     color: var(--grade-color);
-    border: 20px solid var(--grade-color);
+    border: 16px solid var(--grade-color);
 }
 
 .playerStatisticModal {
@@ -250,7 +258,7 @@
     top: 50%;
     border: 0;
     width: 30%;
-    min-height: 50%;
+    min-height: 50vh;
     transform: translate(-50%, -50%);
     border: double 6px transparent;
     border-radius: 25px;
@@ -262,7 +270,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 5%;
+    margin-top: 8%;
     width: 100%;
 }
 
@@ -273,6 +281,7 @@
     text-align: center;
     width: 100%;
     flex: 1 0 auto;
+    font-size: 22px;
     padding: 0 15%;
 }
 
@@ -309,6 +318,9 @@
     margin-top: 10%;
     margin-left: 10%;
     width: 85%;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 110%;
 }
 
 .playerStatisticModalContainer {
@@ -321,6 +333,11 @@
     flex-direction: column;
     margin-top: 10%;
     margin-left: 15%;
+}
+
+.playerStatisticModalRankingName {
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .playerStatisticModalRankingList {
@@ -341,6 +358,10 @@
     box-sizing: border-box;
     font-size: 100%;
     cursor: pointer;
+}
+
+.playerStatisticModalRankingListElementLink:last-child {
+    border-radius: 0 0 10px 10px;
 }
 
 .playerStatisticModalRankingListElementLink {

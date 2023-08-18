@@ -200,6 +200,7 @@
         },
         "touches_per_90": {
             "label": "Toques na bola por 90 minutos",
+            "short": "Toques/90",
             "explanation": "O número médio de toques na bola por 90 minutos. Representa o envolvimento do jogador no jogo e a frequência de suas interações com a bola."
         },
         "received_passes": {
@@ -216,14 +217,17 @@
         },
         "defensive_third_touches": {
             "label": "Toques na bola no campo defensivo",
+            "short": "Toques na defesa",
             "explanation": "O número de toques na bola na terceira parte defensiva do campo. Representa o envolvimento do jogador na construção defensiva e circulação da bola na zona defensiva."
         },
         "mid_third_touches": {
             "label": "Toques na bola no meio-campo",
+            "short": "Toques no meio-campo",
             "explanation": "O número de toques na bola na terceira parte central do campo. Reflete o envolvimento do jogador na construção de jogadas e circulação da bola na área do meio-campo."
         },
         "attacking_third_touches": {
             "label": "Toques na bola no ataque",
+            "short": "Toques no ataque",
             "explanation": "O número de toques na bola na terceira parte ofensiva do campo. Indica o envolvimento do jogador no ataque da equipe e sua presença na zona defensiva do adversário."
         },
         "directness": {

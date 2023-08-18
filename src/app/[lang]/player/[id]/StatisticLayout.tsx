@@ -84,8 +84,8 @@ const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isP
                                     className={styles.playerBadge}
                                     src={playerInfo.has_image ? `https://www.sportsbase.io/images/people/${playerInfo.base_id}.png` : `/badges/${playerInfo.club}.png`}
                                     alt={`${playerInfo.club} badge`}
-                                    width={180}
-                                    height={180}
+                                    width={100}
+                                    height={100}
                                 />
                             </div>
                             <div className={styles.playerBasicStats}>

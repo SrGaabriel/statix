@@ -69,12 +69,11 @@
     background-color: transparent;
     border: 5px solid #ffdcfd;
     cursor: pointer;
-    transition: width 0.2s, font-size 0.2s;
+    transition: all 0.2s;
 }
 
 .addPlayerButton:hover {
-    width: 60%;
-    font-size: 6rem;
+    transform: scale(1.1);
 }
 
 .playerCardModel:not(:first-child) {

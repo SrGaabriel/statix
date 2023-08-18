@@ -85,7 +85,7 @@ function createOptions(
             indicator: indicators,
             startAngle: 180,
             splitNumber: 11,
-            radius: isNarrow ? 100 : 300,
+            radius: isNarrow ? 100 : 280,
             shape: 'circle',
             zlevel: 0,
             axisName: {
