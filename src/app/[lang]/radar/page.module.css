@@ -23,19 +23,14 @@
     position: relative;
     width: 600px;
     aspect-ratio: 1/1;
-    background-color: black;
     border-radius: 50%;
 }
 
 .radarPoint {
     position: absolute;
-    top: -5px;
-    left: calc(50% - 10px);
-    width: 10px;
-    height: 10px;
     border-radius: 50%;
     background-color: green;
-    transform: translate(50%, 50%);
+    transition: all 0.5s ease;
 }
 
 .radarSteps {
@@ -50,10 +45,24 @@
 .radarStep {
     position: absolute;
     aspect-ratio: 1/1;
-    border: 20px solid blueviolet;
     border-radius: 100%;
 }
 
-.radarStep:nth-child(2) {
-    border: 20px solid blue;
+.radarLines {
+    position: absolute;
+    width: 100%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.radarLine {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 600px;
+    height: 1.5px;
+    background-color: white;
 }
