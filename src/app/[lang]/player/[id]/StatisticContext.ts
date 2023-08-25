@@ -10,6 +10,7 @@ export interface State {
     statisticType: string,
     dictionary: any,
     fullView: boolean,
+    ratingMode: boolean,
     dynamicMode: boolean
 };
 
@@ -38,6 +39,8 @@ export function reducer(state: State, action: Action): State {
             return { ...state, statisticType: action.payload };
         case 'SET_FULL_VIEW_MODE':
             return { ...state, fullView: action.payload };
+        case 'SET_RATING_MODE':
+            return { ...state, ratingMode: action.payload };
         case 'SET_DYNAMIC_MODE':
             return { ...state, dynamicMode: action.payload };
         default:

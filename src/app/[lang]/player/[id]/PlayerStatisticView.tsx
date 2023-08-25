@@ -22,6 +22,7 @@ const PlayerStatisticView: React.FC<Properties> = ({playerInfo, league, position
         statisticType,
         dictionary,
         fullView: true,
+        ratingMode: true,
         dynamicMode: true
     });
     const dataRequest = useSWR(statisticState.statisticType != 'profile' ? `/api/${playerInfo.id}/${statisticState.position}/${statisticState.league}` : null, () => playerDataFetcher(playerInfo.id, statisticState.position, statisticState.league), {

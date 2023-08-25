@@ -70,6 +70,7 @@
         "playmaking": "Criatividade",
         "passing": "Passe",
         "defending": "Defesa",
+        "superstitions": "Superstições",
         "overall": "Geral",
         "shot_stopping": "Reflexos",
         "distribution": "Distribuição",
@@ -235,7 +236,7 @@
             "explanation": "A porcentagem de passes que são realizados diretamente em direção ao alvo. Reflete a tendência do jogador em realizar passes rápidos e diretos em vez de passes laterais ou para trás."
         },
         "passes_per_90": {
-            "label": "Passes cada 90 minutos",
+            "label": "Frequência dos passes",
             "explanation": "O número médio de passes completos por 90 minutos. Representa o envolvimento do jogador no jogo de passes da equipe e seu volume de passes."
         },
         "accuracy": {
@@ -370,6 +371,42 @@
         "fouling_tendency": {
             "label": "Tendência a cometer faltas",
             "explanation": "O número médio de faltas cometidas por um jogador por 90 minutos. Indica com que frequência um jogador comete faltas durante as partidas."
+        },
+        "points_per_appearance": {
+            "label": "Pontos por jogo",
+            "explanation": "O número médio de pontos conquistados por um jogador por partida. Reflete a contribuição do jogador para o desempenho da equipe."
+        },
+        "goals_on_pitch": {
+            "label": "Goals em campo",
+            "explanation": "O número de gols marcados por um time enquanto um jogador está em campo. Representa a contribuição do jogador para o ataque da equipe e a produção de gols."
+        },
+        "goals_against_on_pitch": {
+            "label": "Goals sofridos em campo",
+            "explanation": "O número de gols sofridos por um time enquanto um jogador está em campo. Reflete a contribuição do jogador para a defesa da equipe e a prevenção de gols."
+        },
+        "goal_difference_on_pitch": {
+            "label": "Saldo de gols médio em campo",
+            "explanation": "A média da diferença entre os gols marcados e os gols sofridos por um time enquanto um jogador está em campo. Quantifica a contribuição geral do jogador para o desempenho da equipe."
+        },
+        "net_goals_on_pitch": {
+            "label": "Saldo de gols total em campo",
+            "explanation": "A diferença total entre os gols marcados e os gols sofridos por um time enquanto um jogador está em campo. Quantifica a contribuição geral do jogador para o desempenho da equipe."
+        },
+        "expected_goals_on_pitch": {
+            "label": "xG do time em campo",
+            "explanation": "O número de gols esperados marcados por um time enquanto um jogador está em campo. Representa a contribuição do jogador para o ataque da equipe e a produção de gols com base nos resultados esperados."
+        },
+        "expected_goals_against_on_pitch": {
+            "label": "xGA do time em campo",
+            "explanation": "O número de gols esperados sofridos por um time enquanto um jogador está em campo. Reflete a contribuição do jogador para a defesa da equipe e a prevenção de gols com base nos resultados esperados."
+        },
+        "expected_goal_difference_on_pitch": {
+            "label": "TSaldo de xG médio em campo"
+            
+        },
+        "expected_net_goals_on_pitch": {
+            "label": "Team net XG on pitch",
+            "explanation": "The difference between the expected goals scored and the expected goals conceded by a team while a player is on the pitch. It quantifies the player's overall contribution to the team's performance based on the expected outcomes."
         },
         "goals_against_per_90": {
             "label": "Capacidade defensiva do time",

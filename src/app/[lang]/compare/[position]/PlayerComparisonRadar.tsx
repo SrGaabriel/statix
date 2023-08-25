@@ -80,6 +80,9 @@ function createOptions(
           itemGap: isNarrow? 30 : 50,
           bottom: 0
         },
+        grid: {
+          containLabel: true,
+        },
         radar: [
           {
             indicator: indicators,
@@ -93,7 +96,7 @@ function createOptions(
               fontSize: isNarrow ? 6 : 15,
               fontFamily: 'Roboto',
               fontWeight: 'bolder',
-              padding: isNarrow ? 0 : 15,
+              padding: isNarrow ? 0 : 30
             },
             splitArea: {
               areaStyle: {
@@ -120,7 +123,7 @@ function createOptions(
             type: 'radar',
             emphasis: {
               lineStyle: {
-                width: 10
+                width: 5
               }
             },
             data: [
@@ -134,9 +137,12 @@ function createOptions(
         object.series[0].data.push({
             name: name,
             value: value,
-            symbol: 'none',
+            symbol: 'none',            
             areaStyle: {
               color: color
+            },
+            lineStyle: {
+              width: 0
             }
         })
     }
@@ -146,11 +152,11 @@ function createOptions(
     const thirdColor = '#fffb00'
     const fourthColor = "#5a01a3"
     addDataToSeries(names[0], firstPlayerValues, '#1b1b1b')
-    addDataToSeries(names[1], secondPlayerValues, '#ff730071')
+    addDataToSeries(names[1], secondPlayerValues, '#ff7300')
     if (thirdPlayerValues) {
-        addDataToSeries(names[2]!!, thirdPlayerValues, '#ffffff86')
+        addDataToSeries(names[2]!!, thirdPlayerValues, '#ffffff')
         if (fourthPlayerValues) {
-            addDataToSeries(names[3]!!, fourthPlayerValues, '#5a01a371')
+            addDataToSeries(names[3]!!, fourthPlayerValues, '#5a01a3')
         }
     }
 

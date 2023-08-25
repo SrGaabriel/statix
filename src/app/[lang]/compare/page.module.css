@@ -65,7 +65,7 @@
     border-radius: 100%;
     width: 50%;
     color: var(--background);
-    font-size: 5rem;
+    font-size: 500%;
     background-color: transparent;
     border: 5px solid #ffdcfd;
     cursor: pointer;

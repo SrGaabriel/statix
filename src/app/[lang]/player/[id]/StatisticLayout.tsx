@@ -1,12 +1,10 @@
 'use client'
 
 import styles from './page.module.css'
-import { getCountryEmoji } from '@/app/utils/emojis';
 import Header from '@/app/components/Header';
 import Image from 'next/image';
 import Link from 'next/link';
-import { OUTFIELD_POSITIONS, getLeagueName, getPositionNameById, getPositionPluralName, getStatisticName } from '@/app/utils/naming';
-import DropdownMenu from '@/app/components/DropdownMenu';
+import { OUTFIELD_POSITIONS, getStatisticName } from '@/app/utils/naming';
 import React, { Dispatch, HTMLAttributes, useEffect, useState, useRef } from 'react';
 import { Action, useStatisticContext } from './StatisticContext';
 import PlayerStatistic from './PlayerStatistic';
@@ -20,19 +18,22 @@ interface Properties extends HTMLAttributes<HTMLDivElement> {
 
 const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isProfile=false}) => {
     const { state, dispatch } = useStatisticContext();
-    const { playerInfo, league, position, statisticType, fullView, dynamicMode, dictionary } = state;
+    const { playerInfo, league, position, statisticType, fullView, ratingMode, dynamicMode, dictionary } = state;
     const [localFullView, setLocalFullView] = useState(fullView);
-    const [localDynamicMode, setDynamicMode] = useState(fullView);
-    const [clickedDropdown, setClickedDropdown] = useState<string | null>(null);
+    const [localRatingMode, setLocalRatingMode] = useState(ratingMode);
+    const [localDynamicMode, setLocalDynamicMode] = useState(dynamicMode);
 
     useEffect(() => {
         if (localFullView != fullView) {
             dispatch({ type: 'SET_FULL_VIEW_MODE', payload: localFullView });
         }
+        if (localRatingMode != ratingMode) {
+            dispatch({ type: 'SET_RATING_MODE', payload: localRatingMode });
+        }
         if (localDynamicMode != dynamicMode) {
             dispatch({ type: 'SET_DYNAMIC_MODE', payload: localDynamicMode });
         }
-    }, [localFullView, dispatch, fullView, localDynamicMode, dynamicMode]);
+    }, [localFullView, dispatch, fullView, localDynamicMode, dynamicMode, localRatingMode, ratingMode]);
 
     const positions = OUTFIELD_POSITIONS.filter(pos => pos !== position);
     const leagues = ['premier_league', 'ligue_1', 'serie_a', 'bundesliga', 'la_liga', 'brasileirao', 'top_5'].filter(nleague => league !== nleague);
@@ -65,8 +66,9 @@ const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isP
         const dataset = playerData[statisticType]
         statistics = [];
         for (const key in dataset) {
+            const statistic = dataset[key];
             statistics.push(
-                (<PlayerStatistic stat={key} label={getStatisticName(dictionary, key)} value={dataset[key]}/>)
+                (<PlayerStatistic stat={key} label={getStatisticName(dictionary, key)} value={statistic.value} percentage={statistic.percentage}/>)
             )
         }
     }
@@ -84,8 +86,8 @@ const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isP
                                     className={styles.playerBadge}
                                     src={playerInfo.has_image ? `https://www.sportsbase.io/images/people/${playerInfo.base_id}.png` : `/badges/${playerInfo.club}.png`}
                                     alt={`${playerInfo.club} badge`}
-                                    width={100}
-                                    height={100}
+                                    width={140}
+                                    height={140}
                                 />
                             </div>
                             <div className={styles.playerBasicStats}>
@@ -104,10 +106,9 @@ const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isP
                 <div className={styles.playerStatsSection}>
                     <div className={styles.playerStatsUpperSection}>
                         {getHeaderButtons(playerInfo.id, statisticType, position, dictionary, dispatch)}
-                        {statisticType == "profile"
-                            ? createModeToggle(dictionary.statistics.dynamic.toUpperCase(), dictionary.statistics.absolute.toUpperCase(), dynamicMode, setDynamicMode)
-                            : createModeToggle(dictionary.statistics.standard.toUpperCase(), dictionary.statistics.compact.toUpperCase(), localFullView, setLocalFullView)
-                        }
+                        <div className={styles.playerStatsUpperSectionSecondRow}>
+                            {getModeToggles()}
+                        </div>
                     </div>
                     <div className={styles.playerStatisticsContainer}>
                         {statistics}
@@ -116,6 +117,18 @@ const StatisticLayout: React.FC<Properties> = ({playerData, isLoading=false, isP
             </main>
         </div>
     )
+    function getModeToggles() {
+        if (statisticType == "profile") {
+            return <>
+                {createModeToggle(dictionary.statistics.ratings.toUpperCase(), dictionary.statistics.values.toUpperCase(), localDynamicMode, setLocalDynamicMode)}
+            </>
+        }
+
+        return <>
+            {createModeToggle(dictionary.statistics.standard.toUpperCase(), dictionary.statistics.compact.toUpperCase(), localFullView, setLocalFullView)}
+            {createModeToggle(dictionary.statistics.ratings.toUpperCase(), dictionary.statistics.values.toUpperCase(), localRatingMode, setLocalRatingMode)}
+        </>
+    }
 }
 
 function createPositionBlock(dictionary: any, position: string, dispatch: Dispatch<Action>) {
@@ -180,6 +193,7 @@ function getHeaderButtons(id: string, currentStatType: string, position: string,
                 {createButton("shot-stopping", dictionary.statistics.shot_stopping)}
                 {createButton("distribution", dictionary.statistics.distribution)}
                 {createButton("sweeping", dictionary.statistics.sweeping)}
+                {createButton("superstitions", dictionary.statistics.superstitions)}
                 <Link href={{ pathname: `/${dictionary.code}/compare`, query: { first: id } }} className={`${styles.playerStatsHeaderButton} ${styles.compareHeaderButton}`}>
                     <button className={`${styles.playerStatsHeaderButtonText} ${styles.compareHeaderButtonText}`}>{dictionary.statistics.compare}</button>
                 </Link>
@@ -195,6 +209,7 @@ function getHeaderButtons(id: string, currentStatType: string, position: string,
             {createButton("possession", dictionary.statistics.possession)}
             {createButton("passing", dictionary.statistics.passing)}
             {createButton("defending", dictionary.statistics.defending)}
+            {createButton("superstitions", dictionary.statistics.superstitions)}
             <Link href={{ pathname: `/${dictionary.code}/compare`, query: { first: id } }} className={`${styles.playerStatsHeaderButton} ${styles.compareHeaderButton}`}>
                 <button className={`${styles.playerStatsHeaderButtonText} ${styles.compareHeaderButtonText}`}>{dictionary.statistics.compare}</button>
             </Link>

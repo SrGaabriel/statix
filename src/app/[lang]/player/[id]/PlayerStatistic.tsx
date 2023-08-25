@@ -10,19 +10,20 @@ import useSWR from 'swr';
 import Loading from '@/app/components/Loading';
 import Link from 'next/link';
 import { useStatisticContext } from './StatisticContext';
-import { getStatisticExplanation } from '@/app/utils/naming';
+import { getStatisticExplanation, getStatisticMeasure } from '@/app/utils/naming';
 
 interface Properties extends HTMLAttributes<HTMLDivElement> {
     stat: string,
     label: string,
-    value: number
+    value: number,
+    percentage: number
 }
 
-const PlayerStatistic: React.FC<Properties> = ({ stat, label, value }) => {
+const PlayerStatistic: React.FC<Properties> = ({ stat, label, value, percentage }) => {
     const context = useStatisticContext();
     const {state} = context;
-    const { playerInfo, league, position, statisticType, fullView, dictionary } = state;
-    const color = getGradeColor(convertPercentageToLetter(value))
+    const { playerInfo, league, position, statisticType, fullView, ratingMode, dictionary } = state;
+    const color = getGradeColor(convertPercentageToLetter(percentage))
     const [buttonClicked, setButtonClicked] = useState(false);
     const { data, error, isLoading } = useSWR(buttonClicked ? `/api/${playerInfo.id}/${position}/${league}/${statisticType}/${stat}` : null, () => statisticRankFetcher(playerInfo.id, position, league, statisticType, stat), {
         revalidateOnFocus: false,
@@ -45,12 +46,8 @@ const PlayerStatistic: React.FC<Properties> = ({ stat, label, value }) => {
           <ul className={styles.playerStatisticModalRankingList}>
             {data.ranking.map(player => {
                 if (player.id === playerInfo.id) {
-                    const borderRadius = player.rank === 1 ? '10px 10px 0 0' : player.rank === 4 ? '0 0 10px 10px' : '0';
-                    const borderRadiusStyle: any = {
-                        borderRadius
-                    }
                     return (
-                        <p key="ownuser-ranking" className={`${styles.playerStatisticModalRankingListElementLink} ${styles.playerStatisticModalRankingListElementLinkOwn}`} style={borderRadiusStyle}>
+                        <p key="ownuser-ranking" className={`${styles.playerStatisticModalRankingListElementLink} ${styles.playerStatisticModalRankingListElementLinkOwn}`}>
                             {player.rank}. {getCountryEmoji(player.nation)} {player.name} {player.value.toFixed(2)}
                         </p>
                     )
@@ -65,19 +62,37 @@ const PlayerStatistic: React.FC<Properties> = ({ stat, label, value }) => {
           </ul>
         );
     }
-    const clubColors = getClubColors(playerInfo.club);
-    const gradientStyle: any = {
-        '--gradient': `linear-gradient(white, white), linear-gradient(90deg, ${clubColors.primary}, ${clubColors.secondary})`,
-        '--grade-color': color
-    }
+
     const closeModal = () => {
         const dialog = (document.getElementById(`${label}${stat}`) as HTMLDialogElement);
         dialog.close();
     }
+    const display = ratingMode ? convertPercentageToLetter(percentage) : (Number.isInteger(value) ? Math.round(value) : value.toFixed(1));
+    const statisticLabel = (ratingMode ? label : getStatisticMeasure(dictionary, stat)) ?? label;
+    const clubColors = getClubColors(playerInfo.club);
 
+    const calculateDisplayFontSize = () => {
+        // calculates font size depending on the length of the display string
+        const length = display.toString().length;
+        const initialValue = fullView ? 600 : 180;
+        const lengthFactor = fullView ? 20 : 10;
+        const fontSize = initialValue - (length * lengthFactor);
+        return `${fontSize}%`;
+    }
+
+    const gradientStyle: any = {
+        '--gradient': `linear-gradient(white, white), linear-gradient(90deg, ${clubColors.primary}, ${clubColors.secondary})`,
+        '--grade-color': color,
+    }
+    const ratingStyle: any = {
+        '--grade-color': color,
+        fontSize: calculateDisplayFontSize()
+    }
+
+    const statisticStylesheet = fullView ? styles.playerStatistic : styles.compactPlayerStatistic;
     return (
-        <div className={styles.playerStatistic}>
-            <div onClick={() => {
+        <div className={statisticStylesheet}>
+            <div className={styles.actualPlayerStatistic} onClick={() => {
                 let dialog = (document.getElementById(`${label}${stat}`) as HTMLDialogElement);
                 if (dialog.open)
                     return;
@@ -109,10 +124,10 @@ const PlayerStatistic: React.FC<Properties> = ({ stat, label, value }) => {
         return (
             <div className={styles.playerStatisticContainer} style={gradientStyle}>
                 <div className={styles.playerStatisticLabelSection}>
-                    <h1 className={styles.playerStatisticLabel}>{label.toUpperCase()}</h1>
+                    <h1 className={styles.playerStatisticLabel}>{statisticLabel.toUpperCase()}</h1>
                 </div>
                 <div className={styles.playerStatisticRatingSection}>
-                    <h1 className={`${styles.playerStatisticRating} ${styles.unselectable}`} style={gradientStyle}>{convertPercentageToLetter(value)}</h1>
+                    <h1 className={`${styles.playerStatisticRating} ${styles.unselectable}`} style={ratingStyle}>{display}</h1>
                 </div>
             </div>
         )
@@ -120,11 +135,12 @@ const PlayerStatistic: React.FC<Properties> = ({ stat, label, value }) => {
     function renderCompact() {
         return (
             <div className={styles.compactPlayerStatisticContainer} style={gradientStyle}>
-                <h1 className={styles.compactPlayerStatisticLabel}>{label.toUpperCase()}</h1>
-                <h1 className={`${styles.compactPlayerStatisticRating} ${styles.unselectable}`} style={{color: `${color}`, border:`10px solid ${color}`}}>{convertPercentageToLetter(value)}</h1>
+                <h1 className={styles.compactPlayerStatisticLabel}>{statisticLabel.toUpperCase()}</h1>
+                <h1 className={`${styles.compactPlayerStatisticRating} ${styles.unselectable}`} style={ratingStyle}>{display}</h1>
             </div>
         )
     }
+    
 }
 
 export default PlayerStatistic;

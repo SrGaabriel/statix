@@ -34,7 +34,6 @@ export default async function Comparison({ params, searchParams }: {
 
     const indicators = []
     for (const key in firstPlayerData.values) {
-        const value = firstPlayerData.values[key];
         indicators.push({ text: getShortenedStatisticName(dictionary, key).toUpperCase(), max: 100 })
     };
     const getValuesFromData = (data: any) => {

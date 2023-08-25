@@ -101,6 +101,11 @@ export function getShortenedStatisticName(dictionary: any, statistic: string): s
     return statisticData.short ? statisticData.short : statisticData.label;
 }
 
+export function getStatisticMeasure(dictionary: any, statistic: string): string {
+    const statisticData = dictionary.statistics_data[statistic];
+    return statisticData.stat ?? statisticData.label;
+}
+
 export function getStatisticExplanation(dictionary: any, statistic: string): string {
     return dictionary.statistics_data[statistic].explanation;
 }

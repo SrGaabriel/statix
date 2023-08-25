@@ -5,6 +5,7 @@ import styles from './header.module.css'
 import React, { HTMLAttributes } from 'react'
 import SearchBox from './PlayerSearch'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { getLanguageEmoji } from '../utils/naming'
 
 interface Properties extends HTMLAttributes<HTMLDivElement> {
     dictionary: any,
@@ -22,7 +23,7 @@ const Header: React.FC<Properties> = ({dictionary, style = {}}) => {
                 <div className={styles.headerSide}>
                     {makeHeaderLabel(dictionary.code, 'Home', '/')}
                     {makeHeaderLabel(dictionary.code, dictionary.statistics.compare, '/compare')}
-                    {makeHeaderLabel(dictionary.code, 'F.A.Q', '/faq')}
+                    {makeHeaderLabel(dictionary.code, 'Blog', '/blog')}
                     {makeHeaderLabel(dictionary.code, dictionary.header.contact, '/contact')}
                 </div>
                 <div className={styles.headerSide}>
@@ -30,6 +31,7 @@ const Header: React.FC<Properties> = ({dictionary, style = {}}) => {
                         href={`${pathname.replace(`/${dictionary.code}`, `/${otherCode}`)}?${searchParams.toString()}`}
                         className={`${styles.headerLabel} ${styles.languageButtton}`}
                     >
+                        <span>{getLanguageEmoji(dictionary.code)}</span>
                         {dictionary.header.language}
                     </Link>
                     <div>
