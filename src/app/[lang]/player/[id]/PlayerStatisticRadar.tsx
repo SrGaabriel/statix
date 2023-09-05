@@ -9,12 +9,13 @@ import { useStatisticContext } from "./StatisticContext";
 import { PlayerInfo, playerProfileFetcher } from "@/app/api/player";
 import { ClubColors, getClubColors } from "@/app/utils/colors";
 import { getShortenedStatisticName, getStatisticName } from "@/app/utils/naming";
+import Radar from "../../radar/Radar";
 
 const PlayerStatisticRadar = () => {
     const context = useStatisticContext();
     const {state} = context;
     const { playerInfo, league, position, dynamicMode, dictionary } = state;
-    const [option, setOption] = useState<echarts.EChartsOption>({});
+    const [option, setOption] = useState<RadarConfig>();
     const mode = dynamicMode ? 'dynamic' : 'absolute';
     const { data, error, isLoading } = useSWR(`/api/${playerInfo.id}/profile/${league}/${position}?mode=${mode}`, () => playerProfileFetcher(playerInfo.id, league, position, mode))
     const clubColors = getClubColors(playerInfo.club);
@@ -34,7 +35,7 @@ const PlayerStatisticRadar = () => {
       const getStatisticLabel = (type: string) => isNarrow ? getShortenedStatisticName(dictionary, type) : getStatisticName(dictionary, type);
 
       if (!data) return;
-      const indicators = data.values.map((value: any) => {
+      const indicators: RadarLabel[] = data.values.map((value: any) => {
         return { text: getStatisticLabel(value.type).toUpperCase(), max: dynamicMode ? 100: value.best }
       });
       const playerValues: number[] = data.values.map((value: any) => value.value);
@@ -43,17 +44,15 @@ const PlayerStatisticRadar = () => {
       setOption(createOptions(dynamicMode, playerInfo, indicators, playerValues, averageValues, isNarrow, clubColors));
     }, [dynamicMode, playerInfo, dictionary, data, clubColors, mode, isNarrow])
 
-    if (isLoading) {
+    if (isLoading || !option) {
       const emptyIndicator = { text: '...', max: 100 }
       return (
         <div className={styles.playerRadarContainer}>
-            <div id="chart" className={styles.playerRadarChart}>
                 <ReactECharts
                   style={{height: '700px', width: '100%'}}
                   option={createOptions(dynamicMode, playerInfo, [emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator], [], [], isNarrow)}
                   className={styles.playerStatisticRadar}
                 />
-            </div>
         </div>
       )
     } else if (error || !data) {
@@ -62,9 +61,7 @@ const PlayerStatisticRadar = () => {
 
     return (
         <div className={styles.playerRadarContainer}>
-            <div id="chart" className={styles.playerRadarChart}>
-                <ReactECharts option={option} style={{height: '800px', width: '100%'}} className={styles.playerStatisticRadar}/>
-            </div>
+            <Radar config={option} className={styles.playerStatisticRadar}/>
         </div>
     )
 }
@@ -72,85 +69,55 @@ const PlayerStatisticRadar = () => {
 function createOptions(
   isDynamicMode: boolean,
   playerInfo: PlayerInfo,
-  indicators: { text: string, max: number }[],
+  indicators: RadarLabel[],
   playerValues: number[],
   averageValues: number[] | undefined,
   isNarrow: boolean,
   clubColors: ClubColors = { primary: '#000000', secondary: '#000000' },
-): echarts.EChartsOption {
-  const averageData = isDynamicMode ? {} : {
-    name: 'Average',
-    value: averageValues,
-    areaStyle: {
-      color: '#ffffffa7'
-    }
-  };
+): RadarConfig {
+  console.log(indicators.length);
   return {
-    color: [clubColors.secondary, '#575757'],
-    grid: {
-      top: 100,
-      bottom: 100,
-      containLabel: true
-    },
-    legend: {
-      data: [playerInfo.name, 'Average'],
-      bottom: 0,
-    },
-    radar: [
+    startAngle: 90,
+    percentage: true,
+    radius: 600,
+
+    datasets: [
       {
-        indicator: indicators,
-        startAngle: 90,
-        splitNumber: 8,
-        radius: isNarrow ? 65 : 300,
-        shape: 'circle',
-        axisName: {
-          color: '#333',
-          fontSize: isNarrow ? 5 : 15,
-          fontFamily: 'Roboto',
-          fontWeight: 'bolder',
-          padding: isNarrow ? 3 : 15,
-        },
-        splitArea: {
-          areaStyle: {
-            color: ['#8a8a8a', '#c0c0c0' ],
-            shadowColor: 'rgba(0, 0, 0, 0.2)',
-            shadowBlur: 10
-          }
-        },
-        axisLine: {
-          symbol: ['none', 'none'],
-          lineStyle: {
-            color: 'rgba(211, 253, 250, 0.8)'
-          }
-        },
-        splitLine: {
-          lineStyle: {
-            color: 'rgba(211, 253, 250, 0.8)'
-          }
-        }
-      },
+        name: playerInfo.name,
+        data: playerValues,
+        areaColor: clubColors.primary,
+        lineColor: clubColors.secondary,
+      }
     ],
-    series: [
+    labels: indicators,
+    categories: [
       {
-        type: 'radar',
-        emphasis: {
-          lineStyle: {
-            width: 10
-          }
-        },
-        data: [
-          {
-            name: playerInfo.name,
-            value: playerValues,
-            areaStyle: {
-              color: clubColors.primary
-            }
-          },
-          averageData
-        ]
+          name: 'Shooting',
+          color: '#ff3b18',
+          space: 4
+      },
+      {
+          name: 'Playmaking',
+          color: '#013594',
+          space: 4
+      },
+      {
+          name: 'Possession',
+          color: '#01ff41',
+          space: 6
+      },
+      {
+          name: "Passing",
+          color: '#ff7300',
+          space: 6
+      },
+      {
+          name: "Defending",
+          color: '#00b36e',
+          space: 2
       }
     ]
-  };
+  }
 }
 
 export default PlayerStatisticRadar;

@@ -11,17 +11,14 @@
 }
 
 .radar {
+    position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    width: 800px;
-    height: 800px;
-    background-color: aqua;
+    user-select: none;
 }
 
 .radarCircle {
-    position: relative;
-    width: 600px;
     aspect-ratio: 1/1;
     border-radius: 50%;
 }
@@ -29,8 +26,8 @@
 .radarPoint {
     position: absolute;
     border-radius: 50%;
-    background-color: green;
-    transition: all 0.5s ease;
+    transition: all 0.6s ease-in-out;
+    transform-origin: center;
 }
 
 .radarSteps {
@@ -48,21 +45,63 @@
     border-radius: 100%;
 }
 
-.radarLines {
-    position: absolute;
-    width: 100%;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+.radarStep:first-child {
+    box-shadow: 0 0 20px rgb(0, 0, 0, 0.8);
 }
 
 .radarLine {
     position: absolute;
     display: flex;
     align-items: center;
-    width: 600px;
-    height: 1.5px;
-    background-color: white;
+    background-color: rgb(228, 228, 228);
+}
+
+.radarCanvas {
+    position: absolute;
+    z-index: 2;
+    transition: all 0.6s ease-in-out;
+}
+
+.radarCategory {
+    position: absolute;
+
+    border-radius:50%;
+    background: conic-gradient(
+     var(--color) var(--degree), transparent calc(var(--degree) + var(--smoothing)) 100%);
+    z-index: -1;
+}
+
+.radarLegend {
+    display: flex;
+    width: 80%;
+    justify-content: space-around;
+    margin-top: 96px;
+}
+
+.radarLegendContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.radarLegendColor {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.radarLegendName {
+    font-family: 'Roboto', sans-serif;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.radarLabel {
+    position: absolute;
+    font-family: 'Roboto';
+    font-size: 14px;
+    transform: translateX(-100%);
+    max-width: 1000px;
 }

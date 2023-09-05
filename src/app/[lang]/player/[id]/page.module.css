@@ -546,23 +546,6 @@
     border: 20px solid gray;
 }
 
-.playerRadarContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.playerRadarChart {
-    width: 100%;
-    height: 100%;
-}
-
-.playerStatisticRadar {
-    width: 100%;
-    height: 700px;
-}
-
 @media (prefers-color-scheme: dark) {
     .main {
         background-color: rgb(0, 0, 0);
