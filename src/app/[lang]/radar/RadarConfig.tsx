@@ -3,8 +3,9 @@ interface RadarConfig {
     labels: RadarLabel[],
     categories: RadarCategory[],
     startAngle: number,
-    radius: number,
-    percentage: boolean
+    diameter: number,
+    percentage: boolean,
+    steps: number
 }
 
 interface RadarLabel {

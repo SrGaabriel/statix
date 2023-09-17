@@ -8,8 +8,9 @@ import useSWR from "swr";
 import { useStatisticContext } from "./StatisticContext";
 import { PlayerInfo, playerProfileFetcher } from "@/app/api/player";
 import { ClubColors, getClubColors } from "@/app/utils/colors";
-import { getShortenedStatisticName, getStatisticName } from "@/app/utils/naming";
+import { getParentPosition, getShortenedStatisticName, getStatisticName } from "@/app/utils/naming";
 import Radar from "../../radar/Radar";
+import { getSpacesForCategoryByPosition } from "@/app/utils/positions";
 
 const PlayerStatisticRadar = () => {
     const context = useStatisticContext();
@@ -41,8 +42,8 @@ const PlayerStatisticRadar = () => {
       const playerValues: number[] = data.values.map((value: any) => value.value);
       const averageValues: number[] = dynamicMode ? [] : data.values.map((value: any) => value.average);
 
-      setOption(createOptions(dynamicMode, playerInfo, indicators, playerValues, averageValues, isNarrow, clubColors));
-    }, [dynamicMode, playerInfo, dictionary, data, clubColors, mode, isNarrow])
+      setOption(createOptions(position, playerInfo, indicators, playerValues, averageValues, isNarrow, clubColors));
+    }, [dynamicMode, playerInfo, dictionary, data, clubColors, mode, isNarrow, position])
 
     if (isLoading || !option) {
       const emptyIndicator = { text: '...', max: 100 }
@@ -50,7 +51,7 @@ const PlayerStatisticRadar = () => {
         <div className={styles.playerRadarContainer}>
                 <ReactECharts
                   style={{height: '700px', width: '100%'}}
-                  option={createOptions(dynamicMode, playerInfo, [emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator], [], [], isNarrow)}
+                  option={createOptions(position, playerInfo, [emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator, emptyIndicator], [], [], isNarrow)}
                   className={styles.playerStatisticRadar}
                 />
         </div>
@@ -67,7 +68,7 @@ const PlayerStatisticRadar = () => {
 }
 
 function createOptions(
-  isDynamicMode: boolean,
+  position: string,
   playerInfo: PlayerInfo,
   indicators: RadarLabel[],
   playerValues: number[],
@@ -75,12 +76,12 @@ function createOptions(
   isNarrow: boolean,
   clubColors: ClubColors = { primary: '#000000', secondary: '#000000' },
 ): RadarConfig {
-  console.log(indicators.length);
+  const parentPosition = getParentPosition(position);
   return {
     startAngle: 90,
     percentage: true,
-    radius: 600,
-
+    diameter: 600,
+    steps: 11,
     datasets: [
       {
         name: playerInfo.name,
@@ -93,28 +94,28 @@ function createOptions(
     categories: [
       {
           name: 'Shooting',
-          color: '#ff3b18',
-          space: 4
+          color: '#ef476f',
+          space: getSpacesForCategoryByPosition(parentPosition, 'shooting')
       },
       {
           name: 'Playmaking',
-          color: '#013594',
-          space: 4
+          color: '#ffd166',
+          space: getSpacesForCategoryByPosition(parentPosition, 'playmaking')
       },
       {
           name: 'Possession',
-          color: '#01ff41',
-          space: 6
+          color: '#06d6a0',
+          space: getSpacesForCategoryByPosition(parentPosition, 'possession')
       },
       {
           name: "Passing",
-          color: '#ff7300',
-          space: 6
+          color: '#118ab2',
+          space: getSpacesForCategoryByPosition(parentPosition, 'passing')
       },
       {
           name: "Defending",
-          color: '#00b36e',
-          space: 2
+          color: '#073b4c',
+          space: getSpacesForCategoryByPosition(parentPosition, 'defending')
       }
     ]
   }

@@ -83,7 +83,7 @@ const PlayerComparisonContainer: React.FC<Properties> = ({ dictionary, firstPlay
                         <dialog id="addModal" className={styles.addPlayerButtonModal}>
                             <SearchBox
                                 width={isNarrow ? '300px' : '800px'}
-                                height={isNarrow ? '80px' : '100px'}
+                                height={isNarrow ? '80px' : '80px'}
                                 dictionary={dictionary}
                                 resultTrigger={(player) => {
                                     setPlayers([...players, player]);

@@ -1,3 +1,3 @@
 export function getApi(): String {
-    return "https://ccb4-201-95-144-116.ngrok-free.app";
+    return "https://e0f0-189-47-41-164.ngrok-free.app";
 }

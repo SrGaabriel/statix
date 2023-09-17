@@ -11,8 +11,9 @@ export default async function Page({ params }: { params: { lang: string } }) {
             <div className={styles.container}>
                 <Radar config={{
                     startAngle: 0,
-                    radius: 600,
-                    percentage: true,
+                    diameter: 600,
+                    percentage: false,
+                    steps: 10,
                     datasets: [
                         {
                             name: 'Dataset 1',
@@ -84,7 +85,21 @@ export default async function Page({ params }: { params: { lang: string } }) {
                         }
                     ],
                     categories: [
-                        
+                        {
+                            name: 'Shooting',
+                            color: '#ff3b18',
+                            space: 4
+                        },
+                        {
+                            name: 'Playmaking',
+                            color: '#013594',
+                            space: 4
+                        },
+                        {
+                            name: 'Possession',
+                            color: '#00a3e0',
+                            space: 4
+                        }
                     ]
                 }}/>
             </div>
